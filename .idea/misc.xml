@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/zheru/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_capture.xml" value="0.25555555555555554" />
+        <entry key="..\:/Users/zheru/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_main.xml" value="0.25555555555555554" />
+        <entry key="..\:/Users/zheru/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_response.xml" value="0.25555555555555554" />
+        <entry key="..\:/Users/zheru/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_submit.xml" value="0.25555555555555554" />
         <entry key="..\:/Users/zheru/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/xml/file_paths.xml" value="0.25555555555555554" />
       </map>
     </option>

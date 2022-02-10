@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SubmitActivity">
+
+    <ImageView
+        android:id="@+id/capturedImageView"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05"/>
+
+    <TextView
+        android:id="@+id/mealTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meal Title:"
+        android:textStyle="italic"
+        android:textSize="25sp"
+        android:textColor="@color/purple_700"
+        app:layout_constraintTop_toBottomOf="@id/capturedImageView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/mealTitleEditText"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mealTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="5dp"
+        android:hint="Enter title"
+        android:gravity="center"
+        android:ems="15"
+        android:maxLength="34"/>
+
+    <TextView
+        android:id="@+id/trackTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Is my meal..."
+        android:textStyle="italic"
+        android:textSize="18sp"
+        android:textColor="@color/purple_700"
+        app:layout_constraintTop_toBottomOf="@id/mealTitleEditText"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="10dp"/>
+
+    <ImageButton
+        android:id="@+id/offTrackBtn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_cross"
+        android:background="@color/white"
+        android:layout_weight="1"
+        android:layout_marginLeft="40dp"
+        app:layout_constraintTop_toBottomOf="@id/trackTitle"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/onTrackBtn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_tick"
+        android:background="@color/white"
+        android:layout_weight="1"
+        android:layout_marginRight="40dp"
+        app:layout_constraintTop_toBottomOf="@id/trackTitle"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/offTrackTitle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="OFF-TRACK"
+        android:textStyle="italic"
+        android:textSize="14sp"
+        android:textColor="@color/purple_700"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/offTrackBtn"
+        app:layout_constraintStart_toStartOf="@id/offTrackBtn"
+        app:layout_constraintEnd_toEndOf="@id/offTrackBtn"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/onTrackTitle"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="ON-TRACK"
+        android:textStyle="italic"
+        android:textSize="14sp"
+        android:textColor="@color/purple_700"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/onTrackBtn"
+        app:layout_constraintStart_toStartOf="@id/onTrackBtn"
+        app:layout_constraintEnd_toEndOf="@id/onTrackBtn"
+        android:layout_marginTop="5dp"/>
+
+    <TextView
+        android:id="@+id/feelingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="I'm feeling..."
+        android:textStyle="italic"
+        android:textSize="18sp"
+        android:textColor="@color/purple_700"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/trackTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="130dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/feelingsBar"
+        app:layout_constraintTop_toBottomOf="@id/feelingTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/cryingBtn"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/emoji_crying"
+                android:background="@color/white"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/pensiveBtn"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/emoji_pensive"
+                android:background="@color/white"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/happyBtn"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/emoji_happy"
+                android:background="@color/white"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/joyfulBtn"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/emoji_joyful"
+                android:background="@color/white"
+                android:layout_weight="1"/>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/submitBtn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="SUBMIT"
+        android:textSize="24sp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:cornerRadius="0dp"
+        app:layout_constraintTop_toBottomOf="@id/feelingsBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintVertical_bias="0.99"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
