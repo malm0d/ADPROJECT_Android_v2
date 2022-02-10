@@ -16,13 +16,6 @@ import java.util.List;
 
 import iss.nus.adproject_android_v2.R;
 
-/**
- * 说明：自定义时间选择器
- * 作者：liuwan1992
- * 添加时间：2016/9/28
- * 修改人：liuwan1992
- * 修改时间：2018/12/21
- */
 public class CustomDatePicker implements View.OnClickListener, PickerView.OnSelectListener {
 
     private Context mContext;
@@ -44,37 +37,37 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     private int mScrollUnits = SCROLL_UNIT_HOUR + SCROLL_UNIT_MINUTE;
 
     /**
-     * 时间单位：时、分
+     * time：hour、min
      */
     private static final int SCROLL_UNIT_HOUR = 0b1;
     private static final int SCROLL_UNIT_MINUTE = 0b10;
 
     /**
-     * 时间单位的最大显示值
+     * bigger value to show time
      */
     private static final int MAX_MINUTE_UNIT = 59;
     private static final int MAX_HOUR_UNIT = 23;
     private static final int MAX_MONTH_UNIT = 12;
 
     /**
-     * 级联滚动延迟时间
+     * scroll delay time
      */
     private static final long LINKAGE_DELAY_DEFAULT = 100L;
 
     /**
-     * 时间选择结果回调接口
+     * call back Interface
      */
     public interface Callback {
         void onTimeSelected(long timestamp);
     }
 
     /**
-     * 通过日期字符串初始换时间选择器
+     * use String to Init
      *
      * @param context      Activity Context
-     * @param callback     选择结果回调
-     * @param beginDateStr 日期字符串，格式为 yyyy-MM-dd HH:mm
-     * @param endDateStr   日期字符串，格式为 yyyy-MM-dd HH:mm
+     * @param callback     result callback
+     * @param beginDateStr Date String，Format: yyyy-MM-dd HH:mm
+     * @param endDateStr   ate String，Format: yyyy-MM-dd HH:mm
      */
     public CustomDatePicker(Context context, Callback callback, String beginDateStr, String endDateStr) {
         this(context, callback, DateFormatUtils.str2Long(beginDateStr, true),
@@ -82,12 +75,12 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 通过时间戳初始换时间选择器，毫秒级别
+     * by timestamps choose date，ms
      *
      * @param context        Activity Context
-     * @param callback       选择结果回调
-     * @param beginTimestamp 毫秒级时间戳
-     * @param endTimestamp   毫秒级时间戳
+     * @param callback       result callback
+     * @param beginTimestamp ms  级别 timestapm
+     * @param endTimestamp   ms
      */
     public CustomDatePicker(Context context, Callback callback, long beginTimestamp, long endTimestamp) {
         if (context == null || callback == null || beginTimestamp <= 0 || beginTimestamp >= endTimestamp) {
@@ -283,10 +276,10 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 联动“月”变化
+     * linkage "Month" change
      *
-     * @param showAnim 是否展示滚动动画
-     * @param delay    联动下一级延迟时间
+     * @param showAnim
+     * @param delay    linkage delay time
      */
     private void linkageMonthUnit(final boolean showAnim, final long delay) {
         int minMonth;
@@ -331,10 +324,10 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 联动“日”变化
+     * linkage "Day" change
      *
-     * @param showAnim 是否展示滚动动画
-     * @param delay    联动下一级延迟时间
+     * @param showAnim
+     * @param delay
      */
     private void linkageDayUnit(final boolean showAnim, final long delay) {
         int minDay;
@@ -377,10 +370,10 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 联动“时”变化
+     * linkage "Hour" change
      *
-     * @param showAnim 是否展示滚动动画
-     * @param delay    联动下一级延迟时间
+     * @param showAnim
+     * @param delay
      */
     private void linkageHourUnit(final boolean showAnim, final long delay) {
         if ((mScrollUnits & SCROLL_UNIT_HOUR) == SCROLL_UNIT_HOUR) {
@@ -426,9 +419,9 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 联动“分”变化
+     * linkage "Min" change
      *
-     * @param showAnim 是否展示滚动动画
+     * @param showAnim
      */
     private void linkageMinuteUnit(final boolean showAnim) {
         if ((mScrollUnits & SCROLL_UNIT_MINUTE) == SCROLL_UNIT_MINUTE) {
@@ -480,9 +473,9 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 展示时间选择器
+     * Show datePicker
      *
-     * @param dateStr 日期字符串，格式为 yyyy-MM-dd 或 yyyy-MM-dd HH:mm
+     * @param dateStr dateString，Format: yyyy-MM-dd or yyyy-MM-dd HH:mm
      */
     public void show(String dateStr) {
         if (!canShow() || TextUtils.isEmpty(dateStr)) return;
@@ -498,11 +491,11 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 设置日期选择器的选中时间
+     * set selected time
      *
-     * @param dateStr  日期字符串
-     * @param showAnim 是否展示动画
-     * @return 是否设置成功
+     * @param dateStr  time String
+     * @param showAnim
+     * @return if setting success?
      */
     public boolean setSelectedTime(String dateStr, boolean showAnim) {
         return canShow() && !TextUtils.isEmpty(dateStr)
@@ -510,9 +503,9 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 展示时间选择器
+     * Show datePicker
      *
-     * @param timestamp 时间戳，毫秒级别
+     * @param timestamp timestamp，to -->ms
      */
     public void show(long timestamp) {
         if (!canShow()) return;
@@ -523,11 +516,11 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 设置日期选择器的选中时间
+     * set selected time
      *
-     * @param timestamp 毫秒级时间戳
-     * @param showAnim  是否展示动画
-     * @return 是否设置成功
+     * @param timestamp ms
+     * @param showAnim
+     * @return
      */
     public boolean setSelectedTime(long timestamp, boolean showAnim) {
         if (!canShow()) return false;
@@ -550,7 +543,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 设置是否允许点击屏幕或物理返回键关闭
+     * 设置是否允许点击屏幕或物理返回键关闭 setCancelable
      */
     public void setCancelable(boolean cancelable) {
         if (!canShow()) return;
@@ -559,7 +552,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 设置日期控件是否显示时和分
+     * set if ShowPreciseTime
      */
     public void setCanShowPreciseTime(boolean canShowPreciseTime) {
         if (!canShow()) return;
@@ -591,7 +584,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 设置日期控件是否可以循环滚动
+     * set if can ScrollLoop
      */
     public void setScrollLoop(boolean canLoop) {
         if (!canShow()) return;
@@ -604,7 +597,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 设置日期控件是否展示滚动动画
+     * setCanShowAnim
      */
     public void setCanShowAnim(boolean canShowAnim) {
         if (!canShow()) return;
@@ -617,7 +610,7 @@ public class CustomDatePicker implements View.OnClickListener, PickerView.OnSele
     }
 
     /**
-     * 销毁弹窗
+     * destory window
      */
     public void onDestroy() {
         if (mPickerDialog != null) {

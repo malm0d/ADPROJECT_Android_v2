@@ -4,24 +4,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * 说明：日期格式化工具
- * 作者：liuwan1992
- * 添加时间：2018/12/17
- * 修改人：liuwan1992
- * 修改时间：2018/12/18
- */
+
 public class DateFormatUtils {
 
     private static final String DATE_FORMAT_PATTERN_YMD = "yyyy-MM-dd";
     private static final String DATE_FORMAT_PATTERN_YMD_HM = "yyyy-MM-dd HH:mm";
 
     /**
-     * 时间戳转字符串
+     * timestamp convert to String
      *
-     * @param timestamp     时间戳
-     * @param isPreciseTime 是否包含时分
-     * @return 格式化的日期字符串
+     * @param timestamp
+     * @param isPreciseTime if include Hour and min
+     * @return  Date String
      */
     public static String long2Str(long timestamp, boolean isPreciseTime) {
         return long2Str(timestamp, getFormatPattern(isPreciseTime));
@@ -32,11 +26,11 @@ public class DateFormatUtils {
     }
 
     /**
-     * 字符串转时间戳
+     *  String convert to timestamp
      *
-     * @param dateStr       日期字符串
-     * @param isPreciseTime 是否包含时分
-     * @return 时间戳
+     * @param dateStr       Date String
+     * @param isPreciseTime if include Hour and min
+     * @return timestamp
      */
     public static long str2Long(String dateStr, boolean isPreciseTime) {
         return str2Long(dateStr, getFormatPattern(isPreciseTime));
