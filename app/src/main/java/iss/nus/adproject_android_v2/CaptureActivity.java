@@ -74,7 +74,7 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
             }
             if (photoFile != null) {
                 photoURI = FileProvider.getUriForFile(this,
-                        "iss.workshop.adproject.fileprovider",
+                        "iss.nus.adproject_android_v2.fileprovider",
                         photoFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(intent, REQ_CAMERA);

@@ -35,7 +35,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="iss.workshop.adproject.fileprovider"
+            android:authorities="iss.nus.adproject_android_v2.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
