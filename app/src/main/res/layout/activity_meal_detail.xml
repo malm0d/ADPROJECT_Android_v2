@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MealDetailActivity">
+
+    <ImageView
+        android:id="@+id/mealdetailimage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/editNoteBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintRight_toRightOf="@id/mealdetailimage"
+        app:layout_constraintTop_toBottomOf="@id/mealdetailimage" />
+
+    <ImageButton
+        android:id="@+id/editTimeBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintRight_toLeftOf="@id/editNoteBtn"
+        app:layout_constraintTop_toTopOf="@id/editNoteBtn" />
+
+    <ImageButton
+        android:id="@+id/deleteMealBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintRight_toLeftOf="@id/editTimeBtn"
+        app:layout_constraintTop_toTopOf="@id/editNoteBtn" />
+
+    <TextView
+        android:id="@+id/detailMealtitle"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="15dp"
+        android:text="Fried Chicken"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/mealdetailimage"
+        app:layout_constraintRight_toLeftOf="@id/deleteMealBtn"
+        app:layout_constraintTop_toTopOf="@id/editNoteBtn" />
+
+    <TextView
+        android:id="@+id/detailMealtime"
+        android:layout_width="0dp"
+        android:layout_height="15dp"
+        android:layout_marginRight="15dp"
+        android:text="2022-2-1 14:26"
+        android:textSize="14dp"
+        app:layout_constraintLeft_toLeftOf="@id/mealdetailimage"
+        app:layout_constraintRight_toLeftOf="@id/deleteMealBtn"
+        app:layout_constraintTop_toBottomOf="@id/detailMealtitle" />
+
+    <EditText
+        android:id="@+id/mealDetailDes"
+        android:layout_width="0dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="10dp"
+        android:enabled="false"
+        android:text="meal detail"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintLeft_toLeftOf="@id/mealdetailimage"
+        app:layout_constraintRight_toRightOf="@id/mealdetailimage"
+        app:layout_constraintTop_toBottomOf="@id/detailMealtitle" />
+
+    <ImageButton
+        android:id="@+id/facebookBtn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/mealDetailDes"
+        app:layout_constraintTop_toBottomOf="@id/mealDetailDes" />
+
+    <ImageButton
+        android:id="@+id/instagramBtn"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="15dp"
+        app:layout_constraintLeft_toRightOf="@id/facebookBtn"
+        app:layout_constraintTop_toTopOf="@id/facebookBtn" />
+
+    <Switch
+        android:id="@+id/publicStates"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:text="Public"
+        app:layout_constraintRight_toRightOf="@id/mealDetailDes"
+        app:layout_constraintTop_toBottomOf="@id/mealDetailDes" />
+
+    <Button
+        android:id="@+id/submitChange"
+        android:layout_width="181dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#6ACDDA"
+        android:text="SAVE ALL CHANGE"
+        android:textColor="#FFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintRight_toRightOf="@id/mealDetailDes"
+        app:layout_constraintTop_toBottomOf="@id/publicStates" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
