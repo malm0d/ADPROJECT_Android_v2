@@ -246,10 +246,12 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     protected void uploadData() {
+        setButtonsUnclickable();
         String serverUrl = "http://192.168.1.75:8080/api/uploadMealEntry";
         String fileName = currentPhotoPath.substring(currentPhotoPath.indexOf("JPEG"));
         File imageFile = new File(currentPhotoPath);
         if (imageFile.exists() == false) {
+            setButtonsClickable();
             Toast.makeText(this, "File is missing", Toast.LENGTH_SHORT).show();
         }
         OkHttpClient okHttpClient = new OkHttpClient();
@@ -274,6 +276,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        setButtonsClickable();
                         Toast.makeText(SubmitActivity.this, "Error sending request to server", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -281,6 +284,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
+                setButtonsClickable();
                 final String res = response.body().string();
                 System.out.println(res);
                 if (res == null) {
@@ -298,6 +302,28 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = new Intent(this, ResponseActivity.class);
         intent.putExtra("responseResult", res);
         startActivity(intent);
+    }
+
+    private void setButtonsUnclickable() {
+        mealTitleEntry.setEnabled(false);
+        submitBtn.setClickable(false);
+        onTrackBtn.setClickable(false);
+        offTrackBtn.setClickable(false);
+        cryingBtn.setClickable(false);
+        pensiveBtn.setClickable(false);
+        happyBtn.setClickable(false);
+        joyfulBtn.setClickable(false);
+    }
+
+    private void setButtonsClickable(){
+        mealTitleEntry.setEnabled(true);
+        submitBtn.setClickable(true);
+        onTrackBtn.setClickable(true);
+        offTrackBtn.setClickable(true);
+        cryingBtn.setClickable(true);
+        pensiveBtn.setClickable(true);
+        happyBtn.setClickable(true);
+        joyfulBtn.setClickable(true);
     }
 
 }
