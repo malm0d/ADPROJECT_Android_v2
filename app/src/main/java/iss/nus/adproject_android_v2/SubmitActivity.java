@@ -305,25 +305,35 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void setButtonsUnclickable() {
-        mealTitleEntry.setEnabled(false);
-        submitBtn.setClickable(false);
-        onTrackBtn.setClickable(false);
-        offTrackBtn.setClickable(false);
-        cryingBtn.setClickable(false);
-        pensiveBtn.setClickable(false);
-        happyBtn.setClickable(false);
-        joyfulBtn.setClickable(false);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mealTitleEntry.setEnabled(false);
+                submitBtn.setClickable(false);
+                onTrackBtn.setClickable(false);
+                offTrackBtn.setClickable(false);
+                cryingBtn.setClickable(false);
+                pensiveBtn.setClickable(false);
+                happyBtn.setClickable(false);
+                joyfulBtn.setClickable(false);
+            }
+        });
     }
 
     private void setButtonsClickable(){
-        mealTitleEntry.setEnabled(true);
-        submitBtn.setClickable(true);
-        onTrackBtn.setClickable(true);
-        offTrackBtn.setClickable(true);
-        cryingBtn.setClickable(true);
-        pensiveBtn.setClickable(true);
-        happyBtn.setClickable(true);
-        joyfulBtn.setClickable(true);
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mealTitleEntry.setEnabled(true);
+                submitBtn.setClickable(true);
+                onTrackBtn.setClickable(true);
+                offTrackBtn.setClickable(true);
+                cryingBtn.setClickable(true);
+                pensiveBtn.setClickable(true);
+                happyBtn.setClickable(true);
+                joyfulBtn.setClickable(true);
+            }
+        });
     }
 
 }
