@@ -24,13 +24,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * 说明：内容选择器，例如年月日、省市区等
- * 作者：liuwan1992
- * 添加时间：2016/9/28
- * 修改人：liuwan1992
- * 修改时间：2018/12/21
- */
 public class PickerView extends View {
 
     private Context mContext;
@@ -320,28 +313,28 @@ public class PickerView extends View {
     }
 
     /**
-     * 设置选择结果监听
+     * 设置选择结果监听Result Listener
      */
     public void setOnSelectListener(OnSelectListener listener) {
         mOnSelectListener = listener;
     }
 
     /**
-     * 是否允许滚动
+     * setCanScroll
      */
     public void setCanScroll(boolean canScroll) {
         mCanScroll = canScroll;
     }
 
     /**
-     * 是否允许循环滚动
+     * setCanScrollLoop
      */
     public void setCanScrollLoop(boolean canLoop) {
         mCanScrollLoop = canLoop;
     }
 
     /**
-     * 执行滚动动画
+     * excute startAnim
      */
     public void startAnim() {
         if (!mCanShowAnim) return;
@@ -359,14 +352,14 @@ public class PickerView extends View {
     }
 
     /**
-     * 是否允许滚动动画
+     * setCanShowAnim
      */
     public void setCanShowAnim(boolean canShowAnim) {
         mCanShowAnim = canShowAnim;
     }
 
     /**
-     * 销毁资源
+     * Destory resource
      */
     public void onDestroy() {
         mOnSelectListener = null;
