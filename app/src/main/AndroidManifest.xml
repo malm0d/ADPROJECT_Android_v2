@@ -26,6 +26,7 @@
             android:exported="false" />
         <activity
             android:name=".CaptureActivity"
+            android:exported="false" />
         <activity
             android:name=".MealDetailActivity"
             android:exported="false" />
