@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResponseActivity">
+
+    <TextView
+        android:id="@+id/title1"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="Congratulations on recording a new entry!"
+        android:textSize="30sp"
+        android:textColor="@color/purple_700"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintVertical_bias="0.125"/>
+
+    <TextView
+        android:id="@+id/title2"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:text="For your next meal, we recommend it to be:"
+        android:textSize="30sp"
+        android:textColor="@color/purple_700"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/title1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50sp"
+        android:textColor="@color/purple_700"
+        android:textStyle="italic"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/title2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="70dp"
+        tools:text="On Track"/>
+
+    <Button
+        android:id="@+id/okResponseBtn"
+        android:layout_width="350dp"
+        android:layout_height="70dp"
+        android:text="OK"
+        android:textSize="25sp"
+        app:layout_constraintTop_toBottomOf="@id/response"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="75dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
