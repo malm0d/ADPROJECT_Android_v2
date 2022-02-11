@@ -49,9 +49,7 @@ public class ViewBlogActivity extends AppCompatActivity {
     private void RequestPost(String url,String UserName){
 
         OkHttpClient client = new OkHttpClient();
-//        FormBody.Builder formBuilder = new FormBody.Builder();
 
-//        formBuilder.add("UserName", UserName);
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder .addQueryParameter("activeUserId","3")
                     .addQueryParameter("pageNo", "0")
@@ -89,21 +87,21 @@ public class ViewBlogActivity extends AppCompatActivity {
                 System.out.println("This information return from server side");
                 System.out.println(res);
                 try {
-//                    JSONObject jsonObj = new JSONObject(res);
+
                     JSONArray jsonArray = new JSONArray(res);
 
                     JSONObject jsonObject = jsonArray.getJSONObject(0);
 
-//                    String dataStr = jsonObject.toString();
+
                     String dataStr = jsonArray.toString();
                     ObjectMapper mapper = new ObjectMapper();
                     mapper.registerModule(new JSR310Module());
 
                     final ArrayList<BlogEntry> blogEntries = mapper.readValue(dataStr, new TypeReference<ArrayList<BlogEntry>>(){});
-
+/*
                     for(BlogEntry blogEntry : blogEntries) {
                         System.out.println(blogEntry);
-                    }
+                    }*/
 
 
 
