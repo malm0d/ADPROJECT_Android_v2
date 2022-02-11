@@ -7,13 +7,17 @@ import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import com.fasterxml.jackson.datatype.jsr310.deser.JSR310DateTimeDeserializerBase;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
+import iss.nus.adproject_android_v2.helper.BlogEntry;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -85,14 +89,23 @@ public class ViewBlogActivity extends AppCompatActivity {
                 System.out.println("This information return from server side");
                 System.out.println(res);
                 try {
-                    JSONObject jsonObj = new JSONObject(res);
+//                    JSONObject jsonObj = new JSONObject(res);
+                    JSONArray jsonArray = new JSONArray(res);
 
-                    String dataStr = jsonObj.getString("data");
+                    JSONObject jsonObject = jsonArray.getJSONObject(0);
 
+//                    String dataStr = jsonObject.toString();
+                    String dataStr = jsonArray.toString();
                     ObjectMapper mapper = new ObjectMapper();
+                    mapper.registerModule(new JSR310Module());
+
+                    final ArrayList<BlogEntry> blogEntries = mapper.readValue(dataStr, new TypeReference<ArrayList<BlogEntry>>(){});
+
+                    for(BlogEntry blogEntry : blogEntries) {
+                        System.out.println(blogEntry);
+                    }
 
 
-//                    final ArrayList<MealHelper> mealList = mapper.readValue(dataStr, new TypeReference<ArrayList<MealHelper>>(){});
 
 
 
