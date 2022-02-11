@@ -23,9 +23,6 @@ import java.time.format.DateTimeFormatter;
 
 public class CaptureActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //need session data?
-    //user data?
-    //From Android, how can we map to the right user on the server and db?
     private Button mealWithPhotoBtn;
     private Button systemRecommendBtn;
     private final int REQ_CAMERA_PERMISSION = 8;
@@ -33,15 +30,25 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
     private String currentPhotoPath;
     private Uri photoURI;
     private String timeStamp;
+    private int userId;
+    private int goalId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
 
+        //userId = intent.getIntExtra("userId", -1);
+        //goalId = intent.getIntExtra("goalId", -1);
+        //if (userId == -1 || goalId == -1) {
+        //    Toast.makeText(this, "No valid user or goal", Toast.LENGTH_LONG).show();
+        //    finish();
+        //}
+
         mealWithPhotoBtn = findViewById(R.id.mealWithPhotoBtn);
         systemRecommendBtn = findViewById(R.id.systemRecommendBtn);
         initButtons();
+
     }
 
     private void initButtons() {
@@ -96,6 +103,8 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra("currentPhotoPath", currentPhotoPath);
         intent.putExtra("photoURI", photoURI);
         intent.putExtra("timeStamp", timeStamp);
+        //intent.putExtra("userId", userId);
+        //intent.putExtra("goalId", goalId);
         startActivity(intent);
     }
 
