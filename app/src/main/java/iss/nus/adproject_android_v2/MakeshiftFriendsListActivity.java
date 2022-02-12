@@ -45,9 +45,13 @@ public class MakeshiftFriendsListActivity extends AppCompatActivity implements  
         msg.show();
 
         Integer friendUserId = friendsUserIds[pos];
+        String friendUsername = friendsUsernames[pos];
+        String activeUsername = "jill";
         Intent intent = new Intent(this, ViewBlogActivity.class);
         intent.putExtra("activeUserId", activeUserId);
         intent.putExtra("friendUserId", friendUserId);
+        intent.putExtra("friendUsername", friendUsername);
+        intent.putExtra("activeUsername",activeUsername);
         startActivity(intent);
 
 

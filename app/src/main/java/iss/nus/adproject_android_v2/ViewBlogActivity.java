@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -30,12 +33,16 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ViewBlogActivity extends AppCompatActivity {
+public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.OnItemClickListener{
     private final String url = "http://192.168.0.108:8080/api/blogentry/blog";
     private final String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
     private List<BlogEntry> blogEntries;
     private Thread getBlogEntriesThread;
-    private Thread downloadImagesThread;
+    private Integer activeUserId;
+    private Integer friendUserId;
+    private String friendUsername;
+    private String activeUsername;
+
 
 
 
@@ -44,8 +51,10 @@ public class ViewBlogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_blog);
         Intent intent = getIntent();
-        Integer activeUserId = intent.getIntExtra("activeUserId", 0);
-        Integer friendUserId = intent.getIntExtra("friendUserId",0);
+        activeUserId = intent.getIntExtra("activeUserId", 0);
+        friendUserId = intent.getIntExtra("friendUserId",0);
+        friendUsername = intent.getStringExtra("friendUsername");
+        activeUsername = intent.getStringExtra("activeUsername");
 
         getBlogEntriesThread = new Thread(new Runnable() {
             @Override
@@ -60,36 +69,15 @@ public class ViewBlogActivity extends AppCompatActivity {
         });
         getBlogEntriesThread.start();
 
-        downloadImagesThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    getBlogEntriesThread.join();
-                    System.out.println("getBlogEntries finished");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                for(BlogEntry blogEntry : blogEntries) {
-                    System.out.println(blogEntry);
-                }
-                System.out.println("Start downloading images");
-                downloadImages();
-
-
-            }
-        });
-        downloadImagesThread.start();
+        // Make sure all blog entry Json data is loaded before proceeding
         try {
             getBlogEntriesThread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        try {
-            downloadImagesThread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("Both background threads complete");
+
+        TextView authorText = findViewById(R.id.authorText);
+        authorText.setText(friendUsername+"'s blog");
 
         ViewBlogAdapter adapter = new ViewBlogAdapter(this, blogEntries);
         ListView listView = findViewById(R.id.blogEntryList);
@@ -99,7 +87,6 @@ public class ViewBlogActivity extends AppCompatActivity {
 
 
     }
-
 
 
 
@@ -133,15 +120,6 @@ public class ViewBlogActivity extends AppCompatActivity {
             mapper.registerModule(new JSR310Module());
 
             blogEntries = mapper.readValue(dataStr, new TypeReference<ArrayList<BlogEntry>>(){});
-            System.out.println("blogEntries saved");
-
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            });
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -149,15 +127,19 @@ public class ViewBlogActivity extends AppCompatActivity {
 
     }
 
-    private void downloadImages() {
-        if (blogEntries == null) {
-            return;
-        }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View v, int pos, long id) {
+        Integer blogEntryId = blogEntries.get(pos).getId();
+        Intent intent = new Intent(this, ViewBlogEntryActivity.class);
+        intent.putExtra("blogEntryId", blogEntryId);
+        intent.putExtra("activeUserId",activeUserId);
+        intent.putExtra("activeUsername",activeUsername);
+        intent.putExtra("friendUsername",friendUsername);
+        intent.putExtra("friendUserId",friendUserId);
+        startActivity(intent);
 
 
-        for (BlogEntry blogEntry : blogEntries) {
-            // Download Images here
-        }
 
     }
 }

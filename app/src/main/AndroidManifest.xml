@@ -19,6 +19,9 @@
         android:theme="@style/Theme.ADPROJECT_Android_v2"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ViewBlogEntryActivity"
+            android:exported="false" />
+        <activity
             android:name=".MakeshiftFriendsListActivity"
             android:exported="false" />
         <activity

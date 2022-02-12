@@ -9,20 +9,24 @@
     <TextView
         android:id="@+id/authorText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/blogEntryList"
+        android:layout_height="0dp"
+        android:background="@color/colorMyGray"
         android:gravity="center"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         />
 
     <ListView
         android:id="@+id/blogEntryList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider = "#e5e5ff"
-        android:dividerHeight="1dp"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent="0.94"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/authorText"
 
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

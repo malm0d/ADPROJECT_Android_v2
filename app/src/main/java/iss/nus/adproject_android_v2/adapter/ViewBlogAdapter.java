@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import iss.nus.adproject_android_v2.R;
@@ -45,7 +46,9 @@ public class ViewBlogAdapter extends ArrayAdapter<Object> {
 
         TextView timestampText = view.findViewById(R.id.timestampText);
         LocalDateTime timestamp = blogEntries.get(pos).getTimeStamp();
-        timestampText.setText(timestamp.toString());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
+        String formattedTimestamp = timestamp.format(formatter);
+        timestampText.setText(formattedTimestamp);
 
         TextView likes = view.findViewById(R.id.likesText);
         String likeString = "Liked by " + blogEntries.get(pos).getNumberOfLikes() + " users";
@@ -60,12 +63,6 @@ public class ViewBlogAdapter extends ArrayAdapter<Object> {
                 .load(imageApiUrl + queryString + imageDir + blogEntries.get(pos).getImageURL())
                 .placeholder(R.drawable.no_img)
                 .into(entryImageView);
-
-
-
-
-
-
 
 
         return view;
