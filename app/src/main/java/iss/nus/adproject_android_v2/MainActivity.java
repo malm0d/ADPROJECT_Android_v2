@@ -12,7 +12,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button getBtn;
     private Button pastmealBtn;
     private Button captureBtn;
-
+    private Button viewGoalBtn;
+    private Button myProfileBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +28,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         captureBtn = findViewById(R.id.capture);
         captureBtn.setOnClickListener(this);
+
+        viewGoalBtn = findViewById(R.id.ViewGoalBtn);
+        viewGoalBtn.setOnClickListener(this);
+
+        myProfileBtn = findViewById(R.id.MyProfileBtn);
+        myProfileBtn.setOnClickListener(this);
+
     }
 
 
@@ -54,6 +62,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
 
+        if (v == viewGoalBtn) {
+            Intent intent = new Intent(this, ViewGoalActivity.class);
+            startActivity(intent);
+        }
 
+        if (v == myProfileBtn) {
+            Intent intent = new Intent(this, UserProfile.class);
+            startActivity(intent);
+        }
     }
 }

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewGoalActivity">
+
+
+    <Button
+        android:id="@+id/PastGoalBtn"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Past Goals"
+        android:background="#194a8d"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/analyticsBtn"
+        app:layout_constraintTop_toBottomOf="@id/MyGoalText" />
+    <Button
+        android:id="@+id/analyticsBtn"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:text="Analytics"
+        android:background="#194a8d"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/PastGoalBtn"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/MyGoalText" />
+    <TextView
+        android:id="@+id/MyGoalText"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="My Goal"
+        android:textSize="40sp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/CurrentPathText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CURRENT PATH"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="120dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        />
+
+    <iss.nus.adproject_android_v2.ui.ImageViewPlus
+        android:id="@+id/CurrentGoalPhoto"
+        android:layout_width="230dp"
+        android:layout_height="230dp"
+        android:src="@drawable/chickenrice"
+        android:alpha="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CurrentPathText"
+         />
+
+        <TextView
+            android:id="@+id/goalName"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:text="Cut Weight"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/CurrentPathText"
+            />
+
+    <Button
+        android:id="@+id/EditProfilePhoto"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="62dp"
+        android:text="See details"
+        android:backgroundTint="#2196F3"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goalName" />
+
+
+    <TextView
+        android:id="@+id/pathProgressText2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/CurrentGoalPhoto"
+        />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:max="100"
+        android:progress="0"
+        android:visibility="visible"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pathProgressText2"
+        />
+    <TextView
+        android:id="@+id/targetCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Target Count: 80"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/progressBar"
+        />
+
+    <TextView
+        android:id="@+id/totalCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TotalCount: 100"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/targetCount"
+        />
+
+    <TextView
+        android:id="@+id/TotalMealRecord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_marginTop="20dp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/totalCount"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
