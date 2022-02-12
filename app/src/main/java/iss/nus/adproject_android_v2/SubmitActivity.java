@@ -167,7 +167,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
         if (view == cryingBtn) {
             feelingClicks++;
             if (feelingClicks == 1) {
-                feeling = "crying";
+                feeling = "cry";
                 pensiveBtn.setVisibility(View.GONE);
                 happyBtn.setVisibility(View.GONE);
                 joyfulBtn.setVisibility(View.GONE);
@@ -218,7 +218,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
         if (view == joyfulBtn) {
             feelingClicks++;
             if (feelingClicks == 1) {
-                feeling = "joyful";
+                feeling = "joy";
                 cryingBtn.setVisibility(View.GONE);
                 pensiveBtn.setVisibility(View.GONE);
                 happyBtn.setVisibility(View.GONE);
