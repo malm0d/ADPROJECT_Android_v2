@@ -40,13 +40,12 @@ public class ViewBlogActivity extends AppCompatActivity {
 
     private void getDataFromServer(){
         String url = "http://192.168.0.108:8080/api/blogentry/page";
-        String UserName = "Ken";
-        RequestPost(url,UserName);
+        RequestPost(url);
     }
 
 
 
-    private void RequestPost(String url,String UserName){
+    private void RequestPost(String url){
 
         OkHttpClient client = new OkHttpClient();
 
@@ -98,8 +97,7 @@ public class ViewBlogActivity extends AppCompatActivity {
                     mapper.registerModule(new JSR310Module());
 
                     final ArrayList<BlogEntry> blogEntries = mapper.readValue(dataStr, new TypeReference<ArrayList<BlogEntry>>(){});
-/*
-                    for(BlogEntry blogEntry : blogEntries) {
+/*                    for(BlogEntry blogEntry : blogEntries) {
                         System.out.println(blogEntry);
                     }*/
 

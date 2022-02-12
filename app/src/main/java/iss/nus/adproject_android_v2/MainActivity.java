@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         else if (v == viewBlogBtn) {
-            Intent intent = new Intent(this, ViewBlogActivity.class);
+            Intent intent = new Intent(this, MakeshiftFriendsListActivity.class);
             startActivity(intent);
 
         }
