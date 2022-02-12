@@ -42,9 +42,26 @@ public class DashboardActivity extends AppCompatActivity {
         TextView show_profilePic = findViewById(R.id.show_profilePic);
         Button logout_btn = findViewById(R.id.dashboard_logout);
 
-        show_userId.setText("User ID: " + user.getUserId().toString());
+        show_userId.setText("User ID: " + user.getUserId());
         show_username.setText("Username: " + user.getUsername());
         show_name.setText("Name: " + user.getName());
         show_profilePic.setText("Profile Pic: " + user.getProfilePic());
+
+        logout_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+
+                startLoginActivity();
+            }
+        });
+    }
+
+    private void startLoginActivity() {
+        Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
+        startActivity(intent);
     }
 }

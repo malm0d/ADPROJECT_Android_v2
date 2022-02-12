@@ -7,21 +7,21 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserHelper implements Serializable {
 
-    private Integer userId;
+    private String userId;
     private String username;
     private String name;
     private String profilePic;
 
     public UserHelper() { };
 
-    public UserHelper(Integer userId, String username, String name, String profilePic) {
+    public UserHelper(String userId, String username, String name, String profilePic) {
         this.userId = userId;
         this.username = username;
         this.name = name;
         this.profilePic = profilePic;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
@@ -37,7 +37,7 @@ public class UserHelper implements Serializable {
         return profilePic;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

@@ -45,6 +45,20 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        String username = pref.getString("username", "");
+
+        if (!username.isEmpty()) {
+            user.setUserId(pref.getString("userId", ""));
+            user.setUsername(pref.getString("username", ""));
+            user.setName(pref.getString("userId", ""));
+            user.setProfilePic(pref.getString("profilePic", ""));
+
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            intent.putExtra("user", user);
+            startActivity(intent);
+        }
+
         mUsernameTxt = findViewById(R.id.username);
         mPasswordTxt = findViewById(R.id.password);
         mLoginBtn = findViewById(R.id.loginBtn);
@@ -87,28 +101,6 @@ public class LoginActivity extends AppCompatActivity {
     private void authenticate(String username, String password) {
         String url = "http://192.168.1.107:8080/api/login/auth";
         RequestPost(url, username, password);
-        if (login_outcome.isEmpty()) {
-            mInvalidLoginTxt.setVisibility(View.VISIBLE);
-            mUsernameTxt.getText().clear();
-            mPasswordTxt.getText().clear();
-            mInvalidLoginTxt.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mInvalidLoginTxt.setVisibility(View.INVISIBLE);
-                }
-            }, 5000);
-        } else {
-            try {
-                JSONObject jObj = new JSONObject(login_outcome);
-                user.setUserId(jObj.getInt("userId"));
-                user.setUsername(jObj.getString("username"));
-                user.setName(jObj.getString("name"));
-                user.setProfilePic(jObj.getString("profilePic"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            startDashboardActivity();
-        }
     }
 
     private void startResetPwdActivity() {
@@ -150,18 +142,55 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                final String res = response.body().string();
-                System.out.println("Information returned from server:");
-                System.out.println(res);
-                login_outcome = res;
+                if (response.isSuccessful()) {
+                    final String res = response.body().string();
+                    System.out.println("Information returned from server:");
+                    System.out.println(res);
+                    if (!res.isEmpty()) {
+                        try {
+                            JSONObject jObj = new JSONObject(res);
+                            user.setUserId(jObj.getString("userId"));
+                            user.setUsername(jObj.getString("username"));
+                            user.setName(jObj.getString("name"));
+                            user.setProfilePic(jObj.getString("profilePic"));
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                            SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = pref.edit();
+                            editor.putString("userId", jObj.getString("userId"));
+                            editor.putString("username", jObj.getString("username"));
+                            editor.putString("name", jObj.getString("name"));
+                            editor.putString("profilePic", jObj.getString("profilePic"));
 
+                            editor.commit();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        startDashboardActivity();
+                    } else {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                mInvalidLoginTxt.setVisibility(View.VISIBLE);
+                                mUsernameTxt.getText().clear();
+                                mPasswordTxt.getText().clear();
+                                mInvalidLoginTxt.postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        mInvalidLoginTxt.setVisibility(View.INVISIBLE);
+                                    }
+                                }, 5000);
+                            }
+                        });
                     }
-                });
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                }
             }
         });
     }
