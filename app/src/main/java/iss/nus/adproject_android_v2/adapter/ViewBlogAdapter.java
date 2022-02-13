@@ -65,6 +65,11 @@ public class ViewBlogAdapter extends ArrayAdapter<Object> {
                 .placeholder(R.drawable.no_img)
                 .into(entryImageView);
 
+
+        TextView authorText = view.findViewById(R.id.rowAuthor);
+        String authorString = "by " + blogEntries.get(pos).getAuthorUsername();
+        authorText.setText(authorString);
+
         ImageView likeBtn = view.findViewById(R.id.rowLikeBtn);
         if(blogEntries.get(pos).isLikedByActiveUser()){
             likeBtn.setBackgroundResource(R.drawable.thumb_logo_blue_fill);

@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:text="Fried Chicken"
         android:textSize="18dp"
         android:textStyle="bold"
@@ -29,22 +29,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/rowAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:text="author"
+        app:layout_constraintLeft_toLeftOf="@id/blogTitle"
+        app:layout_constraintTop_toBottomOf="@id/blogTitle" />
+
+    <TextView
         android:id="@+id/timestampText"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
         android:text="2022-2-14"
-        app:layout_constraintLeft_toLeftOf="@id/blogTitle"
-        app:layout_constraintTop_toBottomOf="@id/blogTitle" />
+        app:layout_constraintLeft_toLeftOf="@id/rowAuthor"
+        app:layout_constraintTop_toBottomOf="@id/rowAuthor" />
+
 
     <TextView
         android:id="@+id/likesText"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="10dp"
-        android:text="Score: 8/10"
-        app:layout_constraintLeft_toLeftOf="@id/timestampText"
-        app:layout_constraintTop_toBottomOf="@id/timestampText" />
+        android:text="liked by x users"
+        app:layout_constraintBottom_toBottomOf="@+id/rowAuthor"
+        app:layout_constraintEnd_toEndOf="@+id/rowFlagBtn"
+        app:layout_constraintTop_toTopOf="@+id/rowAuthor" />
 
     <ImageView
         android:id="@+id/rowLikeBtn"
