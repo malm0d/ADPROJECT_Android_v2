@@ -58,6 +58,23 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
 
 
     }
+    public void initTheUi(){
+        mealDetailImg = findViewById(R.id.mealdetailimage);
+        mealTitle = findViewById(R.id.detailMealtitle);
+        mealDesc = findViewById(R.id.mealDetailDes);
+        mealtime = findViewById(R.id.detailMealtime);
+        saveChage = findViewById(R.id.submitChange);
+
+        likeBtn = findViewById(R.id.likeBtn);
+        commentBtn = findViewById(R.id.commentBtn);
+        flagBtn = findViewById(R.id.flagBtn);
+        entryAuthor = findViewById(R.id.entryAuthor);
+
+        likeBtn.setOnClickListener(this);
+        commentBtn.setOnClickListener(this);
+
+
+    }
     public void showData(){
         String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
 
@@ -77,39 +94,39 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
         String formattedTimestamp = timestamp.format(formatter);
         mealtime.setText(formattedTimestamp);
-
-
-
-
-
-
-        likeBtn.setBackgroundResource(R.drawable.thumb_logo_no_fill);
+        if(blogEntry.isLikedByActiveUser()) {
+            likeBtn.setBackgroundResource(R.drawable.thumb_logo_blue_fill);
+        }
+        else {
+            likeBtn.setBackgroundResource(R.drawable.thumb_logo_no_fill);
+        }
         commentBtn.setBackgroundResource(R.drawable.speech_bubble);
         flagBtn.setBackgroundResource(R.drawable.flag_logo_no_fill);
 
     }
-    public void initTheUi(){
-        mealDetailImg = findViewById(R.id.mealdetailimage);
-        mealTitle = findViewById(R.id.detailMealtitle);
-        mealDesc = findViewById(R.id.mealDetailDes);
-        mealtime = findViewById(R.id.detailMealtime);
-        saveChage = findViewById(R.id.submitChange);
-
-        likeBtn = findViewById(R.id.likeBtn);
-        commentBtn = findViewById(R.id.commentBtn);
-        flagBtn = findViewById(R.id.flagBtn);
-        entryAuthor = findViewById(R.id.entryAuthor);
 
 
-       
 
-        likeBtn.setOnClickListener(this);
-        commentBtn.setOnClickListener(this);
+    @Override
+    public void onClick(View v){
+        if (v == likeBtn) {
+            toggleLike();
+        }
 
 
     }
-    @Override
-    public void onClick(View v){
+
+    public void toggleLike() {
+        if(blogEntry.isLikedByActiveUser()) {
+            //If currently liked, unlike
+            blogEntry.setLikedByActiveUser(false);
+            likeBtn.setBackgroundResource(R.drawable.thumb_logo_no_fill);
+        }
+        else {
+            //If currently unliked, like
+            blogEntry.setLikedByActiveUser(true);
+            likeBtn.setBackgroundResource(R.drawable.thumb_logo_blue_fill);
+        }
 
     }
 }
