@@ -17,6 +17,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -28,7 +29,7 @@ import okhttp3.Response;
 public class UserProfile extends AppCompatActivity implements View.OnClickListener {
 
     private User currentUser;
-
+    private ArrayList<Goal> completedGoal;
     ImageViewPlus profilephoto;
     TextView userName;
     TextView onPathReCord;
@@ -36,8 +37,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     TextView height;
     TextView weight;
     TextView bmi;
-    Button EditProfileBtn;
+    Button EditProfileBtn, achievement1, achievement2;
     TextView UserNameText;
+
 
 //    private final String[] profileName = {
 //            "Age:", "dateOfBirth:", "Height:", "Weight","BMI:"
@@ -52,6 +54,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         EditProfileBtn.setOnClickListener(this);
 
         getDataFromServer();
+        getDataFromServer1();
     }
 
 
@@ -80,16 +83,17 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         String BMI = "BMI :" + bmiStr;
         bmi.setText(BMI);
     }
-//    @Override
-//    public void onItemClick(AdapterView<?> av,
-//                            View v, int pos, long id) {
-//
-//        TextView textView = v.findViewById(R.id.ProfileRowText);
-//        String caption = textView.getText().toString();
-//
-//        Toast toast = Toast.makeText(this, caption, Toast.LENGTH_SHORT);
-//        toast.show();
-//    }
+
+    protected void initView1(ArrayList<Goal> completedGoal){
+
+        completedGoal = completedGoal;
+
+        achievement1 = findViewById(R.id.achievement1);
+        achievement2 = findViewById(R.id.achievement2);
+
+        achievement1.setText(completedGoal.get(completedGoal.size() - 1).getGoalDescription());
+        achievement2.setText(completedGoal.get(completedGoal.size() - 2).getGoalDescription());
+    }
 
     private void getDataFromServer(){
         String url1 = "http://192.168.31.50:8888/api/userProfile";
@@ -97,7 +101,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         RequestPost(url1,UserName);
     }
 
-    private void RequestPost(String url,String UserName){
+    private void RequestPost(String url,String UserName) {
 
         OkHttpClient client = new OkHttpClient();
         FormBody.Builder formBuilder = new FormBody.Builder();
@@ -135,7 +139,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
                     ObjectMapper mapper = new ObjectMapper();
 
-                    final User currentUser = mapper.readValue(dataStr, new TypeReference<User>(){});
+                    final User currentUser = mapper.readValue(dataStr, new TypeReference<User>() {
+                    });
 
                     System.out.println("check data ");
 
@@ -148,7 +153,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                     });
 
 
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -156,9 +160,79 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
             }
         });
-
-
     }
+
+        private void getDataFromServer1(){
+            String url1 = "http://192.168.31.50:8888/api/completedGoal";
+            String UserName = "jake";
+            RequestPost1(url1,UserName);
+        }
+
+        private void RequestPost1(String url,String UserName){
+
+            OkHttpClient client = new OkHttpClient();
+            FormBody.Builder formBuilder = new FormBody.Builder();
+
+            formBuilder.add("UserName", UserName);
+
+
+            Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
+            Call call = client.newCall(request);
+
+            call.enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(UserProfile.this, "server error", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                    });
+                }
+
+                @Override
+                public void onResponse(Call call, final Response response) throws IOException {
+                    String res = response.body().string();
+                    System.out.println("This information return from server side");
+                    System.out.println(res);
+                    try {
+                        JSONObject jsonObj = new JSONObject(res);
+
+                        String dataStr = jsonObj.getString("data");
+
+                        ObjectMapper mapper = new ObjectMapper();
+
+                        final ArrayList<Goal> completedGoal1 = mapper.readValue(dataStr, new TypeReference<ArrayList<Goal> >(){});
+
+                        System.out.println("check data ");
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                initView1(completedGoal1);
+                                Toast.makeText(UserProfile.this, "success", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+
+                }
+            });
+
+
+        }
+
+
     @Override
     public void onClick(View v){
 

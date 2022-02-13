@@ -70,13 +70,13 @@ j
         android:id="@+id/age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Age:"
+        android:text="Date of Birth:"
         android:textSize="40sp"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@+id/mine_iv_headportrait"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="30dp"
+
         />
     <TextView
         android:id="@+id/height"
@@ -89,7 +89,7 @@ j
         app:layout_constraintBottom_toTopOf="@+id/weight"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         />
     <TextView
         android:id="@+id/weight"
@@ -102,7 +102,7 @@ j
        app:layout_constraintBottom_toTopOf="@+id/bmi"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         />
     <TextView
         android:id="@+id/bmi"
@@ -114,7 +114,7 @@ j
         app:layout_constraintTop_toBottomOf="@+id/weight"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         />
 
     <TextView
@@ -126,24 +126,28 @@ j
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/bmi"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/achievement1"
         android:layout_width="150dp"
         android:layout_height="100dp"
+        android:textColor="@color/white"
+        android:backgroundTint="#2196F3"
         app:layout_constraintTop_toBottomOf="@+id/AchievementText"
-        app:layout_constraintRight_toLeftOf="@+id/button2"
+        app:layout_constraintRight_toLeftOf="@+id/achievement2"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="15dp"
         />
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/achievement2"
         android:layout_width="150dp"
         android:layout_height="100dp"
+        android:backgroundTint="#2196F3"
+        android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/AchievementText"
-        app:layout_constraintLeft_toRightOf="@+id/button1"
+        app:layout_constraintLeft_toRightOf="@+id/achievement1"
         android:layout_marginLeft="50dp"
         />
 
