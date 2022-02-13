@@ -19,6 +19,12 @@
         android:theme="@style/Theme.ADPROJECT_Android_v2"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".CommentBlogEntryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FlagBlogEntryActivity"
+            android:exported="false" />
+        <activity
             android:name=".ViewBlogEntryActivity"
             android:exported="false" />
         <activity

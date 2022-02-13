@@ -84,6 +84,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         entryAuthor = findViewById(R.id.entryAuthor);
 
         likeBtn.setOnClickListener(this);
+        flagBtn.setOnClickListener(this);
         commentBtn.setOnClickListener(this);
 
 
@@ -113,8 +114,14 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         else {
             likeBtn.setBackgroundResource(R.drawable.thumb_logo_no_fill);
         }
+        if(blogEntry.isFlaggedByActiveUser()) {
+            flagBtn.setBackgroundResource(R.drawable.flag_logo_red_fill);
+        }
+        else{
+            flagBtn.setBackgroundResource(R.drawable.flag_logo_no_fill);
+        }
         commentBtn.setBackgroundResource(R.drawable.speech_bubble);
-        flagBtn.setBackgroundResource(R.drawable.flag_logo_no_fill);
+
 
     }
 
@@ -124,6 +131,16 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v){
         if (v == likeBtn) {
             toggleLike();
+        }
+        else if (v == flagBtn) {
+            Intent intent = new Intent(this,FlagBlogEntryActivity.class);
+            intent.putExtra("blogEntry",blogEntry);
+            startActivity(intent);
+        }
+        else if (v == commentBtn) {
+            Intent intent = new Intent(this,CommentBlogEntryActivity.class);
+            intent.putExtra("blogEntry",blogEntry);
+            startActivity(intent);
         }
 
 
