@@ -80,7 +80,7 @@
             />
 
     <Button
-        android:id="@+id/EditProfilePhoto"
+        android:id="@+id/SeeDetailsBtn"
         android:layout_width="130dp"
         android:layout_height="40dp"
         android:layout_marginTop="62dp"

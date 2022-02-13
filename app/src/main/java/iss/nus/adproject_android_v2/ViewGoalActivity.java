@@ -1,6 +1,9 @@
 package iss.nus.adproject_android_v2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,20 +26,24 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ViewGoalActivity extends AppCompatActivity  {
+public class ViewGoalActivity extends AppCompatActivity implements View.OnClickListener   {
 
     private List<String> mealstrList;
     private Goal currentGoal;
+    String intentprogresstext, mealsOnPath, mealsOffPath;
     TextView goalName;
     TextView totalCount;
     TextView targetCount;
     TextView pathProgressText;
     TextView TotalMealRecord;
+    Button GoDetailsBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_goal);
 
+        GoDetailsBtn = findViewById(R.id.SeeDetailsBtn);
+        GoDetailsBtn.setOnClickListener(this);
         getDataFromServer();
         getDataFromServer1();
     }
@@ -61,7 +68,10 @@ public class ViewGoalActivity extends AppCompatActivity  {
         pathProgressText = findViewById(R.id.pathProgressText2);
         String progresstext1 ="You are " + strList.get(2) + " % on path!";
         pathProgressText.setText(progresstext1);
-
+        //create string data for intent
+        intentprogresstext = progresstext1;
+        mealsOnPath = strList.get(0);
+        mealsOffPath = strList.get(1);
         int totalmealsInt = Integer.parseInt(strList.get(0)) + Integer.parseInt(strList.get(1));
         String totalmeals = "Meals in record :" + String.valueOf(totalmealsInt);
         TotalMealRecord.setText(totalmeals);
@@ -201,6 +211,22 @@ public class ViewGoalActivity extends AppCompatActivity  {
     }
 
 
+    @Override
+    public void onClick(View v){
+
+        int id = v.getId();
+        if(id == R.id.SeeDetailsBtn){
+
+            Intent intent = new Intent(this, GoalDetailsActivity.class);
+            intent.putExtra("mealstrList", String.valueOf(mealstrList));
+            intent.putExtra("currentGoal", currentGoal);
+            intent.putExtra("intentprogresstext",intentprogresstext);
+            intent.putExtra("mealsOnPath",mealsOnPath);
+            intent.putExtra("mealsOffPath",mealsOffPath);
+            startActivity(intent);
+
+        }
+    }
 
 
 }
