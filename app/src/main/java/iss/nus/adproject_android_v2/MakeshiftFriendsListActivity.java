@@ -40,9 +40,6 @@ public class MakeshiftFriendsListActivity extends AppCompatActivity implements  
     {
         // view v is the selected row
         TextView textView = v.findViewById(R.id.friendsUsernameTextView);
-        String str = textView.getText().toString();
-        Toast msg = Toast.makeText(this,str,Toast.LENGTH_SHORT);
-        msg.show();
 
         Integer friendUserId = friendsUserIds[pos];
         String friendUsername = friendsUsernames[pos];

@@ -1,9 +1,10 @@
 package iss.nus.adproject_android_v2.helper;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 
-public class BlogEntry{
+public class BlogEntry implements Serializable {
     private Integer id;
     private String imageURL;
 

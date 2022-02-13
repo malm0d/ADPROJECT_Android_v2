@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -83,6 +84,7 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
         ListView listView = findViewById(R.id.blogEntryList);
         if(listView != null) {
             listView.setAdapter(adapter);
+            listView.setOnItemClickListener(this);
         }
 
 
@@ -137,6 +139,7 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
         intent.putExtra("activeUsername",activeUsername);
         intent.putExtra("friendUsername",friendUsername);
         intent.putExtra("friendUserId",friendUserId);
+        intent.putExtra("blogEntry", blogEntries.get(pos));
         startActivity(intent);
 
 

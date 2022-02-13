@@ -5,5 +5,94 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewBlogEntryActivity">
+    <ImageView
+        android:scaleType="centerCrop"
+        android:id="@+id/mealdetailimage"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/flagBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintRight_toRightOf="@id/mealdetailimage"
+        app:layout_constraintTop_toBottomOf="@id/mealdetailimage" />
+
+    <ImageButton
+        android:id="@+id/commentBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintRight_toLeftOf="@id/flagBtn"
+        app:layout_constraintTop_toTopOf="@id/flagBtn" />
+
+    <ImageButton
+        android:id="@+id/likeBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="5dp"
+        app:layout_constraintRight_toLeftOf="@id/commentBtn"
+        app:layout_constraintTop_toTopOf="@id/flagBtn" />
+
+    <TextView
+        android:id="@+id/detailMealtitle"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="15dp"
+
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="@id/mealdetailimage"
+        app:layout_constraintRight_toLeftOf="@id/likeBtn"
+        app:layout_constraintTop_toTopOf="@id/flagBtn" />
+    <TextView
+        android:id="@+id/entryAuthor"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginRight="15dp"
+        android:text="by author"
+        android:textSize="16dp"
+        app:layout_constraintLeft_toLeftOf="@id/mealdetailimage"
+        app:layout_constraintRight_toLeftOf="@id/likeBtn"
+        app:layout_constraintTop_toBottomOf="@id/detailMealtitle"
+
+
+        />
+
+    <TextView
+        android:id="@+id/detailMealtime"
+        android:layout_width="0dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="15dp"
+        android:text="2022-2-1 14:26"
+        android:textSize="14dp"
+        app:layout_constraintLeft_toLeftOf="@id/mealdetailimage"
+        app:layout_constraintRight_toLeftOf="@id/likeBtn"
+        app:layout_constraintTop_toBottomOf="@id/entryAuthor" />
+
+    <EditText
+        android:id="@+id/mealDetailDes"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="5dp"
+        android:enabled="false"
+        android:text="meal detail"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintLeft_toLeftOf="@id/mealdetailimage"
+        app:layout_constraintRight_toRightOf="@id/mealdetailimage"
+        app:layout_constraintTop_toBottomOf="@id/detailMealtime"
+
+
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
