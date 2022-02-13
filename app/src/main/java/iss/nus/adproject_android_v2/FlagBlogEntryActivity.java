@@ -136,6 +136,9 @@ public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnC
                 }
 
                 blogEntry.setFlaggedByActiveUser(true);
+                Intent responseIntent = new Intent();
+                responseIntent.putExtra("blogEntry",blogEntry);
+                setResult(RESULT_OK,responseIntent);
                 finish();
             }
         });

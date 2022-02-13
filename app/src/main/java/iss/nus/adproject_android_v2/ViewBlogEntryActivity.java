@@ -1,5 +1,7 @@
 package iss.nus.adproject_android_v2;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,9 +48,6 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
     EditText mealDesc;
     TextView entryAuthor;
 
-
-    Switch publicSwitch;
-
     Button saveChage;
 
     MealHelper meal;
@@ -57,19 +56,36 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
 
     private BlogEntry blogEntry;
     private Integer activeUserId;
+    private ActivityResultLauncher<Intent> rlFlagBlogEntryActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_blog_entry);
+        System.out.println("Executing onCreate");
 
         Intent intent = getIntent();
         blogEntry = (BlogEntry) intent.getSerializableExtra("blogEntry");
         activeUserId = intent.getIntExtra("activeUserId",0);
+
+
+
+        rlFlagBlogEntryActivity = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == AppCompatActivity.RESULT_OK){
+                        Intent data = result.getData();
+                        blogEntry = (BlogEntry) data.getSerializableExtra("blogEntry");
+                    }
+                }
+        );
+    }
+    @Override
+    protected void onResume() {
+
+        super.onResume();
         initTheUi();
         showData();
-
-
     }
     public void initTheUi(){
         mealDetailImg = findViewById(R.id.mealdetailimage);
@@ -84,7 +100,12 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         entryAuthor = findViewById(R.id.entryAuthor);
 
         likeBtn.setOnClickListener(this);
-        flagBtn.setOnClickListener(this);
+        if(blogEntry.isFlaggedByActiveUser()) {
+            flagBtn.setOnClickListener(null);
+        }
+        else {
+            flagBtn.setOnClickListener(this);
+        }
         commentBtn.setOnClickListener(this);
 
 
@@ -136,7 +157,8 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
             Intent intent = new Intent(this,FlagBlogEntryActivity.class);
             intent.putExtra("blogEntry",blogEntry);
             intent.putExtra("activeUserId",activeUserId);
-            startActivity(intent);
+
+            rlFlagBlogEntryActivity.launch(intent);
         }
         else if (v == commentBtn) {
             Intent intent = new Intent(this,CommentBlogEntryActivity.class);
