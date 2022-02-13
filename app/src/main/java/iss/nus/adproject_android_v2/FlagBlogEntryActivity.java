@@ -5,9 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -16,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 import iss.nus.adproject_android_v2.helper.BlogEntry;
 
-public class FlagBlogEntryActivity extends AppCompatActivity {
+public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnClickListener{
     private BlogEntry blogEntry;
     private ImageView entryImage;
     private TextView blogTitle;
@@ -24,6 +26,7 @@ public class FlagBlogEntryActivity extends AppCompatActivity {
     private TextView likesText;
     private TextView otherReasonText;
     private String reason;
+    private Button submitBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,10 @@ public class FlagBlogEntryActivity extends AppCompatActivity {
         timeStampText = findViewById(R.id.timestampText);
         likesText = findViewById(R.id.likesText);
         otherReasonText = findViewById(R.id.other_reason_text);
+        submitBtn = findViewById(R.id.submit_report_btn);
+        if(submitBtn!= null) {
+            submitBtn.setOnClickListener(this);
+        }
     }
 
     public void renderBlogEntry() {
@@ -96,6 +103,28 @@ public class FlagBlogEntryActivity extends AppCompatActivity {
                 }
                 break;
         }
-        System.out.println(reason);
+//        System.out.println(reason);
+    }
+
+    public void submitForm() {
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        if(view == submitBtn) {
+            Toast errorMsg = Toast.makeText(this, "Please input a reason",Toast.LENGTH_SHORT);
+            if(reason == null) {
+                errorMsg.show();
+                return;
+            }
+            reason = reason.trim();
+            if(reason.isEmpty()) {
+                errorMsg.show();
+                return;
+            }
+        }
+
     }
 }
