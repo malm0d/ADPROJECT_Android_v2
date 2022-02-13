@@ -40,31 +40,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Offensive Language"
-            android:onClick="onRadioButtonClicked"
+            
             />
         <RadioButton android:id="@+id/radio_offensive_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Offensive Image"
-            android:onClick="onRadioButtonClicked"
+            
             />
         <RadioButton android:id="@+id/radio_irrelevant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Irrelevant"
-            android:onClick="onRadioButtonClicked"
+            
             />
         <RadioButton android:id="@+id/radio_advertisement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Advertisement"
-            android:onClick="onRadioButtonClicked"
+            
             />
         <RadioButton android:id="@+id/radio_other"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Other: "
-            android:onClick="onRadioButtonClicked"
+            
             />
     </RadioGroup>
     <EditText

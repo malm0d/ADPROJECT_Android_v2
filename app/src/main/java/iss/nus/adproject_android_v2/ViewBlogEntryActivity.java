@@ -135,11 +135,13 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         else if (v == flagBtn) {
             Intent intent = new Intent(this,FlagBlogEntryActivity.class);
             intent.putExtra("blogEntry",blogEntry);
+            intent.putExtra("activeUserId",activeUserId);
             startActivity(intent);
         }
         else if (v == commentBtn) {
             Intent intent = new Intent(this,CommentBlogEntryActivity.class);
             intent.putExtra("blogEntry",blogEntry);
+            intent.putExtra("activeUserId",activeUserId);
             startActivity(intent);
         }
 
@@ -177,9 +179,9 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         RequestBody reqbody = RequestBody.create(null, new byte[0]);
 
         Request request = new Request   .Builder()
-                .url(httpUrl)
-                .post(reqbody)
-                .build();
+                                        .url(httpUrl)
+                                        .post(reqbody)
+                                        .build();
         Call call = client.newCall(request);
         Integer finalDrawableId = drawableId;
         Boolean finalLikeEndState = likeEndState;
