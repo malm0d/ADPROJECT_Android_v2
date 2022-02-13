@@ -2,16 +2,17 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
-        android:scaleType="centerCrop"
         android:id="@+id/entryImage"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,5 +45,27 @@
         android:text="Score: 8/10"
         app:layout_constraintLeft_toLeftOf="@id/timestampText"
         app:layout_constraintTop_toBottomOf="@id/timestampText" />
+
+    <ImageView
+        android:id="@+id/rowLikeBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/blogTitle"
+        app:layout_constraintEnd_toStartOf="@+id/rowFlagBtn"
+        app:layout_constraintTop_toTopOf="@+id/blogTitle"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/rowFlagBtn"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/blogTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/blogTitle"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

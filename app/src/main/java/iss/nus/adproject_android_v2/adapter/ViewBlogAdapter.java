@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -64,6 +65,21 @@ public class ViewBlogAdapter extends ArrayAdapter<Object> {
                 .placeholder(R.drawable.no_img)
                 .into(entryImageView);
 
+        ImageView likeBtn = view.findViewById(R.id.rowLikeBtn);
+        if(blogEntries.get(pos).isLikedByActiveUser()){
+            likeBtn.setBackgroundResource(R.drawable.thumb_logo_blue_fill);
+        }
+        else {
+            likeBtn.setBackgroundResource(R.drawable.thumb_logo_no_fill);
+        }
+
+        ImageView flagBtn = view.findViewById(R.id.rowFlagBtn);
+        if(blogEntries.get(pos).isFlaggedByActiveUser()) {
+            flagBtn.setBackgroundResource(R.drawable.flag_logo_red_fill);
+        }
+        else {
+            flagBtn.setBackgroundResource(R.drawable.flag_logo_no_fill);
+        }
 
         return view;
     }

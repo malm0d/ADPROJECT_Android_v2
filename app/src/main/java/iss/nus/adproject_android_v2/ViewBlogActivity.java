@@ -3,10 +3,12 @@ package iss.nus.adproject_android_v2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,15 +36,16 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.OnItemClickListener{
+public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.OnItemClickListener, View.OnClickListener{
     private final String url = "http://192.168.0.108:8080/api/blogentry/blog";
-    private final String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
     private List<BlogEntry> blogEntries;
     private Thread getBlogEntriesThread;
     private Integer activeUserId;
     private Integer friendUserId;
     private String friendUsername;
     private String activeUsername;
+    private ImageView likeBtn;
+    private ImageView flagBtn;
 
 
 
@@ -88,6 +91,14 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
 
     }
     private void updateUi() {
+        likeBtn = findViewById(R.id.rowLikeBtn);
+        if(likeBtn != null) {
+            likeBtn.setOnClickListener(this);
+        }
+        flagBtn = findViewById(R.id.flagBtn);
+        if(flagBtn != null) {
+            flagBtn.setOnClickListener(this);
+        }
         TextView authorText = findViewById(R.id.authorText);
         authorText.setText(friendUsername+"'s blog");
 
@@ -152,5 +163,15 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
 
 
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == likeBtn) {
+            System.out.println("Me likey");
+        }
+        else if(view == flagBtn) {
+            System.out.println("Me flaggy");
+        }
     }
 }
