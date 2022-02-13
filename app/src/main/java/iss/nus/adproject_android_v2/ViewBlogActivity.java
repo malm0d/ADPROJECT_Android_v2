@@ -57,6 +57,13 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
         friendUsername = intent.getStringExtra("friendUsername");
         activeUsername = intent.getStringExtra("activeUsername");
 
+
+
+    }
+    @Override
+    public void onResume() {
+
+        super.onResume();
         getBlogEntriesThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -76,7 +83,11 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        updateUi();
 
+
+    }
+    private void updateUi() {
         TextView authorText = findViewById(R.id.authorText);
         authorText.setText(friendUsername+"'s blog");
 
@@ -86,8 +97,6 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
         }
-
-
     }
 
 

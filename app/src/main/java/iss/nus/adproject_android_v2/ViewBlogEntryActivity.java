@@ -50,10 +50,6 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
 
     Button saveChage;
 
-    MealHelper meal;
-
-    private CustomDatePicker mTimerPicker;
-
     private BlogEntry blogEntry;
     private Integer activeUserId;
     private ActivityResultLauncher<Intent> rlFlagBlogEntryActivity;
