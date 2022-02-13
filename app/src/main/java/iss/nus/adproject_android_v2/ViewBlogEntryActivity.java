@@ -1,8 +1,10 @@
 package iss.nus.adproject_android_v2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,15 +14,24 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import iss.nus.adproject_android_v2.datepicker.CustomDatePicker;
 import iss.nus.adproject_android_v2.helper.BlogEntry;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnClickListener{
     ImageView mealDetailImg;
@@ -45,6 +56,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
     private CustomDatePicker mTimerPicker;
 
     private BlogEntry blogEntry;
+    private Integer activeUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +65,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
 
         Intent intent = getIntent();
         blogEntry = (BlogEntry) intent.getSerializableExtra("blogEntry");
+        activeUserId = intent.getIntExtra("activeUserId",0);
         initTheUi();
         showData();
 
@@ -117,16 +130,80 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
     }
 
     public void toggleLike() {
+        String operation = null;
+        Integer drawableId = null;
+        Boolean likeEndState = null;
         if(blogEntry.isLikedByActiveUser()) {
             //If currently liked, unlike
-            blogEntry.setLikedByActiveUser(false);
-            likeBtn.setBackgroundResource(R.drawable.thumb_logo_no_fill);
+            operation = "unlike";
+            likeEndState = false;
+            drawableId =  R.drawable.thumb_logo_no_fill;
         }
         else {
             //If currently unliked, like
-            blogEntry.setLikedByActiveUser(true);
-            likeBtn.setBackgroundResource(R.drawable.thumb_logo_blue_fill);
+            operation = "like";
+            likeEndState = true;
+            drawableId =  R.drawable.thumb_logo_blue_fill;
         }
+
+
+
+        String url = "http://192.168.0.108:8080/api/likes/" + operation;
+        OkHttpClient client = new OkHttpClient();
+        HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
+
+        httpBuilder .addQueryParameter("userId",activeUserId.toString())
+                    .addQueryParameter("mealEntryId",blogEntry.getId().toString());
+
+        HttpUrl httpUrl = httpBuilder.build();
+        //Define empty request body
+        RequestBody reqbody = RequestBody.create(null, new byte[0]);
+
+        Request request = new Request   .Builder()
+                .url(httpUrl)
+                .post(reqbody)
+                .build();
+        Call call = client.newCall(request);
+        Integer finalDrawableId = drawableId;
+        Boolean finalLikeEndState = likeEndState;
+        String finalOperation = operation;
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                System.out.println(finalOperation + " operation failed");
+                //On failure doesn't seem to work
+
+
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+
+                if(response.code() != 200) {
+                    System.out.println(finalOperation + " operation failed");
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast msg = Toast.makeText(ViewBlogEntryActivity.this,finalOperation + " operation failed",Toast.LENGTH_SHORT);
+                            msg.show();
+
+                        }
+                    });
+                    return;
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        blogEntry.setLikedByActiveUser(finalLikeEndState);
+                        likeBtn.setBackgroundResource(finalDrawableId);
+
+                    }
+                });
+
+            }
+        });
+
+
 
     }
 }

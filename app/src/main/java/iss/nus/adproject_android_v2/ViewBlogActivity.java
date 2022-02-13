@@ -134,7 +134,6 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
     public void onItemClick(AdapterView<?> adapterView, View v, int pos, long id) {
         Integer blogEntryId = blogEntries.get(pos).getId();
         Intent intent = new Intent(this, ViewBlogEntryActivity.class);
-        intent.putExtra("blogEntryId", blogEntryId);
         intent.putExtra("activeUserId",activeUserId);
         intent.putExtra("activeUsername",activeUsername);
         intent.putExtra("friendUsername",friendUsername);
