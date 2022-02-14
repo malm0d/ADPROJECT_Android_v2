@@ -84,6 +84,14 @@ public class LoginActivity extends AppCompatActivity {
                 startResetPwdActivity();
             }
         });
+
+        mCreateAccBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private Boolean validateLogin(String username, String password) {
@@ -99,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void authenticate(String username, String password) {
-        String url = "http://192.168.1.107:8080/api/login/auth";
+        String url = "http://192.168.1.8:8080/api/login/auth";
         RequestPost(url, username, password);
     }
 
@@ -152,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
                             user.setUserId(jObj.getString("userId"));
                             user.setUsername(jObj.getString("username"));
                             user.setName(jObj.getString("name"));
-                            user.setProfilePic(jObj.getString("profilePic"));
+                            user.setProfilePic(jObj.getString( "profilePic"));
 
                             SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pref.edit();
