@@ -68,11 +68,14 @@
         app:layout_constraintTop_toBottomOf="@id/descriptionTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:hint="Enter Description: 200 Characters"
+        android:hint="Enter Description: 500 Characters"
         android:gravity="center"
         android:ems="15"
-        android:maxLength="200"
-        android:lines="6"/>
+        android:maxLength="500"
+        android:lines="6"
+        android:overScrollMode="always"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"/>
 
 
     <TextView
