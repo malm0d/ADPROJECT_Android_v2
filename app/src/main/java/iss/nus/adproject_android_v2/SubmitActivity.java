@@ -33,6 +33,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
     private String currentPhotoPath;
     private Uri photoURI;
     private String mealTitle;
+    private String description;
     private String feeling = null;
     private int trackScore = -1;
     private String timeStamp;
@@ -45,6 +46,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
 
     private ImageView capturedImageView;
     private EditText mealTitleEntry;
+    private EditText descriptionEntry;
     private ImageButton offTrackBtn;
     private TextView offTrackTitle;
     private ImageButton onTrackBtn;
@@ -77,6 +79,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void run() {
                         mealTitleEntry = findViewById(R.id.mealTitleEditText);
+                        descriptionEntry = findViewById(R.id.descriptionEditText);
                         offTrackBtn = findViewById(R.id.offTrackBtn);
                         offTrackTitle = findViewById(R.id.offTrackTitle);
                         onTrackBtn = findViewById(R.id.onTrackBtn);
@@ -234,15 +237,18 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
 
         if (view == submitBtn) {
             mealTitle = mealTitleEntry.getText().toString();
-            if (mealTitle != null && !mealTitle.trim().isEmpty() && selectedTrack == true && feeling != null) {
+            description = descriptionEntry.getText().toString();
+            if (mealTitle != null && !mealTitle.trim().isEmpty() && description != null && !description.trim().isEmpty() && selectedTrack == true && feeling != null) {
                 mealTitle = mealTitle.trim();
+                description = description.trim();
                 System.out.println(mealTitle);
+                System.out.println(description);
                 System.out.println(trackScore);
                 System.out.println(feeling);
                 uploadData();
 
             } else {
-                String validationMsg = "Meal title must have a valid entry and a track and feeling must both be selected";
+                String validationMsg = "Meal title and description must have a valid entry and a track and feeling must both be selected";
                 Toast toast = Toast.makeText(this, validationMsg, Toast.LENGTH_SHORT);
                 toast.show();
             }
@@ -264,6 +270,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                 .addFormDataPart("imageFileName", fileName)
                 .addFormDataPart("imageURL", currentPhotoPath)
                 .addFormDataPart("mealTitle", mealTitle)
+                .addFormDataPart("description", description)
                 .addFormDataPart("feeling", feeling)
                 .addFormDataPart("trackScore", String.valueOf(trackScore))
                 .addFormDataPart("timeStamp", timeStamp)
@@ -312,6 +319,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void run() {
                 mealTitleEntry.setEnabled(false);
+                descriptionEntry.setEnabled(false);
                 submitBtn.setClickable(false);
                 onTrackBtn.setClickable(false);
                 offTrackBtn.setClickable(false);
@@ -328,6 +336,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void run() {
                 mealTitleEntry.setEnabled(true);
+                descriptionEntry.setEnabled(true);
                 submitBtn.setClickable(true);
                 onTrackBtn.setClickable(true);
                 offTrackBtn.setClickable(true);

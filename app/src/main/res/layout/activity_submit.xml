@@ -8,14 +8,14 @@
 
     <ImageView
         android:id="@+id/capturedImageView"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="125dp"
+        android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05"/>
+        app:layout_constraintVertical_bias="0.05" />
 
     <TextView
         android:id="@+id/mealTitle"
@@ -23,7 +23,37 @@
         android:layout_height="wrap_content"
         android:text="Meal Title:"
         android:textStyle="italic"
-        android:textSize="25sp"
+        android:textSize="28sp"
+        android:textColor="@color/purple_700"
+        app:layout_constraintTop_toTopOf="@id/capturedImageView"
+        app:layout_constraintLeft_toRightOf="@id/capturedImageView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"/>
+
+    <EditText
+        android:id="@+id/mealTitleEditText"
+        android:inputType="textMultiLine"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mealTitle"
+        app:layout_constraintLeft_toRightOf="@id/capturedImageView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="@id/mealTitle"
+        app:layout_constraintBottom_toBottomOf="@id/capturedImageView"
+        app:layout_constraintVertical_bias="0.1"
+        android:hint="Enter title: 50 Characters"
+        android:gravity="left"
+        android:ems="15"
+        android:maxLength="50"
+        android:lines="3"/>
+
+    <TextView
+        android:id="@+id/descriptionTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description:"
+        android:textStyle="italic"
+        android:textSize="28sp"
         android:textColor="@color/purple_700"
         app:layout_constraintTop_toBottomOf="@id/capturedImageView"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -31,17 +61,19 @@
         android:layout_marginTop="10dp"/>
 
     <EditText
-        android:id="@+id/mealTitleEditText"
+        android:id="@+id/descriptionEditText"
+        android:inputType="textMultiLine"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/mealTitle"
+        app:layout_constraintTop_toBottomOf="@id/descriptionTitle"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="5dp"
-        android:hint="Enter title"
+        android:hint="Enter Description: 200 Characters"
         android:gravity="center"
         android:ems="15"
-        android:maxLength="34"/>
+        android:maxLength="200"
+        android:lines="6"/>
+
 
     <TextView
         android:id="@+id/trackTitle"
@@ -51,10 +83,10 @@
         android:textStyle="italic"
         android:textSize="18sp"
         android:textColor="@color/purple_700"
-        app:layout_constraintTop_toBottomOf="@id/mealTitleEditText"
+        app:layout_constraintTop_toBottomOf="@id/descriptionEditText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="5dp"/>
 
     <ImageButton
         android:id="@+id/offTrackBtn"
