@@ -19,15 +19,20 @@
         android:theme="@style/Theme.ADPROJECT_Android_v2"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity
+            android:name=".Userdashboard"
+            android:exported="false" />
+        <activity
             android:name=".ResetPwdActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".DashboardActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".ResponseActivity"
             android:exported="false" />
@@ -49,14 +54,16 @@
         <activity
             android:name=".SetGoalActivity"
             android:exported="false" />
-         <activity
-             android:name=".MainActivity"
-             android:exported="true">
-             <intent-filter>
-                 <action android:name="android.intent.action.MAIN" />
-                 <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
-         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="iss.nus.adproject_android_v2.fileprovider"

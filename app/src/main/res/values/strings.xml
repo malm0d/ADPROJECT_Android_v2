@@ -17,4 +17,21 @@
     <string name="current_date">Current date</string>
     <string name="select_time">Choose time</string>
     <string name="current_time">Current time</string>
+
+    <!--User Dashboard-->
+    <string name="current_goal">Current Goal:   </string>
+    <string name="my_progress">How did I progress? </string>
+
+    <!-- Navigation Bar -->
+    <string name="text_label_1">Meals</string>
+    <string name="text_label_2">Path </string>
+    <string name="text_label_3">Add </string>
+    <string name="text_label_4">Friends </string>
+    <string name="text_label_5">Settings </string>
+    <string name="title_activity_settings">SettingsActivity</string>
+
+    <!-- Settings Page -->
+    <string name="reminderText">Reminder Time</string>
+    <string name="setTime">Set Time</string>
+    <string name="reminderTime">20: 00</string>
 </resources>

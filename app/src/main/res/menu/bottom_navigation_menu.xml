@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/meal"
+        android:enabled="true"
+        android:icon="@drawable/meal"
+        android:title="@string/text_label_1"/>
+    <item
+        android:id="@+id/path"
+        android:enabled="true"
+        android:icon="@drawable/path"
+        android:title="@string/text_label_2"/>
+    <item
+        android:id="@+id/add"
+        android:enabled="true"
+        android:icon="@drawable/add"
+        android:title="@string/text_label_3"/>
+    <item
+        android:id="@+id/friends"
+        android:enabled="true"
+        android:icon="@drawable/friends"
+        android:title="@string/text_label_4"/>
+    <item
+        android:id="@+id/settings"
+        android:enabled="true"
+        android:icon="@drawable/settings"
+        android:title="@string/text_label_5"/>
+
+
+</menu>
