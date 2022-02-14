@@ -7,6 +7,7 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
     private String currentPhotoPath;
     private Uri photoURI;
     private String timeStamp;
-    private int userId;
+    private String userId;
     private int goalId;
 
     @Override
@@ -38,9 +39,10 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
 
-        //userId = intent.getIntExtra("userId", -1);
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        userId = pref.getString("userId", "");
         //goalId = intent.getIntExtra("goalId", -1);
-        //if (userId == -1 || goalId == -1) {
+        //if (userId == null || userId.equals("") || goalId == -1) {
         //    Toast.makeText(this, "No valid user or goal", Toast.LENGTH_LONG).show();
         //    finish();
         //}
@@ -103,7 +105,7 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra("currentPhotoPath", currentPhotoPath);
         intent.putExtra("photoURI", photoURI);
         intent.putExtra("timeStamp", timeStamp);
-        //intent.putExtra("userId", userId);
+        intent.putExtra("userId", userId);
         //intent.putExtra("goalId", goalId);
         startActivity(intent);
     }

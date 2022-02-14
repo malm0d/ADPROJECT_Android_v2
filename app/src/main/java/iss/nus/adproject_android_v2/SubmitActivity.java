@@ -37,7 +37,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
     private String feeling = null;
     private int trackScore = -1;
     private String timeStamp;
-    private int userId;
+    private String userId;
     private int goalId;
 
     private boolean selectedTrack = false;
@@ -69,7 +69,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
         photoURI = intent.getParcelableExtra("photoURI");
         getBitmapFromUri(photoURI);
         capturedImageView.setImageURI(photoURI); //alt: capturedImageView.setImageBitmap(imageBitmap);
-        //userId = intent.getIntExtra("userId", -1);
+        userId = intent.getStringExtra("userId");
         //goalId = intent.getIntExtra("goalId", -1);
 
         new Thread(new Runnable() {
@@ -274,7 +274,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                 .addFormDataPart("feeling", feeling)
                 .addFormDataPart("trackScore", String.valueOf(trackScore))
                 .addFormDataPart("timeStamp", timeStamp)
-                //.addFormDataPart("userId", String.valueOf(userId))
+                .addFormDataPart("userId", userId)
                 //.addFormDataPart("goalId", String.valueOf(goalId))
                 .build();
 
