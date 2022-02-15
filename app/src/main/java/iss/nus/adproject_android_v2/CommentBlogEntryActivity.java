@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import iss.nus.adproject_android_v2.adapter.CommentAdapter;
 import iss.nus.adproject_android_v2.helper.BlogEntry;
 import iss.nus.adproject_android_v2.helper.Comment;
 import okhttp3.Call;
@@ -77,11 +79,10 @@ public class CommentBlogEntryActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        /*for(Comment comment : comments) {
-            System.out.println(comment);
-        }*/
+
         initUi();
-        renderBlogEntry();
+        updateUI();
+
 
     }
 
@@ -128,6 +129,15 @@ public class CommentBlogEntryActivity extends AppCompatActivity {
         }
         else {
             flagBtn.setBackgroundResource(R.drawable.flag_logo_no_fill);
+        }
+    }
+
+    private void updateUI(){
+        renderBlogEntry();
+        CommentAdapter adapter = new CommentAdapter(this,comments);
+        ListView commentSection = findViewById(R.id.comment_section);
+        if(commentSection != null) {
+            commentSection.setAdapter(adapter);
         }
     }
 
