@@ -35,6 +35,7 @@ public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnC
     private TextView timeStampText;
     private TextView likesText;
     private TextView otherReasonText;
+    private TextView rowAuthor;
     private String reason;
     private RadioButton offensiveLanguageRadioBtn;
     private RadioButton offensiveImageRadioBtn;
@@ -63,6 +64,7 @@ public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnC
         blogTitle = findViewById(R.id.blogTitle);
         timeStampText = findViewById(R.id.timestampText);
         likesText = findViewById(R.id.likesText);
+        rowAuthor = findViewById(R.id.rowAuthor);
         otherReasonText = findViewById(R.id.other_reason_text);
         offensiveLanguageRadioBtn = findViewById(R.id.radio_offensive_language);
         offensiveImageRadioBtn = findViewById(R.id.radio_offensive_image);
@@ -93,7 +95,8 @@ public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnC
         timeStampText.setText(formattedTimestamp);
         String likeString = "Liked by " + blogEntry.getNumberOfLikes() + " users";
         likesText.setText(likeString);
-
+        String authorText = "by " + blogEntry.getAuthorUsername();
+        rowAuthor.setText(authorText);
     }
 
 
