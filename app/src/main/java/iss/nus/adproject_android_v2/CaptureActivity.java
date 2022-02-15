@@ -148,6 +148,12 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
                 ActivityCompat.requestPermissions(this, permissions, REQ_CAMERA_PERMISSION);
             }
         }
+
+        if (view == systemRecommendBtn){
+            Intent intent = new Intent(this, RecommendActivity.class);
+            System.out.println("go into rec");
+            startActivity(intent);
+        }
     }
 
     @Override

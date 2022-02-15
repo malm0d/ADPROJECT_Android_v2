@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         captureBtn = findViewById(R.id.capture);
         captureBtn.setOnClickListener(this);
+
     }
 
 
@@ -53,7 +54,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent intent = new Intent(this, CaptureActivity.class);
             startActivity(intent);
         }
-
-
     }
 }
