@@ -34,6 +34,9 @@ public class Settings extends AppCompatActivity {
     Button setTimeBtn;
     Switch timeSwitch;
     TimePicker timePicker;
+    PendingIntent pendingIntent;
+
+    int hour, min;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,20 +47,18 @@ public class Settings extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("switchKey",MODE_PRIVATE);
         boolean isOn= sp.getBoolean("switchKey",false);
         timeSwitch.setChecked(isOn);
-        initSwitchListener();
 
         setTimeBtn = findViewById(R.id.setTime);
         setTimeBtn.setEnabled(isOn);
-        setTimeBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                createNotificationChannel();
-                createNotification();
-            }
-        });
 
         timePicker = findViewById(R.id.timePicker);
         timePicker.setEnabled(isOn);
+
+        Intent alarmIntent= new Intent(Settings.this, AlertReceiver.class);
+        pendingIntent = PendingIntent.getBroadcast(Settings.this,0, alarmIntent, 0);
+
+        initSwitchListener();
+
     }
 
     private void initSwitchListener(){
@@ -65,16 +66,19 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isOn) {
                 if(isOn){
-                    Toast.makeText(getApplicationContext(),"notification turned on", Toast.LENGTH_SHORT).show();
-                    startAlarm();
+                    //Toast.makeText(getApplicationContext(),"notification turned on", Toast.LENGTH_SHORT).show();
                     timePicker.setEnabled(true);
                     setTimeBtn.setEnabled(true);
 
+                    startAlarm();
+
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"notification turned off", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(),"notification turned off", Toast.LENGTH_SHORT).show();
                     timePicker.setEnabled(false);
                     setTimeBtn.setEnabled(false);
+
+                    cancelAlarm();
 
 
                 }
@@ -85,26 +89,60 @@ public class Settings extends AppCompatActivity {
             }
 
         });
+
+
+        setTimeBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+                hour = timePicker.getHour();
+                min= timePicker.getMinute();
+
+                String msg = "notification set at " + hour +":" +String.format("%02d",min) +" daily";
+                Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_SHORT).show();
+
+                startAlarm();
+            }
+        });
     }
+
 
     private void startAlarm(){
 
+        Calendar alarmTime = Calendar.getInstance();
+        alarmTime.set(Calendar.HOUR_OF_DAY,timePicker.getHour());
+        alarmTime.set(Calendar.MINUTE,timePicker.getMinute());
+        alarmTime.set(Calendar.SECOND,0);
 
+        Intent intent = new Intent(getApplicationContext(), AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY,10);
-        c.set(Calendar.MINUTE,44);
-        c.set(Calendar.SECOND,0);
 
-        Intent intent = new Intent(this, AlertReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-
-        if (c.before(Calendar.getInstance())) {
-            c.add(Calendar.DATE, 1);
+        if (alarmTime.before(Calendar.getInstance())) {
+            alarmTime.add(Calendar.DATE, 1);
         }
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), alarmManager.INTERVAL_DAY , pendingIntent);
         System.out.println("Alarm set for notification");
+
+        /*AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        int interval = 8000;
+
+        manager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), interval, pendingIntent);
+        Toast.makeText(this,"Alarm Set", Toast.LENGTH_SHORT).show();*/
+
+    }
+
+    private void cancelAlarm(){
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(pendingIntent);
+        Toast.makeText(getApplicationContext(),"notification turned off", Toast.LENGTH_SHORT).show();
+
+        /*AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        manager.cancel(pendingIntent);
+        Toast.makeText(this, "Alarm Canceled", Toast.LENGTH_SHORT).show();*/
+
+
     }
 
     private void createNotificationChannel(){
