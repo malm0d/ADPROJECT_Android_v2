@@ -36,6 +36,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -136,6 +137,10 @@ public class CreateAccountActivity extends AppCompatActivity {
             return false;
         }
 
+        if (!isValidEmailId(email)) {
+            Toast.makeText(getApplicationContext(), "Invalid Email Address", Toast.LENGTH_SHORT).show();
+        }
+
         if (password == null || password.trim().length() == 0) {
             Toast.makeText(getApplicationContext(), "Password is required", Toast.LENGTH_SHORT).show();
             return false;
@@ -151,10 +156,10 @@ public class CreateAccountActivity extends AppCompatActivity {
     protected void RequestPost(String url, String username, String email, String password) {
         OkHttpClient client = new OkHttpClient();
 
-        final File imageFile = new File(uriToFilePath(selectedImage));
+        final File imageFile = new File(path);
 
-        if (path.isEmpty() || !imageFile.exists()) {
-            Toast.makeText(getApplicationContext(), "File does not exists", Toast.LENGTH_SHORT).show();
+        if (!imageFile.exists()) {
+            Toast.makeText(getApplicationContext(), "Please set profile picture", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -279,5 +284,14 @@ public class CreateAccountActivity extends AppCompatActivity {
             filePath = uri.getPath();
         }
         return filePath;
+    }
+
+    private boolean isValidEmailId(String email) {
+        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
     }
 }
