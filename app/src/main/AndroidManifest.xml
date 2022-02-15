@@ -19,6 +19,9 @@
         android:theme="@style/Theme.ADPROJECT_Android_v2"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".PastGoalsActivity"
+            android:exported="false" />
+        <activity
             android:name=".GoalDetailsActivity"
             android:exported="false" />
         <activity

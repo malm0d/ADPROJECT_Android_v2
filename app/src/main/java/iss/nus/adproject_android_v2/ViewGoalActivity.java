@@ -36,7 +36,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
     TextView targetCount;
     TextView pathProgressText;
     TextView TotalMealRecord;
-    Button GoDetailsBtn;
+    Button GoDetailsBtn,PastGoalBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +44,8 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
 
         GoDetailsBtn = findViewById(R.id.SeeDetailsBtn);
         GoDetailsBtn.setOnClickListener(this);
+        PastGoalBtn =findViewById(R.id.PastGoalBtn);
+        PastGoalBtn.setOnClickListener(this);
         getDataFromServer();
         getDataFromServer1();
     }
@@ -225,6 +227,11 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
             intent.putExtra("mealsOffPath",mealsOffPath);
             startActivity(intent);
 
+        }
+
+        if(id == R.id.PastGoalBtn){
+            Intent intent = new Intent(this, PastGoalsActivity.class);
+            startActivity(intent);
         }
     }
 

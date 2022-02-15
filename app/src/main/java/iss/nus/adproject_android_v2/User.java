@@ -13,12 +13,12 @@ public class User implements Serializable {
     private String dateOfBirth;
     private String height;
     private String weight;
-
+    private String profilePic;
 
 
 
     public User(Integer id, String name, String gender, String dateOfBirth,
-                String height, String weight) {
+                String height, String weight, String profilePic) {
         super();
         this.id = id;
         this.name = name;
@@ -26,6 +26,7 @@ public class User implements Serializable {
         this.dateOfBirth = dateOfBirth;
         this.height = height;
         this.weight = weight;
+        this.profilePic = profilePic;
 
     }
 
@@ -74,6 +75,12 @@ public class User implements Serializable {
     }
     public void setWeight(String weight) {
         this.weight = weight;
+    }
+    public String getProfilePic() {
+        return profilePic;
+    }
+    public void setProfilePic(String profilePic) {
+        this.profilePic = profilePic;
     }
 
 }

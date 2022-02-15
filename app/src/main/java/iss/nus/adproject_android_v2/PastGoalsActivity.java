@@ -1,17 +1,14 @@
 package iss.nus.adproject_android_v2;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,60 +23,37 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class PastMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener  {
+public class PastGoalsActivity extends AppCompatActivity {
 
-    private ArrayList<MealHelper> mealsDataArray;
-
+    NavigationBarView bottomNavigation;
+    private ArrayList<Goal> pastGoals;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_past_meals);
+        setContentView(R.layout.activity_past_goals);
 
-        mealsDataArray = new ArrayList<>();
+        pastGoals = new ArrayList<>();
         getDataFromServer();
+
     }
-    
 
     protected void initListView
-            (ArrayList<MealHelper> mealList){
+            (ArrayList<Goal> pastGoalsList){
 
-        mealsDataArray = mealList;
-        ListView listView = findViewById(R.id.mealslist);
+        pastGoals = pastGoalsList;
+        ListView listView = findViewById(R.id.pastGoalList);
         if (listView != null){
-            listView.setAdapter(new mealListAdapter(this,mealList));
-            listView.setOnItemClickListener(this);
+            listView.setAdapter(new pastGoalListAdapter(this,pastGoalsList));
         }
 
-        if (mealList.size() >= 0){
-            Goal latestGoal = mealList.get(0).getGoal();
-            TextView goalText = findViewById(R.id.currentgoal);
-            String goalStr = "Current Goal: " + latestGoal.getGoalDescription();
-            goalText.setText(goalStr);
-        }
-
-
-    }
-
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-
-        Intent intent = new Intent();
-        intent.setClass(this,MealDetailActivity.class);
-        MealHelper detailMeal = mealsDataArray.get(position);
-        intent.putExtra("meal",detailMeal);
-        startActivity(intent);
-
-        System.out.println("clicked position: " + position);
 
     }
 
     private void getDataFromServer(){
-        String url = "http://192.168.31.50:8888/api/pastMeals";
+        String url = "http://192.168.31.50:8888/api/pastGoal";
         String UserName = "jake";
         RequestPost(url,UserName);
     }
-
 
     private void RequestPost(String url,String UserName){
 
@@ -87,6 +61,7 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
         FormBody.Builder formBuilder = new FormBody.Builder();
 
         formBuilder.add("UserName", UserName);
+
 
         Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
         Call call = client.newCall(request);
@@ -100,7 +75,7 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(PastMealsActivity.this, "server error", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(PastGoalsActivity.this, "server error", Toast.LENGTH_SHORT).show();
                             }
                         });
                     }
@@ -109,25 +84,25 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                final String res = response.body().string();
+                String res = response.body().string();
                 System.out.println("This information return from server side");
                 System.out.println(res);
                 try {
                     JSONObject jsonObj = new JSONObject(res);
-                    String dataStr = jsonObj.toString();
+
+                    String dataStr = jsonObj.getString("data");
 
                     ObjectMapper mapper = new ObjectMapper();
 
-
-                    final ArrayList<MealHelper> mealList = mapper.readValue(dataStr, new TypeReference<ArrayList<MealHelper>>(){});
+                    final ArrayList<Goal> completedGoal1 = mapper.readValue(dataStr, new TypeReference<ArrayList<Goal> >(){});
 
                     System.out.println("check data ");
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            initListView(mealList);
-                            Toast.makeText(PastMealsActivity.this, "success", Toast.LENGTH_SHORT).show();
+                            initListView(completedGoal1);
+                            Toast.makeText(PastGoalsActivity.this, "success", Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -143,7 +118,4 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
 
 
     }
-
-
-
 }
