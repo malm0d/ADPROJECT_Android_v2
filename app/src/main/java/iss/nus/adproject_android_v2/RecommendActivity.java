@@ -21,6 +21,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -38,13 +39,18 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
     ImageView cryingImg, pensiveImg, happyImg, joyfulImg;
     ImageView cryingCircle, pensiveCircle, happyCircle, joyfulCircle;
     Map<ImageView, String> feelings = new HashMap<>();
-    String input = " ";
-    String feeling = " ";
+    String input = "+";
+    String feeling = "happy";
     String track = "ontrack";
     SwitchCompat trackSwitch;
     String[] titles;
+    String[] authors;
+    String[] rFeelings;
+    String[] trackScores;
+    String[] imageUrls;
     String goodResult;
     String userId = "1";
+    List<MealHelper> mealHelpers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,51 +114,51 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
 //        }
 
         if (view == cryingImg){
-            if (cryingCircle.getVisibility() == View.VISIBLE){
-                clearFeelings();
-                feeling = " ";
-            }
-            else{
+//            if (cryingCircle.getVisibility() == View.VISIBLE){
+//                clearFeelings();
+//                feeling = "+";
+//            }
+//            else{
                 feeling = feelings.get(view);
                 clearFeelings();
                 cryingCircle.setVisibility(View.VISIBLE);
-            }
+            //}
         }
 
         if (view == pensiveImg){
-            if (pensiveCircle.getVisibility() == View.VISIBLE){
-                clearFeelings();
-                feeling = " ";
-            }
-            else{
+//            if (pensiveCircle.getVisibility() == View.VISIBLE){
+//                clearFeelings();
+//                feeling = "+";
+//            }
+//            else{
                 feeling = feelings.get(view);
                 clearFeelings();
                 pensiveCircle.setVisibility(View.VISIBLE);
-            }
+            //}
         }
 
         if (view == happyImg){
-            if (happyCircle.getVisibility() == View.VISIBLE){
-                clearFeelings();
-                feeling = " ";
-            }
-            else {
+//            if (happyCircle.getVisibility() == View.VISIBLE){
+//                clearFeelings();
+//                feeling = "+";
+//            }
+//            else {
                 feeling = feelings.get(view);
                 clearFeelings();
                 happyCircle.setVisibility(View.VISIBLE);
-            }
+            //}
         }
 
         if (view == joyfulImg){
-            if (joyfulCircle.getVisibility() == View.VISIBLE){
-                clearFeelings();
-                feeling = " ";
-            }
-            else{
+//            if (joyfulCircle.getVisibility() == View.VISIBLE){
+//                clearFeelings();
+//                feeling = "+";
+//            }
+//            else{
                 feeling = feelings.get(view);
                 clearFeelings();
                 joyfulCircle.setVisibility(View.VISIBLE);
-            }
+            //}
         }
 
         if (view == submitBtn){
@@ -163,8 +169,14 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
             SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
             input = String.valueOf(submitTextBox.getText());
             //userId = pref.getString("userId", " ");
+            System.out.println("input: " + input);
+            if (input.isEmpty()){
+                input = "+";
+            }
+            System.out.println("input: " + input);
             String postUrl = "http://192.168.50.208:8080/api/recommend/postStringData/"
                     + userId + "/" + input + "/" + feeling + "/" + track;
+            System.out.print(postUrl);
             //RequestPost(postUrl, input, feeling, track);
 //            RequestPost(postUrl);
 //            String getUrl = "http://192.168.50.208:8080/api/recommend/getResultJson/" + userId;
@@ -175,11 +187,12 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
     public void startResult(){
         Intent intent = new Intent(this, RecSearchResultActivity.class);
         intent.putExtra("titles", titles);
+        intent.putExtra("authors", authors);
+        intent.putExtra("rFeelings", rFeelings);
+        intent.putExtra("trackScores", trackScores);
+        intent.putExtra("imageUrls", imageUrls);
         intent.putExtra("goodResult", goodResult);
         System.out.println("submit button");
-        for (String s : titles){
-            System.out.println(s);
-        }
         startActivity(intent);
     }
 
@@ -228,12 +241,22 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
                     e.printStackTrace();
                 }
                 try {
-                    JSONArray Jarray = json.getJSONArray("titles");
-                    System.out.println("JSONArray:");
-                    System.out.println(Jarray);
+                    JSONArray Jtitles = json.getJSONArray("titles");
+                    JSONArray Jauthors = json.getJSONArray("authors");
+                    JSONArray Jfeelings = json.getJSONArray("feelings");
+                    JSONArray Jtrackscores = json.getJSONArray("trackScores");
+                    JSONArray Jimageurl = json.getJSONArray("imageUrls");
                     titles = new String[5];
-                    for (int i = 0; i < Jarray.length(); i++){
-                        titles[i] = Jarray.getString(i);
+                    authors = new String[5];
+                    rFeelings = new String[5];
+                    trackScores = new String[5];
+                    imageUrls = new String[5];
+                    for (int i = 0; i < Jtitles.length(); i++){
+                        titles[i] = Jtitles.getString(i);
+                        authors[i] = Jauthors.getString(i);
+                        rFeelings[i] = Jfeelings.getString(i);
+                        trackScores[i] = Jtrackscores.getString(i);
+                        imageUrls[i] = Jimageurl.getString(i);
                     }
                     goodResult = json.getString("goodResult");
                     System.out.println(goodResult);

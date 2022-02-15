@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
+
 public class RecSearchResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
 
     Button closeBadResultMsg;
@@ -24,6 +26,10 @@ public class RecSearchResultActivity extends AppCompatActivity implements Adapte
 
         Intent intent = getIntent();
         String[] titles = intent.getStringArrayExtra("titles");
+        String[] authors = intent.getStringArrayExtra("authors");
+        String[] rFeelings = intent.getStringArrayExtra("rFeelings");
+        String[] trackScores = intent.getStringArrayExtra("trackScores");
+        String[] imageUrls = intent.getStringArrayExtra("imageUrls");
         String goodResult = intent.getStringExtra("goodResult");
         System.out.println(goodResult);
 
@@ -34,7 +40,8 @@ public class RecSearchResultActivity extends AppCompatActivity implements Adapte
 
         ListView listView = findViewById(R.id.listView);
         if (listView != null) {
-            listView.setAdapter(new RecSearchResultAdapter(this, titles));
+            listView.setAdapter(new RecSearchResultAdapter(this, titles, authors, rFeelings,
+                    trackScores, imageUrls));
             listView.setOnItemClickListener(this);
         }
 
@@ -59,7 +66,7 @@ public class RecSearchResultActivity extends AppCompatActivity implements Adapte
     public void onItemClick(AdapterView<?> av,
                             View v, int pos, long id) {
 
-        TextView textView = v.findViewById(R.id.foodTitle);
+        TextView textView = v.findViewById(R.id.recEntryTitle);
         String title = textView.getText().toString();
 
         Toast toast = Toast.makeText(this, title, Toast.LENGTH_SHORT);

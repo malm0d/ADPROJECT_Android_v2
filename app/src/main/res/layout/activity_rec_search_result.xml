@@ -24,8 +24,8 @@
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/suggestionTitle"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="600dp"
-        android:layout_marginBottom="100dp"
+        android:layout_height="650dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
 
