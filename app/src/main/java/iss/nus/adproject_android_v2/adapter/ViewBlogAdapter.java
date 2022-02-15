@@ -57,7 +57,6 @@ public class ViewBlogAdapter extends ArrayAdapter<Object> {
 
         ImageView entryImageView = view.findViewById(R.id.entryImage);
         String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
-
         String queryString = "?imagePath=";
         String imageDir = "/static";
         Glide   .with(view)
