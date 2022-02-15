@@ -14,11 +14,26 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ADPROJECT_Android_v2"
-        android:usesCleartextTraffic="true"
-        android:requestLegacyExternalStorage="true">
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".FriendRequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddFriendActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FriendDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageFriendsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageSocialsActivity"
+            android:exported="false" />
         <activity
             android:name=".CreateAccount2Activity"
             android:exported="false" />

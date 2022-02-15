@@ -125,7 +125,7 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
                     ObjectMapper mapper = new ObjectMapper();
 
 
-                    final ArrayList<MealHelper> mealList = mapper.readValue(dataStr, new TypeReference<List<MealHelper>>(){});
+                    final ArrayList<MealHelper> mealList = mapper.readValue(dataStr, new TypeReference<ArrayList<MealHelper>>(){});
 
                     System.out.println("check data ");
 

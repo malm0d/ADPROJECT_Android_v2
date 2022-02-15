@@ -41,6 +41,7 @@ public class DashboardActivity extends AppCompatActivity {
         TextView show_name = findViewById(R.id.show_name);
         TextView show_profilePic = findViewById(R.id.show_profilePic);
         Button logout_btn = findViewById(R.id.dashboard_logout);
+        Button redirect_ms = findViewById(R.id.redirect_ms);
 
         show_userId.setText("User ID: " + user.getUserId());
         show_username.setText("Username: " + user.getUsername());
@@ -56,6 +57,14 @@ public class DashboardActivity extends AppCompatActivity {
                 editor.commit();
 
                 startLoginActivity();
+            }
+        });
+
+        redirect_ms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DashboardActivity.this, ManageSocialsActivity.class);
+                startActivity(intent);
             }
         });
     }
