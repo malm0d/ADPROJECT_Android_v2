@@ -56,11 +56,11 @@ public class Userdashboard extends AppCompatActivity {
 
         //get and set current goal to view
         String url1 = "http://192.168.1.176:8080/api/dashboard/getCurrentGoal/" +userId;
-        getCurrentGoal(url1);
+        //getCurrentGoal(url1);
 
         //get meal track score
         String url2 = "http://192.168.1.176:8080/api/dashboard/getTrack/"+userId;
-        getMealTrack(url2);
+        //getMealTrack(url2);
 
         pieChart = findViewById(R.id.pieChart);
 

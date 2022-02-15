@@ -6,11 +6,34 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/reminderText"
+        android:id="@+id/setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/reminderText"
         android:padding="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/sendReminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send_reminder"
+            android:padding="20dp"/>
+
+        <Switch
+            android:id="@+id/timeSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="20dp"/>
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,25 +47,18 @@
             android:layout_height="wrap_content"
             android:timePickerMode="spinner"/>
 
-        <Switch
-            android:id="@+id/timeSwitch"
+        <Button
+            android:id="@+id/setTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="20dp"/>
+            android:text="@string/setTime"
+            android:textAllCaps="true"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical"/>
 
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/setTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/setTime"
-        android:textAllCaps="true"
-        android:padding="10dp"
-        android:layout_gravity="right"
-        android:layout_marginRight="20dp"/>
 
     <!--view needed to ensure navigation bar stays at bottom-->
     <View
