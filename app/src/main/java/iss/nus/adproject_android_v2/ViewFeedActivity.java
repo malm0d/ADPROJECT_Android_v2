@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -31,7 +34,7 @@ import okhttp3.Response;
 
 public class ViewFeedActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
     private String url;
-    private List<BlogEntry> blogEntries;
+    private List<BlogEntry> blogEntries = new ArrayList<BlogEntry>();;
     private Thread getBlogEntriesThread;
     private Integer activeUserId;
     private String activeUsername;
@@ -41,6 +44,11 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
     private Integer pageLength;
     private ImageView likeBtn;
     private ImageView flagBtn;
+    private Button viewMoreBtn;
+    private ListView listView;
+    private ViewBlogAdapter adapter;
+    Parcelable state;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +58,7 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
         activeUserId = intent.getIntExtra("activeUserId", 0);
         activeUsername = intent.getStringExtra("activeUsername");
         pageNo = 0;
-        pageLength = 10;
+        pageLength = 5;
     }
     @Override
     public void onResume() {
@@ -105,7 +113,8 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new JSR310Module());
 
-            blogEntries = mapper.readValue(dataStr, new TypeReference<ArrayList<BlogEntry>>(){});
+            List<BlogEntry> downloadedBlogEntries = mapper.readValue(dataStr, new TypeReference<ArrayList<BlogEntry>>(){});
+            blogEntries.addAll(downloadedBlogEntries);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -127,11 +136,19 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
         TextView authorText = findViewById(R.id.authorText);
         authorText.setText(activeUsername+"'s feed");
 
-        ViewBlogAdapter adapter = new ViewBlogAdapter(this, blogEntries);
-        ListView listView = findViewById(R.id.blogEntryList);
+        adapter = new ViewBlogAdapter(this, blogEntries);
+        listView = findViewById(R.id.blogEntryList);
         if(listView != null) {
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
+        }
+
+        if(viewMoreBtn == null) {
+            viewMoreBtn = new Button(this);
+            viewMoreBtn.setText("View More");
+            listView.addFooterView(viewMoreBtn);
+
+            viewMoreBtn.setOnClickListener(this);
         }
     }
 
@@ -155,5 +172,16 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
         else if(view == flagBtn) {
             System.out.println("Me flaggy");
         }
+        else if(view == viewMoreBtn){
+            pageNo++;
+            int currentPosition = listView.getFirstVisiblePosition();
+            onResume();
+            // For maintaining scroll position
+            listView.setSelectionFromTop(currentPosition + 1, 0);
+
+
+
+        }
     }
+
 }

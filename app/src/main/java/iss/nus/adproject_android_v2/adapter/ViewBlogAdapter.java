@@ -17,6 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 import iss.nus.adproject_android_v2.R;
@@ -32,6 +33,9 @@ public class ViewBlogAdapter extends ArrayAdapter<Object> {
         this.context = context;
         this.blogEntries = blogEntries;
         addAll(new Object[blogEntries.size()]);
+    }
+    public void setBlogEntries(List<BlogEntry> blogEntries){
+        this.blogEntries = blogEntries;
     }
 
     @NonNull
