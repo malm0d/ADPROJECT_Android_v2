@@ -12,11 +12,11 @@
         android:layout_marginStart="15dp"
         android:text="author: "
         android:textStyle = "bold"
-        android:gravity="right"
+        android:gravity="left"
 
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintWidth_percent="0.25"
         />
 
 
