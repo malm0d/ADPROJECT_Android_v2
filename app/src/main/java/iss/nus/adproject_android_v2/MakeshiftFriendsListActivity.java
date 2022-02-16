@@ -44,11 +44,18 @@ public class MakeshiftFriendsListActivity extends AppCompatActivity implements  
         Integer friendUserId = friendsUserIds[pos];
         String friendUsername = friendsUsernames[pos];
         String activeUsername = "jill";
-        Intent intent = new Intent(this, ViewBlogActivity.class);
+        Intent intent = null;
+        if(friendUsername.equalsIgnoreCase("feed")) {
+            intent = new Intent(this, ViewFeedActivity.class);
+        }
+        else {
+            intent = new Intent(this, ViewBlogActivity.class);
+        }
         intent.putExtra("activeUserId", activeUserId);
+        intent.putExtra("activeUsername",activeUsername);
         intent.putExtra("friendUserId", friendUserId);
         intent.putExtra("friendUsername", friendUsername);
-        intent.putExtra("activeUsername",activeUsername);
+
         startActivity(intent);
 
 
