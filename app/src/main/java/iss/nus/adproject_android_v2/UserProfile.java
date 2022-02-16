@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import iss.nus.adproject_android_v2.ui.ImageViewPlus;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,8 +16,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
+import iss.nus.adproject_android_v2.ui.ImageViewPlus;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -33,7 +37,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     ImageViewPlus profilephoto;
     TextView userName;
     TextView onPathReCord;
-    TextView age;
+    TextView Age;
     TextView height;
     TextView weight;
     TextView bmi;
@@ -41,10 +45,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     TextView UserNameText;
 
 
-//    private final String[] profileName = {
-//            "Age:", "dateOfBirth:", "Height:", "Weight","BMI:"
-//    };
-//    private String[] profile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,20 +58,31 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     }
 
 
-    protected void initView(User user){
+    protected void initView(User user) {
 
         ImageViewPlus profilephoto = findViewById(R.id.mine_iv_headportrait);
         profilephoto.setImageResource(R.drawable.cat01);
         currentUser = user;
-        age = findViewById(R.id.age);
+        Age = findViewById(R.id.age);
         height = findViewById(R.id.height);
         weight = findViewById(R.id.weight);
         bmi = findViewById(R.id.bmi);
         UserNameText = findViewById(R.id.UserNameText);
 
+
         UserNameText.setText(user.getName());
-        String Age ="Date of Birth : " + user.getDateOfBirth();
-        age.setText(Age);
+
+        //DOB to Age
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dateofBirth = sdf.parse(user.getDateOfBirth());
+            int age = getAge(dateofBirth);
+            String Age1 = String.valueOf(age);
+            Age.setText("Age :" + Age1);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         String Height = "Height :" +user.getHeight();
         height.setText(Height);
         String Weight ="Weight :" + user.getWeight();
@@ -247,4 +258,26 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
         }
     }
+
+    public static  int getAge(Date birthDay) {
+        Calendar cal = Calendar.getInstance();
+        if (cal.before(birthDay)) {
+            throw new IllegalArgumentException(
+                    "The birthDay is before Now.It's unbelievable!");
+        }
+        int yearNow = cal.get(Calendar.YEAR);
+        int monthNow = cal.get(Calendar.MONTH);
+        int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH);
+        cal.setTime(birthDay);
+        int yearBirth = cal.get(Calendar.YEAR);
+        int monthBirth = cal.get(Calendar.MONTH);
+        int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
+        int age = yearNow - yearBirth;
+        if (monthNow <= monthBirth) {
+            if (monthNow == monthBirth) {
+                if (dayOfMonthNow < dayOfMonthBirth) age--;
+            }else{
+                age--;
+
+            } } return age; }
 }

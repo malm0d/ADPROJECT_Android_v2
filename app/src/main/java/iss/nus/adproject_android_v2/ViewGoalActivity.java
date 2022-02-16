@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,6 +38,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
     TextView pathProgressText;
     TextView TotalMealRecord;
     Button GoDetailsBtn,PastGoalBtn;
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +48,8 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         GoDetailsBtn.setOnClickListener(this);
         PastGoalBtn =findViewById(R.id.PastGoalBtn);
         PastGoalBtn.setOnClickListener(this);
-        getDataFromServer();
-        getDataFromServer1();
+        getCurrentGoalFromServer();
+        getMealsDataFromServer();
     }
 
     protected void initView(Goal goal){
@@ -70,6 +72,11 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         pathProgressText = findViewById(R.id.pathProgressText2);
         String progresstext1 ="You are " + strList.get(2) + " % on path!";
         pathProgressText.setText(progresstext1);
+        progressBar = findViewById(R.id.progressBar);
+        String progress = strList.get(2);
+        Double progressdouble = Double.parseDouble(progress);
+        int progressint = progressdouble.intValue();
+        progressBar.setProgress(progressint);
         //create string data for intent
         intentprogresstext = progresstext1;
         mealsOnPath = strList.get(0);
@@ -79,7 +86,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         TotalMealRecord.setText(totalmeals);
     }
 
-    private void getDataFromServer(){
+    private void getCurrentGoalFromServer(){
         String url1 = "http://192.168.31.50:8888/api/currentgoal";
         String UserName = "jake";
         RequestPost(url1,UserName);
@@ -148,7 +155,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    private void getDataFromServer1(){
+    private void getMealsDataFromServer(){
         String url1 = "http://192.168.31.50:8888/api/goalsMeal";
         String UserName = "jake";
         RequestPost1(url1,UserName);

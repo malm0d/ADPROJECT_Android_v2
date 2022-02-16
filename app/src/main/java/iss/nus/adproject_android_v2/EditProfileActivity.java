@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.documentfile.provider.DocumentFile;
 
 import java.io.File;
@@ -27,9 +26,11 @@ import java.io.IOException;
 import iss.nus.adproject_android_v2.ui.ImageViewPlus;
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
@@ -116,16 +117,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
 
         if (id == R.id.uploadProfilePic) {
-            if (ContextCompat.checkSelfPermission(EditProfileActivity.this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(EditProfileActivity.this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_ADD_CASE_CALL_PHONE2);
 
-            } else {
                 selectImage();
-            }
+
 
         }
     }
@@ -158,9 +152,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     private String uriToFilePath(Uri uri) {
         String path = null;
-
         path = getFilePath(this, uri);
-
         return path;
     }
 
@@ -201,29 +193,34 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         OkHttpClient client = new OkHttpClient();
         final File imageFile = new File(path);
 
+        if (!imageFile.exists()) {
+            Toast.makeText(getApplicationContext(), "Please set profile picture", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-//        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
-//                .addFormDataPart("multipartFile", fileName, RequestBody.create(imageFile, MediaType.parse("multipart/form-data")))
-//                .addFormDataPart("fileName", fileName)
-//                .addFormDataPart("imageURL", path)
-//                .addFormDataPart("Name", Name)
-//                .addFormDataPart("UserName", UserName)
-//                .addFormDataPart("dateOfBirth", dateOfBirth)
-//                .addFormDataPart("Height", Height)
-//                .addFormDataPart("Weight", Weight)
-//                .build();
+        RequestBody fileBody = RequestBody.create(imageFile, MediaType.parse("multipart/form-data"));
+        MultipartBody multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                .addFormDataPart("multipartFile", fileName, fileBody)
+                .addFormDataPart("fileName", fileName)
+                .addFormDataPart("imageURL", path)
+                .addFormDataPart("Name", Name)
+                .addFormDataPart("UserName", UserName)
+                .addFormDataPart("dateOfBirth", dateOfBirth)
+                .addFormDataPart("Height", Height)
+                .addFormDataPart("Weight", Weight)
+                .build();
+
+        Request request = new Request.Builder().url(url).post(multipartBody).build();
+//        FormBody.Builder formBuilder = new FormBody.Builder();
 //
-//        Request request = new Request.Builder().url(url).post(body).build();
-        FormBody.Builder formBuilder = new FormBody.Builder();
-
-        formBuilder.add("UserName", UserName);
-        formBuilder.add("Name", Name);
-        formBuilder.add("dateOfBirth", dateOfBirth);
-        formBuilder.add("Height", Height);
-        formBuilder.add("Weight", Weight);
-
-        Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
-        System.out.println(fileName);
+//        formBuilder.add("UserName", UserName);
+//        formBuilder.add("Name", Name);
+//        formBuilder.add("dateOfBirth", dateOfBirth);
+//        formBuilder.add("Height", Height);
+//        formBuilder.add("Weight", Weight);
+//
+//        Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
+//        System.out.println(fileName);
         Call call = client.newCall(request);
 
 

@@ -42,13 +42,13 @@ public class pastGoalListAdapter extends ArrayAdapter<Object> {
         titleView.setText(goal.getGoalDescription());
 
         TextView startView = view.findViewById(R.id.goalStartDate);
-        startView.setText(goal.getStartDate());
+        startView.setText(goal.getStartDate() + " to ");
 
         TextView endView = view.findViewById(R.id.goalEndDate);
         endView.setText(goal.getEndDate());
 
         TextView StatusView = view.findViewById(R.id.goalStatus);
-        endView.setText(goal.getStatus());
+        StatusView.setText(goal.getStatus());
         return view;
     }
 }
