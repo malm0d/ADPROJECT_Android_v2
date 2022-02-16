@@ -1,6 +1,5 @@
 package iss.nus.adproject_android_v2;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -25,6 +24,7 @@ public class AlertReceiver extends BroadcastReceiver {
         createNotification(context);
 
         Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
+        System.out.println("Notification sent");
     }
 
     private void createNotificationChannel(Context context){
@@ -38,7 +38,7 @@ public class AlertReceiver extends BroadcastReceiver {
     }
 
     private void createNotification(Context context){
-        Intent intent = new Intent(context, Settings.class);
+        Intent intent = new Intent(context, Notification.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID);
@@ -50,7 +50,7 @@ public class AlertReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent);
         int notificationId=11111;
         NotificationManagerCompat mgr = NotificationManagerCompat.from(context);
-        Notification notification = builder.build();
+        android.app.Notification notification = builder.build();
         mgr.notify(notificationId, notification);
     }
 }

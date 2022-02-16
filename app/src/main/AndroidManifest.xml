@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -19,7 +20,7 @@
         android:theme="@style/Theme.ADPROJECT_Android_v2"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".Settings"
+            android:name=".Notification"
             android:exported="false" />
         <activity
             android:name=".Userdashboard"
@@ -56,6 +57,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -65,7 +67,8 @@
         </activity>
 
         <receiver android:name=".AlertReceiver"
-            android:exported="false">
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>

@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +38,7 @@ import okhttp3.Response;
 public class Userdashboard extends AppCompatActivity {
 
     float[] mealTrack = new float[2];
-    TextView viewCurrentGoal;
+    TextView viewCurrentGoal, myProgress, intro;
     PieChart pieChart;
     PieData pieData;
     List<PieEntry> pieEntryList = new ArrayList<>();
@@ -50,17 +52,19 @@ public class Userdashboard extends AppCompatActivity {
 
         LinearLayout lv1 = (LinearLayout) findViewById(R.id.linear);
         viewCurrentGoal = findViewById(R.id.viewCurrentGoal);
+        myProgress = findViewById(R.id.myProgress);
+        intro = findViewById(R.id.intro);
 
         //get userId
-        Integer userId=3;
+        Integer userId=1;
 
         //get and set current goal to view
         String url1 = "http://192.168.1.176:8080/api/dashboard/getCurrentGoal/" +userId;
-        //getCurrentGoal(url1);
+        getCurrentGoal(url1);
 
         //get meal track score
         String url2 = "http://192.168.1.176:8080/api/dashboard/getTrack/"+userId;
-        //getMealTrack(url2);
+        getMealTrack(url2);
 
         pieChart = findViewById(R.id.pieChart);
 
@@ -75,7 +79,7 @@ public class Userdashboard extends AppCompatActivity {
                     case R.id.add: break;
                     case R.id.friends: break;
                     case R.id.settings:
-                        Intent settings = new Intent(Userdashboard.this, Settings.class);
+                        Intent settings = new Intent(Userdashboard.this, Notification.class);
                         startActivity(settings);
                         break;
 
@@ -121,7 +125,14 @@ public class Userdashboard extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(Userdashboard.this, "success", Toast.LENGTH_SHORT).show();
-                        viewCurrentGoal.setText(res);
+                        if (res.contains("Internal Server Error"))
+                        {
+                            viewCurrentGoal.setText("No goal set yet");
+                        }
+                        else{
+                            viewCurrentGoal.setText(res);
+                        }
+
 
                     }
                 });
@@ -189,6 +200,12 @@ public class Userdashboard extends AppCompatActivity {
 
                         int onTrackPercent = (int) (mealTrack[0]/ (mealTrack[0]+mealTrack[1])*100);
 
+                        if(onTrackPercent==0){
+                            myProgress.setText("No meals recorded yet");
+                            myProgress.setTypeface(null, Typeface.ITALIC);
+                            intro.setVisibility(View.VISIBLE);
+                        }
+
                         pieEntryList.add(new PieEntry(mealTrack[0],"On Track"));
                         pieEntryList.add(new PieEntry(mealTrack[1],"Off Track"));
                         PieDataSet pieDataSet = new PieDataSet(pieEntryList,"Progress");
@@ -202,7 +219,10 @@ public class Userdashboard extends AppCompatActivity {
                         pieChart.setUsePercentValues(true);
                         pieDataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
                         pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-                        pieChart.setCenterText(onTrackPercent+ "% On Track");
+                        if (onTrackPercent>0){
+                            pieChart.setCenterText(onTrackPercent+ "% On Track");
+                        }
+
 
 
                         pieChart.getLegend().setEnabled(false);
