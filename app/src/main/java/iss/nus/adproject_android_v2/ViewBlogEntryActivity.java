@@ -49,6 +49,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
     TextView entryAuthor;
 
     Button saveChage;
+    String activeUsername;
 
     private BlogEntry blogEntry;
     private Integer activeUserId;
@@ -63,6 +64,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         Intent intent = getIntent();
         blogEntry = (BlogEntry) intent.getSerializableExtra("blogEntry");
         activeUserId = intent.getIntExtra("activeUserId",0);
+        activeUsername = intent.getStringExtra("activeUsername");
 
 
 
@@ -160,6 +162,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
             Intent intent = new Intent(this,CommentBlogEntryActivity.class);
             intent.putExtra("blogEntry",blogEntry);
             intent.putExtra("activeUserId",activeUserId);
+            intent.putExtra("activeUsername",activeUsername);
             startActivity(intent);
         }
 

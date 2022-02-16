@@ -46,6 +46,7 @@ public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnC
 
     private Integer activeUserId;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnC
         Intent intent = getIntent();
         blogEntry = (BlogEntry) intent.getSerializableExtra("blogEntry");
         activeUserId = intent.getIntExtra("activeUserId",0);
+
 
         initUi();
         renderBlogEntry();

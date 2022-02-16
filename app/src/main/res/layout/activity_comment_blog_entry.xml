@@ -31,7 +31,6 @@
         android:id="@+id/comment_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="comment input"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/active_username"
         app:layout_constraintEnd_toEndOf="parent"

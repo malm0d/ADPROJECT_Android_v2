@@ -9,6 +9,7 @@ public class Comment implements Serializable {
 
     }
 
+
     private Integer commentId;
     private String caption;
     private Integer mealEntryId;
