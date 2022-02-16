@@ -15,9 +15,9 @@
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        android:textSize="17dp"/>
+        android:textSize="30dp"/>
 
     <LinearLayout
         android:id="@+id/linearlayout01"
