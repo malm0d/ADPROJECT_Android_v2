@@ -50,7 +50,6 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
     String[] imageUrls;
     String goodResult;
     String userId = "1";
-    List<MealHelper> mealHelpers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,58 +113,30 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
 //        }
 
         if (view == cryingImg){
-//            if (cryingCircle.getVisibility() == View.VISIBLE){
-//                clearFeelings();
-//                feeling = "+";
-//            }
-//            else{
                 feeling = feelings.get(view);
                 clearFeelings();
                 cryingCircle.setVisibility(View.VISIBLE);
-            //}
         }
 
         if (view == pensiveImg){
-//            if (pensiveCircle.getVisibility() == View.VISIBLE){
-//                clearFeelings();
-//                feeling = "+";
-//            }
-//            else{
                 feeling = feelings.get(view);
                 clearFeelings();
                 pensiveCircle.setVisibility(View.VISIBLE);
-            //}
         }
 
         if (view == happyImg){
-//            if (happyCircle.getVisibility() == View.VISIBLE){
-//                clearFeelings();
-//                feeling = "+";
-//            }
-//            else {
                 feeling = feelings.get(view);
                 clearFeelings();
                 happyCircle.setVisibility(View.VISIBLE);
-            //}
         }
 
         if (view == joyfulImg){
-//            if (joyfulCircle.getVisibility() == View.VISIBLE){
-//                clearFeelings();
-//                feeling = "+";
-//            }
-//            else{
                 feeling = feelings.get(view);
                 clearFeelings();
                 joyfulCircle.setVisibility(View.VISIBLE);
-            //}
         }
 
         if (view == submitBtn){
-//            String postUrl = "http://192.168.50.208:8080/api/recommend/postStringData";
-//            input = String.valueOf(submitTextBox.getText());
-//            System.out.println(input);
-            //send input to spring
             SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
             input = String.valueOf(submitTextBox.getText());
             //userId = pref.getString("userId", " ");
@@ -174,12 +145,10 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
                 input = "+";
             }
             System.out.println("input: " + input);
+            //send input to spring
             String postUrl = "http://192.168.50.208:8080/api/recommend/postStringData/"
                     + userId + "/" + input + "/" + feeling + "/" + track;
             System.out.print(postUrl);
-            //RequestPost(postUrl, input, feeling, track);
-//            RequestPost(postUrl);
-//            String getUrl = "http://192.168.50.208:8080/api/recommend/getResultJson/" + userId;
             RequestGet(postUrl);
         }
     }

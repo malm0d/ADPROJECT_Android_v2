@@ -2,6 +2,7 @@ package iss.nus.adproject_android_v2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
 
@@ -17,15 +18,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class CaptureActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button mealWithPhotoBtn;
     private Button systemRecommendBtn;
+    private Button insuffDataOKBtn;
+    private ConstraintLayout insuffDataPopup;
     private final int REQ_CAMERA_PERMISSION = 8;
     private final int REQ_CAMERA = 21;
     private String currentPhotoPath;
@@ -33,6 +47,8 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
     private String timeStamp;
     private String userId;
     private int goalId;
+    private int entryCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +63,11 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
         //    finish();
         //}
 
+
         mealWithPhotoBtn = findViewById(R.id.mealWithPhotoBtn);
         systemRecommendBtn = findViewById(R.id.systemRecommendBtn);
+        insuffDataPopup = findViewById(R.id.insuffDataPopup);
+        insuffDataOKBtn = findViewById(R.id.insuffDataOKBtn);
         initButtons();
 
     }
@@ -56,6 +75,7 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
     private void initButtons() {
         mealWithPhotoBtn.setOnClickListener(this);
         systemRecommendBtn.setOnClickListener(this);
+        insuffDataOKBtn.setOnClickListener(this);
     }
 
     private File createImageFile() throws IOException {
@@ -150,9 +170,16 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         if (view == systemRecommendBtn){
-            Intent intent = new Intent(this, RecommendActivity.class);
-            System.out.println("go into rec");
-            startActivity(intent);
+            //Intent intent = new Intent(this, RecommendActivity.class);
+            String userId = "2";
+            String getCountUrl = "http://192.168.50.208:8080/api/recommend/getEntryCount/" + userId;
+            RequestGetInt(getCountUrl);
+        }
+
+        if (view == insuffDataOKBtn){
+            insuffDataPopup.setVisibility(View.INVISIBLE);
+            mealWithPhotoBtn.setVisibility(View.VISIBLE);
+            systemRecommendBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -175,4 +202,55 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    private void RequestGetInt(String url){
+        OkHttpClient client = new OkHttpClient();
+        client.newBuilder()
+                .connectTimeout(5, TimeUnit.MINUTES) // connect timeout
+                .writeTimeout(5, TimeUnit.MINUTES) // write timeout
+                .readTimeout(5, TimeUnit.MINUTES) // read timeout
+                .retryOnConnectionFailure(false)
+                .build();
+        Request request = new Request.Builder().url(url).build();
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(CaptureActivity.this, "Server error", Toast.LENGTH_SHORT).show();
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                final String res = response.body().string();
+                System.out.println(res);
+                entryCount = Integer.parseInt(res);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (entryCount < 30){
+                            insuffDataPopup.setVisibility(View.VISIBLE);
+                            mealWithPhotoBtn.setVisibility(View.INVISIBLE);
+                            systemRecommendBtn.setVisibility(View.INVISIBLE);
+                        }
+                        else{
+                            System.out.println("go into rec");
+                            Intent intent = new Intent(CaptureActivity.this, RecommendActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
+                System.out.println("successful get from server");
+            }
+        });
+    }
 }
