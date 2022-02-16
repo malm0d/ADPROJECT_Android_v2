@@ -43,11 +43,7 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
     String feeling = "happy";
     String track = "ontrack";
     SwitchCompat trackSwitch;
-    String[] titles;
-    String[] authors;
-    String[] rFeelings;
-    String[] trackScores;
-    String[] imageUrls;
+    String[] titles, authors, rFeelings, trackScores, imageUrls, descriptions;
     String goodResult;
     String userId = "1";
 
@@ -160,6 +156,7 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
         intent.putExtra("rFeelings", rFeelings);
         intent.putExtra("trackScores", trackScores);
         intent.putExtra("imageUrls", imageUrls);
+        intent.putExtra("descriptions", descriptions);
         intent.putExtra("goodResult", goodResult);
         System.out.println("submit button");
         startActivity(intent);
@@ -215,17 +212,20 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
                     JSONArray Jfeelings = json.getJSONArray("feelings");
                     JSONArray Jtrackscores = json.getJSONArray("trackScores");
                     JSONArray Jimageurl = json.getJSONArray("imageUrls");
+                    JSONArray Jdescriptions = json.getJSONArray("descriptions");
                     titles = new String[5];
                     authors = new String[5];
                     rFeelings = new String[5];
                     trackScores = new String[5];
                     imageUrls = new String[5];
+                    descriptions = new String[5];
                     for (int i = 0; i < Jtitles.length(); i++){
                         titles[i] = Jtitles.getString(i);
                         authors[i] = Jauthors.getString(i);
                         rFeelings[i] = Jfeelings.getString(i);
                         trackScores[i] = Jtrackscores.getString(i);
                         imageUrls[i] = Jimageurl.getString(i);
+                        descriptions[i] = Jdescriptions.getString(i);
                     }
                     goodResult = json.getString("goodResult");
                     System.out.println(goodResult);

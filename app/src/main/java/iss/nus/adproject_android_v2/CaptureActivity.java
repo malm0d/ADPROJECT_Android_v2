@@ -170,7 +170,6 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
         }
 
         if (view == systemRecommendBtn){
-            //Intent intent = new Intent(this, RecommendActivity.class);
             String userId = "2";
             String getCountUrl = "http://192.168.50.208:8080/api/recommend/getEntryCount/" + userId;
             RequestGetInt(getCountUrl);
