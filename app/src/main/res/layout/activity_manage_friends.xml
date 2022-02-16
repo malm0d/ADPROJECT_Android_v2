@@ -78,4 +78,6 @@
         app:layout_constraintTop_toBottomOf="@id/linearlayout02"
         android:dividerHeight="1dp"
         android:divider="#e5e5ff"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
