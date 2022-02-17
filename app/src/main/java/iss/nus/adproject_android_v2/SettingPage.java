@@ -36,9 +36,13 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onClick(View view) {
                 SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+                SharedPreferences prefSwitch = getSharedPreferences("switchKey", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
+                SharedPreferences.Editor editorSwitch = prefSwitch.edit();
                 editor.clear();
                 editor.commit();
+                editorSwitch.clear();
+                editorSwitch.commit();
 
                 startLoginActivity();
             }

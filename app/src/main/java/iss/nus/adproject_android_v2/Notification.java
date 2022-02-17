@@ -70,7 +70,10 @@ public class Notification extends AppCompatActivity {
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
                         startActivity(add);
                         break;
-                    case R.id.friendsMenu: break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
                     case R.id.settingsMenu:
                         Intent settings = new Intent(getApplicationContext(), SettingPage.class);
                         startActivity(settings);

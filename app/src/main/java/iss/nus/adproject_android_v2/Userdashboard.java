@@ -2,6 +2,7 @@ package iss.nus.adproject_android_v2;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -58,7 +59,9 @@ public class Userdashboard extends AppCompatActivity {
 
         //get userId
         //get from Shared Preference
-        Integer userId=1;
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        String userId = pref.getString("userId","0");
+        //Integer userId=1;
 
         //get and set current goal to view
         //change IP address if necessary

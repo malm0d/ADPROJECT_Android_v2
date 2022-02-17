@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void authenticate(String username, String password) {
-        String url = "http://192.168.1.8:8080/api/login/auth";
+        String url = "http://192.168.1.176:8080/api/login/auth";
         RequestPost(url, username, password);
     }
 
