@@ -117,7 +117,7 @@
         android:id="@+id/delPopup"
         android:layout_width="250dp"
         android:layout_height="250dp"
-        android:background="#a8a8a8"
+        android:background="@drawable/popup_background"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
