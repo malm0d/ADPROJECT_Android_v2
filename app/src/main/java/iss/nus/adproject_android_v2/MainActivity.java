@@ -13,7 +13,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button getBtn;
     private Button pastmealBtn;
     private Button captureBtn;
+
     private Button loginBtn;
+    private Button dashboardBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         loginBtn = findViewById(R.id.loginAct);
         loginBtn.setOnClickListener(this);
+
+        dashboardBtn = findViewById(R.id.dashboard);
+        dashboardBtn.setOnClickListener(this);
     }
 
 
@@ -59,8 +64,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
 
+
         if (v == loginBtn) {
             Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+        if (v == dashboardBtn) {
+            Intent intent = new Intent(this, Userdashboard.class);
             startActivity(intent);
         }
 

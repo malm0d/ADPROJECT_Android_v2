@@ -27,6 +27,7 @@ public class ResponseActivity extends AppCompatActivity implements View.OnClickL
         Intent intent = getIntent();
         responseResult = intent.getStringExtra("responseResult");
         recommendation = recommend(responseResult);
+        responseTextView.setText(recommendation);
     }
 
     private void initElements() {
@@ -44,6 +45,9 @@ public class ResponseActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-
+        if (view == okResponseBtn) {
+            Intent intent = new Intent(this, PastMealsActivity.class);
+            startActivity(intent);
+        }
     }
 }

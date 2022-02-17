@@ -7,14 +7,18 @@ import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,9 +27,6 @@ import java.time.format.DateTimeFormatter;
 
 public class CaptureActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //need session data?
-    //user data?
-    //From Android, how can we map to the right user on the server and db?
     private Button mealWithPhotoBtn;
     private Button systemRecommendBtn;
     private final int REQ_CAMERA_PERMISSION = 8;
@@ -33,15 +34,52 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
     private String currentPhotoPath;
     private Uri photoURI;
     private String timeStamp;
+    private String userId;
+    private int goalId;
+    NavigationBarView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_capture);
 
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        userId = pref.getString("userId", "");
+        //goalId = intent.getIntExtra("goalId", -1);
+        //if (userId == null || userId.equals("") || goalId == -1) {
+        //    Toast.makeText(this, "No valid user or goal", Toast.LENGTH_LONG).show();
+        //    finish();
+        //}
+
         mealWithPhotoBtn = findViewById(R.id.mealWithPhotoBtn);
         systemRecommendBtn = findViewById(R.id.systemRecommendBtn);
         initButtons();
+
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        //set Setting selected
+        bottomNavigation.setSelectedItemId(R.id.addMenu);
+
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu: break;
+                    case R.id.pathMenu: break;
+                    case R.id.addMenu:
+                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
+                        startActivity(add);
+                        break;
+                    case R.id.friendsMenu: break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
+            }
+        });
+
     }
 
     private void initButtons() {
@@ -96,6 +134,8 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra("currentPhotoPath", currentPhotoPath);
         intent.putExtra("photoURI", photoURI);
         intent.putExtra("timeStamp", timeStamp);
+        intent.putExtra("userId", userId);
+        //intent.putExtra("goalId", goalId);
         startActivity(intent);
     }
 

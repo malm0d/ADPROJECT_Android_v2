@@ -33,9 +33,14 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
     private String currentPhotoPath;
     private Uri photoURI;
     private String mealTitle;
+    private String description;
     private String feeling = null;
     private int trackScore = -1;
     private String timeStamp;
+    private String userId;
+    private int goalId;
+    private boolean flagged = false;
+    private boolean visibility = true;
 
     private boolean selectedTrack = false;
     private int trackClicks = 0;
@@ -43,6 +48,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
 
     private ImageView capturedImageView;
     private EditText mealTitleEntry;
+    private EditText descriptionEntry;
     private ImageButton offTrackBtn;
     private TextView offTrackTitle;
     private ImageButton onTrackBtn;
@@ -65,6 +71,8 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
         photoURI = intent.getParcelableExtra("photoURI");
         getBitmapFromUri(photoURI);
         capturedImageView.setImageURI(photoURI); //alt: capturedImageView.setImageBitmap(imageBitmap);
+        userId = intent.getStringExtra("userId");
+        //goalId = intent.getIntExtra("goalId", -1);
 
         new Thread(new Runnable() {
             @Override
@@ -73,6 +81,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void run() {
                         mealTitleEntry = findViewById(R.id.mealTitleEditText);
+                        descriptionEntry = findViewById(R.id.descriptionEditText);
                         offTrackBtn = findViewById(R.id.offTrackBtn);
                         offTrackTitle = findViewById(R.id.offTrackTitle);
                         onTrackBtn = findViewById(R.id.onTrackBtn);
@@ -163,7 +172,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
         if (view == cryingBtn) {
             feelingClicks++;
             if (feelingClicks == 1) {
-                feeling = "crying";
+                feeling = "cry";
                 pensiveBtn.setVisibility(View.GONE);
                 happyBtn.setVisibility(View.GONE);
                 joyfulBtn.setVisibility(View.GONE);
@@ -214,7 +223,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
         if (view == joyfulBtn) {
             feelingClicks++;
             if (feelingClicks == 1) {
-                feeling = "joyful";
+                feeling = "joy";
                 cryingBtn.setVisibility(View.GONE);
                 pensiveBtn.setVisibility(View.GONE);
                 happyBtn.setVisibility(View.GONE);
@@ -230,15 +239,18 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
 
         if (view == submitBtn) {
             mealTitle = mealTitleEntry.getText().toString();
-            if (mealTitle != null && !mealTitle.trim().isEmpty() && selectedTrack == true && feeling != null) {
+            description = descriptionEntry.getText().toString();
+            if (mealTitle != null && !mealTitle.trim().isEmpty() && description != null && !description.trim().isEmpty() && selectedTrack == true && feeling != null) {
                 mealTitle = mealTitle.trim();
+                description = description.trim();
                 System.out.println(mealTitle);
+                System.out.println(description);
                 System.out.println(trackScore);
                 System.out.println(feeling);
                 uploadData();
 
             } else {
-                String validationMsg = "Meal title must have a valid entry and a track and feeling must both be selected";
+                String validationMsg = "Meal title and description must have a valid entry and a track and feeling must both be selected";
                 Toast toast = Toast.makeText(this, validationMsg, Toast.LENGTH_SHORT);
                 toast.show();
             }
@@ -260,13 +272,15 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                 .addFormDataPart("imageFileName", fileName)
                 .addFormDataPart("imageURL", currentPhotoPath)
                 .addFormDataPart("mealTitle", mealTitle)
+                .addFormDataPart("description", description)
                 .addFormDataPart("feeling", feeling)
                 .addFormDataPart("trackScore", String.valueOf(trackScore))
                 .addFormDataPart("timeStamp", timeStamp)
+                .addFormDataPart("userId", userId)
+                //.addFormDataPart("goalId", String.valueOf(goalId))
+                .addFormDataPart("flagged", String.valueOf(flagged))
+                .addFormDataPart("visibility", String.valueOf(visibility))
                 .build();
-
-        //STILL NEED USER DETAILS
-        //need goal detail
 
         Request request = new Request.Builder().url(serverUrl).post(requestBody).build();
         Call requestCall = okHttpClient.newCall(request);
@@ -309,6 +323,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void run() {
                 mealTitleEntry.setEnabled(false);
+                descriptionEntry.setEnabled(false);
                 submitBtn.setClickable(false);
                 onTrackBtn.setClickable(false);
                 offTrackBtn.setClickable(false);
@@ -325,6 +340,7 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void run() {
                 mealTitleEntry.setEnabled(true);
+                descriptionEntry.setEnabled(true);
                 submitBtn.setClickable(true);
                 onTrackBtn.setClickable(true);
                 offTrackBtn.setClickable(true);
