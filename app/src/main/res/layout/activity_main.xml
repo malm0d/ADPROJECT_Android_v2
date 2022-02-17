@@ -38,6 +38,16 @@
         tools:layout_marginTop="10dp" />
 
     <Button
+        android:id="@+id/loginAct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#2196F3"
+        android:text="login"
+        android:textColor="#FFFFFF"
+        tools:layout_marginTop="10dp" />
+  
+      <Button
         android:id="@+id/dashboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

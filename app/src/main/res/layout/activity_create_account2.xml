@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CreateAccount2Activity">
+
+    <TextView
+        android:id="@+id/createAccHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/particulars"
+        app:layout_constraintStart_toStartOf="parent"/>
+    <TextView
+        android:id="@+id/particulars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Particulars:"
+        app:layout_constraintTop_toBottomOf="@id/createAccHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/particularsValidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Please correct errors before proceeding."
+        android:textColor="#cc1f36"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/particulars"
+        app:layout_constraintBottom_toTopOf="@id/createAccName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/createAccName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/particularsValidate"
+        app:layout_constraintBottom_toTopOf="@id/createAccGender"
+        android:layout_marginTop="5dp"
+        android:hint="Name"
+        android:ems="10"/>
+
+    <TextView
+        android:id="@+id/createAccGender"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/createAccName"
+        app:layout_constraintBottom_toTopOf="@id/genderRadio"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Gender:"
+        android:textSize="17dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/genderRadio"
+        app:layout_constraintTop_toBottomOf="@id/createAccGender"
+        app:layout_constraintBottom_toTopOf="@id/createAccDOB"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintEnd_toEndOf="parent">
+        <RadioButton
+            android:id="@+id/male"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:layout_marginTop="10dp"
+            android:checked="false"
+            android:textSize="20dp"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton
+            android:id="@+id/female"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:layout_marginTop="10dp"
+            android:checked="false"
+            android:textSize="20dp"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton
+            android:id="@+id/others"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Others"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:layout_marginTop="10dp"
+            android:checked="false"
+            android:textSize="20dp"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/createAccDOB"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/createAccGender"
+        app:layout_constraintBottom_toTopOf="@id/dateBtn"
+        android:layout_marginTop="20dp"
+        android:textSize="17dp"
+        android:text="Date of Birth:"
+        android:ems="10"/>
+
+    <Button
+        android:id="@+id/dateBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="JAN 01 2022"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        style="?android:spinnerStyle"
+        app:layout_constraintTop_toBottomOf="@id/createAccDOB"
+        app:layout_constraintBottom_toTopOf="@id/dobValidate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:onClick="openDatePicker"/>
+
+    <TextView
+        android:id="@+id/dobValidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Must be a past date"
+        android:textColor="#cc1f36"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/dateBtn"
+        app:layout_constraintBottom_toTopOf="@id/createAccHeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/createAccHeight"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dobValidate"
+        app:layout_constraintBottom_toTopOf="@id/heightValidate"
+        android:layout_marginTop="5dp"
+        android:hint="Height (m)"
+        android:inputType="numberDecimal"
+        android:ems="10"/>
+
+    <TextView
+        android:id="@+id/heightValidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="Invalid height"
+        android:textColor="#cc1f36"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/createAccHeight"
+        app:layout_constraintBottom_toTopOf="@id/createAccWeight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/createAccWeight"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:hint="Weight (kg)"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@id/weightValidate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heightValidate" />
+
+    <TextView
+        android:id="@+id/weightValidate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="Invalid weight"
+        android:textColor="#cc1f36"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/createAccWeight"
+        app:layout_constraintBottom_toTopOf="@id/createAccBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/createAccBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0066ff"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/weightValidate"
+        app:layout_constraintBottom_toTopOf="@id/proceedLoginBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Create Account"/>
+
+    <Button
+        android:id="@+id/proceedLoginBtn"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#999999"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@id/createAccBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Proceed to login"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
