@@ -1,5 +1,6 @@
 package iss.nus.adproject_android_v2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
@@ -8,12 +9,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.Calendar;
 
@@ -26,6 +30,7 @@ public class Notification extends AppCompatActivity {
     Switch timeSwitch;
     TimePicker timePicker;
     PendingIntent pendingIntent;
+    NavigationBarView bottomNavigation;
 
     int hour, min;
 
@@ -49,6 +54,28 @@ public class Notification extends AppCompatActivity {
         pendingIntent = PendingIntent.getBroadcast(Notification.this,0, alarmIntent, 0);
 
         initSwitchListener();
+
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+
+        //set Setting selected
+        bottomNavigation.setSelectedItemId(R.id.settings);
+
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.meal: break;
+                    case R.id.path: break;
+                    case R.id.add: break;
+                    case R.id.friends: break;
+                    case R.id.settings:
+                        return true;
+
+                }
+                return false;
+            }
+        });
 
     }
 

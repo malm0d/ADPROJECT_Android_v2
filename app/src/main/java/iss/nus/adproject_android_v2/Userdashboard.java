@@ -56,7 +56,7 @@ public class Userdashboard extends AppCompatActivity {
         intro = findViewById(R.id.intro);
 
         //get userId
-        Integer userId=1;
+        Integer userId=3;
 
         //get and set current goal to view
         String url1 = "http://192.168.1.176:8080/api/dashboard/getCurrentGoal/" +userId;
@@ -84,7 +84,7 @@ public class Userdashboard extends AppCompatActivity {
                         break;
 
                 }
-                return true;
+                return false;
             }
         });
 
