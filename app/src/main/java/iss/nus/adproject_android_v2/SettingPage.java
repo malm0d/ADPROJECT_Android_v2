@@ -35,20 +35,25 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
 
         //bottom navigation bar
         bottomNavigation = findViewById(R.id.bottom_navigation);
-        //set Add selected
+        //set Setting selected
         bottomNavigation.setSelectedItemId(R.id.settingsMenu);
-
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
-                    case R.id.mealMenu: break;
-                    case R.id.pathMenu: break;
+                    case R.id.mealMenu:
+                        //link to meal page
+                        break;
+                    case R.id.pathMenu:
+                        //link to path page
+                        break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
                         startActivity(add);
                         break;
-                    case R.id.friendsMenu: break;
+                    case R.id.friendsMenu:
+                        //link to friends page
+                        break;
                     case R.id.settingsMenu:
                         Intent settings = new Intent(getApplicationContext(), SettingPage.class);
                         startActivity(settings);
