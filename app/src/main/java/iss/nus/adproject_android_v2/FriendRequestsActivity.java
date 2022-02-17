@@ -133,6 +133,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
                     mDelReqPopup = findViewById(R.id.delReqPopup);
                     mDelReqPopup.setVisibility(View.VISIBLE);
                     mReqList.setEnabled(false);
+                    mReceivedReqBtn.setEnabled(false);
+                    mSentReqBtn.setEnabled(false);
 
                     Button mConfirmDelReqBtn = findViewById(R.id.confirmDelReqBtn);
                     mConfirmDelReqBtn.setOnClickListener(new View.OnClickListener() {
@@ -150,6 +152,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
                         public void onClick(View view) {
                             mDelReqPopup.setVisibility(View.INVISIBLE);
                             mReqList.setEnabled(true);
+                            mReceivedReqBtn.setEnabled(true);
+                            mSentReqBtn.setEnabled(true);
                         }
                     });
                 }
@@ -167,6 +171,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
                     mProcessReqPopup = findViewById(R.id.processReqPopup);
                     mProcessReqPopup.setVisibility(View.VISIBLE);
                     mReqList.setEnabled(false);
+                    mReceivedReqBtn.setEnabled(false);
+                    mSentReqBtn.setEnabled(false);
                     TextView mProcessReqTxt = findViewById(R.id.processReqTxt02);
                     mProcessReqTxt.setText("From: " + requests.get(pos).getName());
 
@@ -196,6 +202,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
                         public void onClick(View view) {
                             mProcessReqPopup.setVisibility(View.INVISIBLE);
                             mReqList.setEnabled(true);
+                            mReceivedReqBtn.setEnabled(true);
+                            mSentReqBtn.setEnabled(true);
                         }
                     });
                 }
@@ -301,6 +309,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
                                     public void run() {
                                         mProcessReqPopup.setVisibility(View.INVISIBLE);
                                         mReqList.setEnabled(true);
+                                        mReceivedReqBtn.setEnabled(true);
+                                        mSentReqBtn.setEnabled(true);
                                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                         mReceivedReqBtn.performClick();
                                     }
@@ -311,6 +321,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
                                     public void run() {
                                         mProcessReqPopup.setVisibility(View.INVISIBLE);
                                         mReqList.setEnabled(true);
+                                        mReceivedReqBtn.setEnabled(true);
+                                        mSentReqBtn.setEnabled(true);
                                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                         mReceivedReqBtn.performClick();
                                     }
@@ -321,6 +333,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
                                     public void run() {
                                         mDelReqPopup.setVisibility(View.INVISIBLE);
                                         mReqList.setEnabled(true);
+                                        mReceivedReqBtn.setEnabled(true);
+                                        mSentReqBtn.setEnabled(true);
                                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                         mSentReqBtn.performClick();
                                     }
