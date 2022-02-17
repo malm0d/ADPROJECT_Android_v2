@@ -7,43 +7,23 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/get"
+        android:id="@+id/editProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
         android:backgroundTint="#2196F3"
-        android:text="Set Goal"
+        android:text="@string/editProfile"
         android:textColor="#FFFFFF"
         tools:layout_marginTop="100dp" />
 
     <Button
-        android:id="@+id/pastMeal"
+        android:id="@+id/notificationPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="#2196F3"
-        android:text="View Past Meal"
-        android:textColor="#FFFFFF"
-        tools:layout_marginTop="10dp" />
-
-    <Button
-        android:id="@+id/capture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#2196F3"
-        android:text="capture"
-        android:textColor="#FFFFFF"
-        tools:layout_marginTop="10dp" />
-
-    <Button
-        android:id="@+id/dashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#2196F3"
-        android:text="dashboard"
+        android:text="@string/notification"
         android:textColor="#FFFFFF"
         tools:layout_marginTop="10dp" />
 
