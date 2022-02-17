@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +32,17 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
         notificationBtn.setOnClickListener(this);
 
         logoutBtn = findViewById(R.id.logout);
-        // profileBtn.setOnClickListener(this);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+
+                startLoginActivity();
+            }
+        });
 
         //bottom navigation bar
         bottomNavigation = findViewById(R.id.bottom_navigation);
@@ -52,7 +63,8 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
                         startActivity(add);
                         break;
                     case R.id.friendsMenu:
-                        //link to friends page
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
                         break;
                     case R.id.settingsMenu:
                         Intent settings = new Intent(getApplicationContext(), SettingPage.class);
@@ -71,7 +83,10 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
             Intent intent = new Intent(this, Notification.class);
             startActivity(intent);
         }
+    }
 
-
+    private void startLoginActivity() {
+        Intent intent = new Intent(SettingPage.this, LoginActivity.class);
+        startActivity(intent);
     }
 }

@@ -89,7 +89,8 @@ public class Userdashboard extends AppCompatActivity {
                         startActivity(add);
                         break;
                     case R.id.friendsMenu:
-                        //link to social page
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
                         break;
                     case R.id.settingsMenu:
                         Intent settings = new Intent(getApplicationContext(), SettingPage.class);

@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             user.setName(pref.getString("userId", ""));
             user.setProfilePic(pref.getString("profilePic", ""));
 
-            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            Intent intent = new Intent(LoginActivity.this, Userdashboard.class);
             intent.putExtra("user", user);
             startActivity(intent);
         }
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startDashboardActivity() {
-        Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+        Intent intent = new Intent(LoginActivity.this, Userdashboard.class);
         intent.putExtra("user", user);
         startActivity(intent);
     }

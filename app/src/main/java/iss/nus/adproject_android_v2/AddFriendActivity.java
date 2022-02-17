@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +47,7 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
     Button mConfirmAddBtn;
     Button mRevertAddBtn;
     TextView mConfirmAddTxt;
+    NavigationBarView bottomNavigation;
 
     private String query;
     private String username;
@@ -67,6 +71,36 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
             public void onClick(View view) {
                 query = mUserQuery.getText().toString();
                 getUsersByQuery(url_query, query, username);
+            }
+        });
+
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.friendsMenu);
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu:
+                        //link to meal page
+                        break;
+                    case R.id.pathMenu:
+                        //link to path page
+                        break;
+                    case R.id.addMenu:
+                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
+                        startActivity(add);
+                        break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
             }
         });
 
