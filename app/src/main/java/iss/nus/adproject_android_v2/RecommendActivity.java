@@ -45,7 +45,7 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
     SwitchCompat trackSwitch;
     String[] titles, authors, rFeelings, trackScores, imageUrls, descriptions;
     String goodResult;
-    String userId = "1";
+    String userId = "2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

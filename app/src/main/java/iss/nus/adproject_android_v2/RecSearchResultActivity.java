@@ -22,11 +22,13 @@ import java.util.Map;
 
 public class RecSearchResultActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
 
-    Button closeBadResultMsg, closeDetailsBtn;
-    ConstraintLayout popup, entryDetails;
+    Button closeDetailsBtn;
+    ConstraintLayout entryDetails;
+    TextView popup;
     String[] titles, authors, rFeelings, trackScores, imageUrls, descriptions;
     String goodResult;
     Map<String, Integer> feelings = new HashMap<>();
+    Boolean readyFlag;
 
     //for details
     ImageView detailImage, detailFeeling;
@@ -63,9 +65,6 @@ public class RecSearchResultActivity extends AppCompatActivity implements Adapte
             listView.setOnItemClickListener(this);
         }
 
-        closeBadResultMsg = findViewById(R.id.badResultOKBtn);
-        closeBadResultMsg.setOnClickListener(this);
-
         closeDetailsBtn = findViewById(R.id.detailsCloseBtn);
         closeDetailsBtn.setOnClickListener(this);
 
@@ -82,46 +81,40 @@ public class RecSearchResultActivity extends AppCompatActivity implements Adapte
             popup.setVisibility(View.VISIBLE);
             System.out.println("popup");
         }
+
+        readyFlag = true;
     }
 
     @Override
     public void onClick(View view) {
-        if (view == closeBadResultMsg){
-            popup.setVisibility(View.INVISIBLE);
-        }
-
         if (view == closeDetailsBtn){
             entryDetails.setVisibility(View.INVISIBLE);
+            readyFlag = true;
+            detailDesc.scrollTo(0, 0);
         }
     }
 
     @Override
     public void onItemClick(AdapterView<?> av,
                             View v, int pos, long id) {
+        if (readyFlag){
+            //details
+            String imageApiUrl = "http://192.168.50.208:8080/api/recommend/getEntryPic";
+            String queryString = "?fileName=";
+            Glide.with(v)
+                    .load(imageApiUrl + queryString + imageUrls[pos])
+                    .placeholder(R.drawable.no_img)
+                    .into(detailImage);
+            detailTitle.setText(titles[pos]);
+            detailAuthor.setText("by " + authors[pos]);
+            int feeling = feelings.get(rFeelings[pos].toLowerCase());
+            detailFeeling.setImageResource(feeling);
+            detailTrack.setText(trackScores[pos]);
+            detailDesc.setText(descriptions[pos]);
+            detailDesc.setMovementMethod(new ScrollingMovementMethod());
 
-        TextView textView = v.findViewById(R.id.recEntryTitle);
-        String title = textView.getText().toString();
-
-
-
-        //details
-        String imageApiUrl = "http://192.168.50.208:8080/api/recommend/getEntryPic";
-        String queryString = "?fileName=";
-        Glide.with(v)
-                .load(imageApiUrl + queryString + imageUrls[pos])
-                .placeholder(R.drawable.no_img)
-                .into(detailImage);
-        detailTitle.setText(titles[pos]);
-        detailAuthor.setText("by " + authors[pos]);
-        int feeling = feelings.get(rFeelings[pos].toLowerCase());
-        detailFeeling.setImageResource(feeling);
-        detailTrack.setText(trackScores[pos]);
-        detailDesc.setText(descriptions[pos]);
-        detailDesc.setMovementMethod(new ScrollingMovementMethod());
-
-        entryDetails.setVisibility(View.VISIBLE);
-
-//        Toast toast = Toast.makeText(this, title, Toast.LENGTH_SHORT);
-//        toast.show();
+            entryDetails.setVisibility(View.VISIBLE);
+            readyFlag = false;
+        }
     }
 }

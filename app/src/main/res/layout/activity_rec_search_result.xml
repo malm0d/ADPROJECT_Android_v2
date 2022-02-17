@@ -11,21 +11,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/listLayout"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="10dp"
         android:textSize="30sp"
         android:text="Here are our suggestions!"
         />
 
+    <TextView
+        android:id="@+id/badResultPopup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:background="#8FEA3737"
+        android:text="Recommendations may not be to your liking for now. Do record more meals to let us know you better!"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/suggestionTitle" />
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/listLayout"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/suggestionTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_height="650dp"
-        android:layout_marginBottom="50dp"
+        app:layout_constraintTop_toBottomOf="@id/badResultPopup"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp">
 
@@ -40,7 +54,7 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!--<androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/badResultPopup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -88,7 +102,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detailsPopup"
@@ -128,7 +142,7 @@
                 android:layout_height="42dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:maxWidth="265dp"
+                android:maxWidth="200dp"
                 android:text="Fried Chicken"
                 android:textSize="18dp"
                 android:textStyle="bold"
@@ -182,9 +196,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_marginTop="30dp"
-                android:text="on/off track"
+                android:text="description"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
+                android:textSize="18sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detailsTrack"
                 android:scrollbars="vertical"/>
