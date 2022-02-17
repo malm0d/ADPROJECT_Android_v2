@@ -33,9 +33,10 @@
     <string name="text_label_5">Settings </string>
     <string name="title_activity_settings">SettingsActivity</string>
 
-    <!-- Notification Page -->
+    <!-- Setting Page -->
     <string name="editProfile">Edit Profile</string>
     <string name="notification">Enable Notification</string>
+    <string name="logout">Logout</string>
 
     <!-- Notification Page -->
     <string name="settings">Settings</string>

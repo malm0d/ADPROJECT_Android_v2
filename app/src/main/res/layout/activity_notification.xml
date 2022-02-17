@@ -11,10 +11,9 @@
         android:layout_height="wrap_content"
         android:text="@string/settings"
         android:textStyle="bold"
-        android:textSize="20dp"
-        android:padding="20dp"
-        android:background="@color/greyOffT"
-        android:textColor="@color/white"/>
+        android:textSize="40sp"
+        android:textColor="@color/purple_700"
+        android:padding="20dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,7 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/send_reminder"
-            android:padding="20dp"/>
+            android:textSize="18sp"
+            android:padding="10dp"/>
 
         <Switch
             android:id="@+id/timeSwitch"
@@ -65,7 +65,7 @@
     </LinearLayout>
 
 
-    <!--view needed to ensure navigation bar stays at bottom-->
+    <!--view needed to ensure navigation bar stays at bottom for linear layout-->
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
