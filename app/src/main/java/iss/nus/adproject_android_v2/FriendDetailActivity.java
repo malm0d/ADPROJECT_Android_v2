@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.jar.JarException;
 
+import iss.nus.adproject_android_v2.ui.ImageViewPlus;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -32,7 +33,7 @@ import okhttp3.Response;
 
 public class FriendDetailActivity extends AppCompatActivity {
 
-    ImageView mFriendProfilePic;
+    ImageViewPlus mFriendProfilePic;
     TextView mFriendName;
     TextView mFriendUsername;
     Button mViewFoodBlogBtn;

@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import iss.nus.adproject_android_v2.ui.ImageViewPlus;
+
 public class ReceivedReqAdapter extends ArrayAdapter<Object> {
 
     private final Context context;
@@ -42,7 +44,7 @@ public class ReceivedReqAdapter extends ArrayAdapter<Object> {
         ImageView reqActionBtn = view.findViewById(R.id.addUserBtn);
         reqActionBtn.setBackgroundResource(R.drawable.accept_reject);
 
-        ImageView userImage = view.findViewById(R.id.userImage);
+        ImageViewPlus userImage = view.findViewById(R.id.userImage);
         String url = "http://192.168.1.8:8080/api/friends/profilePic";
         String queryString = "?fileName=";
         String fileName = requests.get(pos).getProfilePic();

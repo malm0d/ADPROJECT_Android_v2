@@ -82,6 +82,12 @@ public class ManageFriendsActivity extends AppCompatActivity implements AdapterV
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mClearSearchBtn.performClick();
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
         Intent intent = new Intent(ManageFriendsActivity.this, FriendDetailActivity.class);
         UserHelper user = friends.get(pos);
@@ -130,7 +136,7 @@ public class ManageFriendsActivity extends AppCompatActivity implements AdapterV
                 try {
                     JSONArray jArray = new JSONArray(res);
                     String data = jArray.toString();
-//
+
                     ObjectMapper mapper = new ObjectMapper();
                     mapper.registerModule(new JSR310Module());
                     friends = mapper.readValue(data, new TypeReference<ArrayList<UserHelper>>(){});
@@ -180,7 +186,7 @@ public class ManageFriendsActivity extends AppCompatActivity implements AdapterV
                 try {
                     JSONArray jArray = new JSONArray(res);
                     String data = jArray.toString();
-//
+
                     ObjectMapper mapper = new ObjectMapper();
                     mapper.registerModule(new JSR310Module());
                     friends = mapper.readValue(data, new TypeReference<ArrayList<UserHelper>>(){});

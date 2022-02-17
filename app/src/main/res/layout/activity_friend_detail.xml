@@ -19,9 +19,9 @@
         app:layout_constraintBottom_toTopOf="@id/friendProfilePic"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <ImageView
+    <iss.nus.adproject_android_v2.ui.ImageViewPlus
         android:id="@+id/friendProfilePic"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="200dp"
         android:scaleType="fitXY"
         android:layout_marginTop="10dp"

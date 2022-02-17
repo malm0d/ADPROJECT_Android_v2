@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
+import iss.nus.adproject_android_v2.ui.ImageViewPlus;
+
 public class FriendListAdapter extends ArrayAdapter<Object> {
 
     private final Context context;
@@ -41,7 +43,7 @@ public class FriendListAdapter extends ArrayAdapter<Object> {
         ImageView friendDetailBtn = view.findViewById(R.id.friendDetailBtn);
         friendDetailBtn.setBackgroundResource(R.drawable.view_detail);
 
-        ImageView friendImage = view.findViewById(R.id.friendImage);
+        ImageViewPlus friendImage = view.findViewById(R.id.friendImage);
         String url = "http://192.168.1.8:8080/api/friends/profilePic";
         String queryString = "?fileName=";
         String fileName = friends.get(pos).getProfilePic();
