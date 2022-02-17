@@ -4,6 +4,8 @@ import android.content.Intent;
 
 import java.io.Serializable;
 import java.lang.reflect.Type;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -34,6 +36,7 @@ import okhttp3.Response;
 public class PastMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener  {
 
     private ArrayList<MealHelper> mealsDataArray;
+    private String GoalStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +58,9 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
             listView.setOnItemClickListener(this);
         }
 
-        if (mealList.size() >= 0){
-            Goal latestGoal = mealList.get(0).getGoal();
             TextView goalText = findViewById(R.id.currentgoal);
-            String goalStr = "Current Goal: " + latestGoal.getGoalDescription();
+            String goalStr = "Current Goal: " + GoalStr;
             goalText.setText(goalStr);
-        }
 
 
     }
@@ -73,14 +73,31 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
         intent.setClass(this,MealDetailActivity.class);
         MealHelper detailMeal = mealsDataArray.get(position);
         intent.putExtra("meal",detailMeal);
-        startActivity(intent);
+//        startActivity(intent);
+        startActivityForResult(intent, 1);
+
 
         System.out.println("clicked position: " + position);
 
     }
 
+
+    @Override
+
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+
+            System.out.println("刷新了"); //刷新操作
+            getDataFromServer();
+        }
+
+    }
+
+
     private void getDataFromServer(){
-        String url = "http://192.168.86.248:8888/api/pastMeals";
+        String url = "http://192.168.86.248:9999/api/pastMeals";
         String UserName = "Ken";
         RequestPost(url,UserName);
     }
@@ -122,8 +139,11 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
 
                     String dataStr = jsonObj.getString("data");
 
-                    ObjectMapper mapper = new ObjectMapper();
+                    String goalStr = jsonObj.getString("goalStr");
 
+                    GoalStr = goalStr;
+
+                    ObjectMapper mapper = new ObjectMapper();
 
                     final ArrayList<MealHelper> mealList = mapper.readValue(dataStr, new TypeReference<ArrayList<MealHelper>>(){});
 
@@ -132,8 +152,13 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            initListView(mealList);
-                            Toast.makeText(PastMealsActivity.this, "success", Toast.LENGTH_SHORT).show();
+                            if(mealList.size() > 0){
+                                initListView(mealList);
+                                Toast.makeText(PastMealsActivity.this, "success", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(PastMealsActivity.this, "current no meals", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     });
 
