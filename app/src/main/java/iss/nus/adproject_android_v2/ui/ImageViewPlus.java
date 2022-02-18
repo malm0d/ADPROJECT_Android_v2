@@ -25,7 +25,7 @@ public class ImageViewPlus extends ImageView{
     private BitmapShader mShader;
     private Matrix mMatrix = new Matrix();
     private float mBorderWidth = dip2px(15);
-    private int mBorderColor = 0xFF0080FF;//外边框的颜色
+    private int mBorderColor = 0xFF0080FF;
 
     public ImageViewPlus(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -50,8 +50,8 @@ public class ImageViewPlus extends ImageView{
             }
             mPaintBitmap.setShader(mShader);
             mPaintBorder.setStyle(Paint.Style.STROKE);
-            mPaintBorder.setStrokeWidth(mBorderWidth / 5.0f);//外边框的大小
-            mPaintBorder.setColor(mBorderColor);//添加外边框
+            mPaintBorder.setStrokeWidth(mBorderWidth / 5.0f);
+            mPaintBorder.setColor(mBorderColor);
             float radius = viewMinSize / 2.0f;
             canvas.drawCircle(radius, radius, radius - mBorderWidth / 6.0f, mPaintBorder);
             canvas.translate(mBorderWidth, mBorderWidth);

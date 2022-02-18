@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
@@ -19,6 +20,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.documentfile.provider.DocumentFile;
+import androidx.loader.content.CursorLoader;
+
+import com.bumptech.glide.Glide;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,19 +40,20 @@ import okhttp3.Response;
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    private static final int MY_ADD_CASE_CALL_PHONE2 = 7;
+
     //    TextView profileValidation;
+
     ImageButton UploadProfilePic;
     EditText NameEdit, DateOfBirthEdit, heightEdit, weightedit;
     Button submitProfileChangeBtn;
     private Context context;
     Uri selectedImage;
     ImageViewPlus profilePhoto;
+    private User user;
 
-    private static final int PICK_IMAGE_REQUEST = 9544;
     private String path = "";
     private String fileName = "";
-
+    private static final int PICK_IMAGE_REQUEST = 9544;
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -72,14 +77,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         //get intent
         Intent intent = getIntent();
-        User user = (User) intent.getSerializableExtra("User");
+        user = (User) intent.getSerializableExtra("User");
         initView(user);
     }
 
     protected void initView(User user) {
 
-        ImageViewPlus profilephoto = findViewById(R.id.profilePhoto);
-        profilephoto.setImageResource(R.drawable.cat01);
         NameEdit = findViewById(R.id.NameEdit);
         DateOfBirthEdit = findViewById(R.id.DateOfBirthEdit);
         heightEdit = findViewById(R.id.heightEdit);
@@ -89,8 +92,22 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         heightEdit.setText(user.getHeight());
         weightedit.setText(user.getWeight());
         fileName = user.getProfilePic();
+        showphoto();
     }
 
+    public void showphoto(){
+        String imageApiUrl = "http://192.168.31.50:8888/api/image/get";
+
+        profilePhoto = findViewById(R.id.profilePhoto);
+        String queryString = "?imagePath=";
+        String imageDir = "/static/blog/images/";
+        String profilePic = user.getProfilePic();
+        Glide.with(this)
+                .load(imageApiUrl + queryString + imageDir + profilePic)
+                .placeholder(R.drawable.no_img)
+                .into(profilePhoto);
+
+    }
     @Override
     public void onClick(View v) {
 
@@ -144,16 +161,33 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 System.out.println("Uri: " + selectedImage.toString());
                 profilePhoto = findViewById(R.id.profilePhoto);
                 profilePhoto.setImageURI(selectedImage);
-                path = uriToFilePath(selectedImage);
                 fileName = DocumentFile.fromSingleUri(getApplicationContext(), selectedImage).getName();
+                String path0 = uriToFilePath(selectedImage);
+                path = path0.substring(0,path0.length()-9) + fileName;
             }
         }
     }
 
     private String uriToFilePath(Uri uri) {
         String path = null;
-        path = getFilePath(this, uri);
+        if ((Build.VERSION.SDK_INT < 19) && (Build.VERSION.SDK_INT > 11)) {
+            path = getRealPath_API11to18(this, uri);
+        } else {
+            path = getFilePath(this,uri);
+        }
         return path;
+    }
+    public static String getRealPath_API11to18(Context context, Uri contentUri) {
+        String[] proj = {MediaStore.Images.Media.DATA};
+        String result = null;
+        CursorLoader cursorLoader = new CursorLoader(context, contentUri, proj,null, null, null);
+        Cursor cursor = cursorLoader.loadInBackground();
+        if (cursor != null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            result = cursor.getString(column_index);
+        }
+        return result;
     }
 
     public static String getFilePath(Context context, Uri uri) {
@@ -164,15 +198,18 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             if (splits.length == 2) {
                 String id = splits[1];
                 String[] column = {MediaStore.Images.Media.DATA};
-                String sel = MediaStore.Images.Media._ID + "=?";
+                String sel = MediaStore.Images.Media._ID + "= ?";
                 Cursor cursor = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                        column, sel, new String[]{id}, null);
-                int columnIndex = cursor.getColumnIndex(column[0]);
+                        column, null, null, null);
+                if (null != cursor) {
                 if (cursor.moveToFirst()) {
-                    filePath = cursor.getString(columnIndex);
+
+                    int index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                    filePath = cursor.getString(index);
                 }
                 cursor.close();
             }
+        }
         } else {
             filePath = uri.getPath();
         }
@@ -260,41 +297,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 
     }
+
 }
 
-//                String status = "";
-//                String username = "";
-//
-//                try {
-//                    JSONObject jObj = new JSONObject(res);
-//                    status = jObj.getString("status");
-//                    username = jObj.getString("username");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                if (status.equals("OK")) {
-//                    Intent intent = new Intent();
-//                    intent.setClass(context, UserProfile.class);
-//                    startActivity(intent);
 
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//
-//                        Toast.makeText(EditProfileActivity.this, "success", Toast.LENGTH_SHORT).show();
-//                        Intent intent = new Intent();
-//                        intent.setClass(context, UserProfile.class);
-//                        startActivity(intent);
-//                    }
-//                });
-//                }
-//            }
-//
-//
-//        });
-//    }
-//}
 
 //    public Boolean validateEntries(String username, String email, String password) {
 //        if (username == null || username.trim().length() == 0) {

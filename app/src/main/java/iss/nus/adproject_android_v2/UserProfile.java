@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -53,6 +54,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         EditProfileBtn = findViewById(R.id.EditProfileBtn);
         EditProfileBtn.setOnClickListener(this);
 
+
         getDataFromServer();
         getDataFromServer1();
     }
@@ -60,8 +62,6 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
     protected void initView(User user) {
 
-        ImageViewPlus profilephoto = findViewById(R.id.mine_iv_headportrait);
-        profilephoto.setImageResource(R.drawable.cat01);
         currentUser = user;
         Age = findViewById(R.id.age);
         height = findViewById(R.id.height);
@@ -93,6 +93,8 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         String bmiStr = String.format("%.1f",bmiFloat);
         String BMI = "BMI :" + bmiStr;
         bmi.setText(BMI);
+
+        showphoto();
     }
 
     protected void initView1(ArrayList<Goal> completedGoal){
@@ -150,7 +152,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
                     ObjectMapper mapper = new ObjectMapper();
 
-                    final User currentUser = mapper.readValue(dataStr, new TypeReference<User>() {
+                    final User currentUser1 = mapper.readValue(dataStr, new TypeReference<User>() {
                     });
 
                     System.out.println("check data ");
@@ -158,7 +160,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            initView(currentUser);
+                            initView(currentUser1);
                             Toast.makeText(UserProfile.this, "success", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -280,4 +282,18 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
                 age--;
 
             } } return age; }
+
+
+    public void showphoto(){
+        String imageApiUrl = "http://192.168.31.50:8888/api/image/get";
+
+        profilephoto = findViewById(R.id.mine_iv_headportrait);
+        String queryString = "?imagePath=";
+        String imageDir = "/static/blog/images/";
+        Glide.with(this)
+                .load(imageApiUrl + queryString + imageDir + currentUser.getProfilePic())
+                .placeholder(R.drawable.no_img)
+                .into(profilephoto);
+
+    }
 }

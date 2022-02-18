@@ -22,7 +22,6 @@ j
         android:id="@+id/mine_iv_headportrait"
         android:layout_width="175dp"
         android:layout_height="175dp"
-        android:src="@drawable/chickenrice"
         app:layout_constraintTop_toBottomOf="@+id/myProfileText"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="25dp"
