@@ -259,7 +259,8 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
 
     protected void uploadData() {
         setButtonsUnclickable();
-        String serverUrl = "http://192.168.1.75:8080/api/uploadMealEntry";
+        //"(IP:8080)/api/uploadMealEntry"
+        String serverUrl = getString(R.string.IP) + "/api/uploadMealEntry";
         String fileName = currentPhotoPath.substring(currentPhotoPath.indexOf("JPEG"));
         File imageFile = new File(currentPhotoPath);
         if (imageFile.exists() == false) {

@@ -78,8 +78,7 @@ public class SetGoalActivity extends AppCompatActivity implements View.OnClickLi
 
         int id = v.getId();
         if(id == R.id.submitGoal){
-
-            String url = "http://192.168.86.248:9999/api/setGoal";
+            String url = getResources().getString(R.string.IP) + "/api/setGoal";
             String UserName = shareusername;
             String goalDescription = userGoal.getText().toString();
             String totalMealCount = totalSpinner.getSelectedItem().toString();

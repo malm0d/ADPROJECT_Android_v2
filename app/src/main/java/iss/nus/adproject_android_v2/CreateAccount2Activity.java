@@ -122,7 +122,7 @@ public class CreateAccount2Activity extends AppCompatActivity {
     }
 
     public void validateWithServer(String name, String height, String weight, String gender, String dob) {
-        String url = "http://192.168.1.8:8080/api/login/create02";
+        String url = getResources().getString(R.string.IP) + "/api/login/create02";
         RequestPost(url, name, height, weight, gender, dob);
     }
 

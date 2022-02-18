@@ -70,7 +70,7 @@ public class FriendDetailActivity extends AppCompatActivity {
         mFriendUsername.setText("Username: " + friend.getUsername());
 
         mFriendProfilePic = findViewById(R.id.friendProfilePic);
-        String url = "http://192.168.1.8:8080/api/friends/profilePic";
+        String url = getResources().getString(R.string.IP) + "/api/friends/profilePic";
         String queryString = "?fileName=";
         String fileName = friend.getProfilePic();
         String userId = friend.getUserId();
@@ -129,7 +129,7 @@ public class FriendDetailActivity extends AppCompatActivity {
     }
 
     private void deleteFriend() {
-        String url = "http://192.168.1.8:8080/api/friends/delete";
+        String url = getResources().getString(R.string.IP) + "/api/friends/delete";
         String friend_username = friend.getUsername();
         requestPost(url, username, friend_username);
     }

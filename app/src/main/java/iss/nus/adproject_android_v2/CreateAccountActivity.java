@@ -152,7 +152,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public void validateWithServer(String username, String email, String password) {
-        String url = "http://192.168.1.8:8080/api/login/create01";
+        String url = getResources().getString(R.string.IP) + "/api/login/create01";
         RequestPost(url, username, email, password);
     }
 
