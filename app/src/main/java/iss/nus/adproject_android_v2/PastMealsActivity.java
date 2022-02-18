@@ -170,7 +170,7 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
 
 
     private void getDataFromServer(){
-        String url = "http://192.168.86.248:9999/api/pastMeals";
+        String url = getResources().getString(R.string.IP) + "/api/pastMeals";
         String UserName = shareusername;
         RequestPost(url,UserName);
     }

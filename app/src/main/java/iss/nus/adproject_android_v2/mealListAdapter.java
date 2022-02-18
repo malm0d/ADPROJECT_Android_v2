@@ -61,7 +61,8 @@ public class mealListAdapter extends ArrayAdapter<Object> {
 
         ImageView mealImage = view.findViewById(R.id.mealImage);
 //        mealImage.setImageResource(R.drawable.food2);
-        String imageApiUrl = "http://192.168.86.248:9999/api/foodImage/get";
+//        String imageApiUrl = "http://192.168.86.248:9999/api/foodImage/get";
+        String imageApiUrl = context.getResources().getString(R.string.IP) + "/api/foodImage/get";
         String queryString = "?imagePath=";
         String imageDir = "/static/blog/images/";
 
