@@ -14,7 +14,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="10dp"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:text="Here are our suggestions!"
         />
 
@@ -23,11 +23,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_marginRight="20dp"
         android:background="#8FEA3737"
         android:text="Recommendations may not be to your liking for now. Do record more meals to let us know you better!"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:visibility="gone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         app:layout_constraintTop_toBottomOf="@id/badResultPopup"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="2dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
