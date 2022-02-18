@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -45,12 +48,16 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
     SwitchCompat trackSwitch;
     String[] titles, authors, rFeelings, trackScores, imageUrls, descriptions;
     String goodResult;
-    String userId = "2";
+    String userId;
+    NavigationBarView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend);
+
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        userId = pref.getString("userId", "");
 
         submitTextBox = findViewById(R.id.submitTextBox);
 
@@ -96,9 +103,38 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
         submitBtn = findViewById(R.id.submitBtn);
         submitBtn.setOnClickListener(this);
 
-//        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = pref.edit();
-//        editor.putString("userId", "1");
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        //set add selected
+        bottomNavigation.setSelectedItemId(R.id.addMenu);
+
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu:
+                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
+                        break;
+                    case R.id.addMenu:
+                        finish();
+                        startActivity(getIntent());
+                        break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -142,7 +178,7 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
             }
             System.out.println("input: " + input);
             //send input to spring
-            String postUrl = "http://192.168.50.208:8080/api/recommend/postStringData/"
+            String postUrl = getResources().getString(R.string.IP) + "/api/recommend/postStringData/"
                     + userId + "/" + input + "/" + feeling + "/" + track;
             System.out.print(postUrl);
             RequestGet(postUrl);

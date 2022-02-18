@@ -1,11 +1,13 @@
 package iss.nus.adproject_android_v2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +32,7 @@ public class RecSearchResultActivity extends AppCompatActivity implements Adapte
     String goodResult;
     Map<String, Integer> feelings = new HashMap<>();
     Boolean readyFlag;
+    NavigationBarView bottomNavigation;
 
     //for details
     ImageView detailImage, detailFeeling;
@@ -83,6 +87,39 @@ public class RecSearchResultActivity extends AppCompatActivity implements Adapte
         }
 
         readyFlag = true;
+
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        //set add selected
+        bottomNavigation.setSelectedItemId(R.id.addMenu);
+
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu:
+                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
+                        break;
+                    case R.id.addMenu:
+                        finish();
+                        startActivity(getIntent());
+                        break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     @Override
@@ -99,7 +136,7 @@ public class RecSearchResultActivity extends AppCompatActivity implements Adapte
                             View v, int pos, long id) {
         if (readyFlag){
             //details
-            String imageApiUrl = "http://192.168.50.208:8080/api/recommend/getEntryPic";
+            String imageApiUrl = getResources().getString(R.string.IP) + "/api/recommend/getEntryPic";
             String queryString = "?fileName=";
             Glide.with(v)
                     .load(imageApiUrl + queryString + imageUrls[pos])

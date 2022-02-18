@@ -41,7 +41,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp">
+        android:layout_marginRight="20dp"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
 
         <ListView
             android:id="@+id/listView"
@@ -54,62 +55,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--<androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/badResultPopup"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#8A424242"
-        android:visibility="invisible">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/badResultInner"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginRight="40dp"
-            android:layout_marginBottom="250dp"
-            android:background="#FFFCFC"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/badResultMsg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="Insufficient data, hence recommendations may not be to your liking. \nDo record more meals to let us know you better!"
-                android:textSize="20sp"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/badResultOKBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="OK"
-                android:textSize="18sp"
-                app:layout_constraintBottom_toBottomOf="@id/badResultInner"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/badResultMsg" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/detailsPopup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#8A424242"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/detailsInner"
@@ -219,5 +171,14 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

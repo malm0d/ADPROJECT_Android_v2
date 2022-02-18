@@ -52,7 +52,7 @@ public class RecSearchResultAdapter extends ArrayAdapter<Object>  {
         }
 
         ImageView entryImage= view.findViewById(R.id.recEntryImage);
-        String imageApiUrl = "http://192.168.50.208:8080/api/recommend/getEntryPic";
+        String imageApiUrl = context.getResources().getString(R.string.IP) + "/api/recommend/getEntryPic";
         String queryString = "?fileName=";
         Glide.with(view)
                 .load(imageApiUrl + queryString + imageUrls[pos])
@@ -68,21 +68,6 @@ public class RecSearchResultAdapter extends ArrayAdapter<Object>  {
         ImageView entryFeeling = view.findViewById(R.id.recFeeling);
         int feeling = feelings.get(rFeelings[pos].toLowerCase());
         entryFeeling.setImageResource(feeling);
-
-//        ImageView entryFeeling = view.findViewById(R.id.recFeeling);
-//        String feel = rFeelings[pos].toLowerCase();
-//        if (feel.equalsIgnoreCase("cry")){
-//            entryFeeling.setImageResource(R.drawable.emoji_crying);
-//        }
-//        else if (feel.equalsIgnoreCase("pensive")){
-//            entryFeeling.setImageResource(R.drawable.emoji_pensive);
-//        }
-//        else if (feel.equalsIgnoreCase("happy")){
-//            entryFeeling.setImageResource(R.drawable.emoji_happy);
-//        }
-//        else if (feel.equalsIgnoreCase("joy")){
-//            entryFeeling.setImageResource(R.drawable.emoji_joyful);
-//        }
 
         TextView entryTrack = view.findViewById(R.id.recTrack);
         entryTrack.setText(trackScores[pos]);
