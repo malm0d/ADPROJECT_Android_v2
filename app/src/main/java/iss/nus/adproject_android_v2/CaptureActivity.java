@@ -72,8 +72,8 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
                         //link to path
                         break;
                     case R.id.addMenu:
-                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
-                        startActivity(add);
+                        finish();
+                        startActivity(getIntent());
                         break;
                     case R.id.friendsMenu:
                         Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
