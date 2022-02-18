@@ -38,7 +38,6 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
     private int trackScore = -1;
     private String timeStamp;
     private String userId;
-    private int goalId;
     private boolean flagged = false;
     private boolean visibility = true;
 
@@ -72,7 +71,6 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
         getBitmapFromUri(photoURI);
         capturedImageView.setImageURI(photoURI); //alt: capturedImageView.setImageBitmap(imageBitmap);
         userId = intent.getStringExtra("userId");
-        //goalId = intent.getIntExtra("goalId", -1);
 
         new Thread(new Runnable() {
             @Override
@@ -278,7 +276,6 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                 .addFormDataPart("trackScore", String.valueOf(trackScore))
                 .addFormDataPart("timeStamp", timeStamp)
                 .addFormDataPart("userId", userId)
-                //.addFormDataPart("goalId", String.valueOf(goalId))
                 .addFormDataPart("flagged", String.valueOf(flagged))
                 .addFormDataPart("visibility", String.valueOf(visibility))
                 .build();

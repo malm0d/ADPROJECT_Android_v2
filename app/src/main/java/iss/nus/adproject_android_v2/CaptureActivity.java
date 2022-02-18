@@ -35,7 +35,6 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
     private Uri photoURI;
     private String timeStamp;
     private String userId;
-    private int goalId;
     NavigationBarView bottomNavigation;
 
     @Override
@@ -45,11 +44,10 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
 
         SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
         userId = pref.getString("userId", "");
-        //goalId = intent.getIntExtra("goalId", -1);
-        //if (userId == null || userId.equals("") || goalId == -1) {
-        //    Toast.makeText(this, "No valid user or goal", Toast.LENGTH_LONG).show();
-        //    finish();
-        //}
+        if (userId == null || userId.equals("")) {
+            Toast.makeText(this, "No valid user", Toast.LENGTH_LONG).show();
+            finish();
+        }
 
         mealWithPhotoBtn = findViewById(R.id.mealWithPhotoBtn);
         systemRecommendBtn = findViewById(R.id.systemRecommendBtn);
@@ -143,12 +141,13 @@ public class CaptureActivity extends AppCompatActivity implements View.OnClickLi
         intent.putExtra("photoURI", photoURI);
         intent.putExtra("timeStamp", timeStamp);
         intent.putExtra("userId", userId);
-        //intent.putExtra("goalId", goalId);
         startActivity(intent);
     }
 
     /*
-    //Work on this after MVP
+    //Work on this after MVP or if time permits.
+    //Very low priority.
+    //Current issue with broadcasting to main gallery
     private void galleryAddPic() {
         //Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         //File f = new File(currentPhotoPath);
