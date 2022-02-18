@@ -41,7 +41,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
     TextView targetCount;
     TextView pathProgressText;
     TextView TotalMealRecord;
-    Button GoDetailsBtn,PastGoalBtn;
+    Button GoDetailsBtn,PastGoalBtn,analyticsBtn;
     private ProgressBar progressBar;
     NavigationBarView bottomNavigation;
     private String shareusername;
@@ -54,10 +54,13 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
         shareusername = pref.getString("username", "");
 
+
         GoDetailsBtn = findViewById(R.id.SeeDetailsBtn);
         GoDetailsBtn.setOnClickListener(this);
         PastGoalBtn =findViewById(R.id.PastGoalBtn);
         PastGoalBtn.setOnClickListener(this);
+        analyticsBtn = findViewById(R.id.analyticsBtn);
+        analyticsBtn.setOnClickListener(this);
         getCurrentGoalFromServer();
         getMealsDataFromServer();
         initBoomNacigation();
@@ -67,7 +70,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         //bottom navigation bar
         bottomNavigation = findViewById(R.id.bottom_navigation);
         //set Setting selected
-        bottomNavigation.setSelectedItemId(R.id.settingsMenu);
+        bottomNavigation.setSelectedItemId(R.id.pathMenu);
 
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -133,7 +136,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void getCurrentGoalFromServer(){
-        String url1 = "http://192.168.31.50:8888/api/currentgoal";
+        String url1 = getResources().getString(R.string.IP) + "/api/currentgoal";
         String UserName = shareusername;
         RequestPost(url1,UserName);
     }
@@ -202,7 +205,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void getMealsDataFromServer(){
-        String url1 = "http://192.168.31.50:8888/api/goalsMeal";
+        String url1 = getResources().getString(R.string.IP) + "/api/goalsMeal";
         String UserName = shareusername;
         RequestPost1(url1,UserName);
     }
@@ -284,6 +287,11 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
 
         if(id == R.id.PastGoalBtn){
             Intent intent = new Intent(this, PastGoalsActivity.class);
+            startActivity(intent);
+        }
+
+        if(id==R.id.analyticsBtn){
+            Intent intent = new Intent(this, Userdashboard.class);
             startActivity(intent);
         }
     }

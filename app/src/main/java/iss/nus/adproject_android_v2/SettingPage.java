@@ -61,7 +61,8 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
                         startActivity(pastMeal);
                         break;
                     case R.id.pathMenu:
-                        //link to path
+                        Intent viewgoal = new Intent(getApplicationContext(), ViewGoalActivity.class);
+                        startActivity(viewgoal);
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);

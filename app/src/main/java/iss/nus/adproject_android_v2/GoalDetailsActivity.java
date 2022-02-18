@@ -61,7 +61,7 @@ public class GoalDetailsActivity extends AppCompatActivity implements View.OnCli
         //bottom navigation bar
         bottomNavigation = findViewById(R.id.bottom_navigation);
         //set Setting selected
-        bottomNavigation.setSelectedItemId(R.id.settingsMenu);
+        bottomNavigation.setSelectedItemId(R.id.pathMenu);
 
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -126,7 +126,7 @@ public class GoalDetailsActivity extends AppCompatActivity implements View.OnCli
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dlg, int which) {
                                     // your action here
-                                    String url = "http://192.168.31.50:8888/api/endGoal";
+                                    String url = getResources().getString(R.string.IP) + "/api/endGoal";
                                     String UserName = shareusername;
                                     endtheGoal(url,UserName,goalId);
                                 }

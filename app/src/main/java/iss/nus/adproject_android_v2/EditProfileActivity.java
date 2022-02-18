@@ -158,7 +158,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         int id = v.getId();
         if (id == R.id.submitProfileChange) {
 
-            String url = "http://192.168.31.50:8888/api/saveProfile";
+            String url = getResources().getString(R.string.IP) + "/api/saveProfile";
             String UserName = shareusername;
             String Name = NameEdit.getText().toString();
             String dateOfBirth = DateOfBirthEdit.getText().toString();

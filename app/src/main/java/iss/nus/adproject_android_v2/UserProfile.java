@@ -127,9 +127,9 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
             e.printStackTrace();
         }
 
-        String Height = "Height :" +user.getHeight();
+        String Height = "Height :" +user.getHeight() +"cm";
         height.setText(Height);
-        String Weight ="Weight :" + user.getWeight();
+        String Weight ="Weight :" + user.getWeight() +"kg";
         weight.setText(Weight);
         double heightNum =Integer.parseInt(user.getHeight());
         double weightNum = Integer.parseInt(user.getWeight());
@@ -153,7 +153,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     }
 
     private void getDataFromServer(){
-        String url1 = "http://192.168.31.50:8888/api/userProfile";
+        String url1 = getResources().getString(R.string.IP) + "/api/userProfile";
         String UserName = shareusername;
         RequestPost(url1,UserName);
     }
@@ -220,7 +220,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
     }
 
         private void getDataFromServer1(){
-            String url1 = "http://192.168.31.50:8888/api/completedGoal";
+            String url1 = getResources().getString(R.string.IP) + "/api/completedGoal";
             String UserName = shareusername;
             RequestPost1(url1,UserName);
         }
