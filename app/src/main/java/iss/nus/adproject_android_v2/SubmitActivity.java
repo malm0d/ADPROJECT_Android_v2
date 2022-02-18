@@ -38,7 +38,6 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
     private int trackScore = -1;
     private String timeStamp;
     private String userId;
-    private int goalId;
     private boolean flagged = false;
     private boolean visibility = true;
 
@@ -72,7 +71,6 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
         getBitmapFromUri(photoURI);
         capturedImageView.setImageURI(photoURI); //alt: capturedImageView.setImageBitmap(imageBitmap);
         userId = intent.getStringExtra("userId");
-        //goalId = intent.getIntExtra("goalId", -1);
 
         new Thread(new Runnable() {
             @Override
@@ -278,7 +276,6 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                 .addFormDataPart("trackScore", String.valueOf(trackScore))
                 .addFormDataPart("timeStamp", timeStamp)
                 .addFormDataPart("userId", userId)
-                //.addFormDataPart("goalId", String.valueOf(goalId))
                 .addFormDataPart("flagged", String.valueOf(flagged))
                 .addFormDataPart("visibility", String.valueOf(visibility))
                 .build();
@@ -303,12 +300,19 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                 final String res = response.body().string();
                 System.out.println(res);
                 if (res == null) {
-                    Toast.makeText(SubmitActivity.this, "An error occurred getting a proper response from the recommender", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SubmitActivity.this, "An error occurred getting a proper response from the recommender. Please wait and try again.", Toast.LENGTH_LONG).show();
                 }
-                if (res.equals("IOException") || res.equals("MultipartFileFailure")) {
-                    Toast.makeText(SubmitActivity.this, "An error occurred on the server", Toast.LENGTH_LONG).show();
+                else if (res.equals("IOException") || res.equals("MultipartFileFailure")) {
+                    Toast.makeText(SubmitActivity.this, "An error occurred on the server. Please wait and try again.", Toast.LENGTH_LONG).show();
                 }
-                startResponseActivity(res);
+                else if (res.equals("nocurrentgoalset")) {
+                    Toast.makeText(SubmitActivity.this, "No current goal set. Please set a goal.", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(SubmitActivity.this, SetGoalActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    startResponseActivity(res);
+                }
             }
         });
     }
