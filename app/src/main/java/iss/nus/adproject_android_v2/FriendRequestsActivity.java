@@ -95,7 +95,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
                         //link to meal page
                         break;
                     case R.id.pathMenu:
-                        //link to path page
+                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        startActivity(pastMeal);
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);

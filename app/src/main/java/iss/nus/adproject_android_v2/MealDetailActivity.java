@@ -1,6 +1,7 @@
 package iss.nus.adproject_android_v2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -63,11 +64,15 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
     private CustomDatePicker mTimerPicker;
 
+    private String shareusername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_detail);
+
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        shareusername = pref.getString("username", "");
 
         Intent intent = getIntent();
         meal = (MealHelper)intent.getSerializableExtra("meal");
@@ -75,6 +80,8 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
         initTheUi();
         showData(meal);
         initTimerPicker();
+
+
     }
 
     public void initTheUi(){
@@ -159,7 +166,7 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
         if(id == R.id.deleteMealBtn){
             showMessage("delete meal");
             String url = "http://192.168.86.248:9999/api/deleteMeal";
-            String UserName = "Ken";
+            String UserName = shareusername;
             deleteMealRequest(url,UserName,meal.getId());
         }else if (id == R.id.editTimeBtn){
 
@@ -183,7 +190,7 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
             showMessage("submit changes");
 
             String url = "http://192.168.86.248:9999/api/modifyMealInfo";
-            String UserName = "Ken";
+            String UserName = shareusername;
 
             String mealTime = mealtime.getText().toString();
             String mealDes = mealDesc.getText().toString();
