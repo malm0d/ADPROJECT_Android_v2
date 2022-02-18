@@ -306,7 +306,12 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                     Toast.makeText(SubmitActivity.this, "An error occurred on the server. Please wait and try again.", Toast.LENGTH_LONG).show();
                 }
                 else if (res.equals("nocurrentgoalset")) {
-                    Toast.makeText(SubmitActivity.this, "No current goal set. Please set a goal.", Toast.LENGTH_LONG).show();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(SubmitActivity.this, "No current goal set. Please set a goal.", Toast.LENGTH_LONG).show();
+                        }
+                    });
                     Intent intent = new Intent(SubmitActivity.this, SetGoalActivity.class);
                     startActivity(intent);
                 }
