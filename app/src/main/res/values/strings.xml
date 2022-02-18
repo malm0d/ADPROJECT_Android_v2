@@ -53,5 +53,5 @@
     <string name="send_reminder">Send reminder</string>
 
     <!-- IP Address -->
-    <string name="IP">http://192.168.50.208:8080</string>
+    <string name="IP">http://192.168.0.108:8080</string>
 </resources>
