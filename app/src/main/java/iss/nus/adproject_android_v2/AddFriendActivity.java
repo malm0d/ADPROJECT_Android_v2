@@ -85,11 +85,11 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.mealMenu:
-                        //link to meal page
-                        break;
-                    case R.id.pathMenu:
                         Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
                         startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);

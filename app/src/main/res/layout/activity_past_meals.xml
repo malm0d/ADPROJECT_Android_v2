@@ -20,6 +20,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/setCurrentGoalBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0066ff"
+        android:text="Set Goal"
+        android:textColor="#FFFFFF"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/currentgoal"
+        app:layout_constraintEnd_toEndOf="@+id/currentgoal"
+        app:layout_constraintTop_toTopOf="@id/currentgoal"
+        app:layout_constraintBottom_toBottomOf="@id/currentgoal"/>
+
     <ListView
         android:id="@+id/mealslist"
         android:layout_width="match_parent"

@@ -52,7 +52,7 @@ public class SetGoalActivity extends AppCompatActivity implements View.OnClickLi
         shareusername = pref.getString("username", "");
 
         ImageView logoImage = findViewById(R.id.logoimageView);
-        logoImage.setImageResource(R.drawable.logo);
+        logoImage.setImageResource(R.drawable.app_logo);
 
         saveBtn = findViewById(R.id.submitGoal);
         saveBtn.setOnClickListener(this);
@@ -69,39 +69,7 @@ public class SetGoalActivity extends AppCompatActivity implements View.OnClickLi
         totalSpinner.setAdapter(adapter);
         targetSpinner.setAdapter(adapter);
 
-
-        //bottom navigation bar
-        bottomNavigation = findViewById(R.id.bottom_navigation);
-        //set Setting selected
-        bottomNavigation.setSelectedItemId(R.id.addMenu);
-
-        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.mealMenu: break;
-                    case R.id.pathMenu:
-                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
-                        startActivity(pastMeal);
-                        break;
-                    case R.id.addMenu:
-                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
-                        startActivity(add);
-                        break;
-                    case R.id.friendsMenu:
-                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
-                        startActivity(friends);
-                        break;
-                    case R.id.settingsMenu:
-                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
-                        startActivity(settings);
-                        break;
-                }
-                return false;
-            }
-        });
-
-//        initBoomNacigation();
+        initBoomNacigation();
 
     }
 
@@ -191,10 +159,12 @@ public class SetGoalActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
-                    case R.id.mealMenu: break;
-                    case R.id.pathMenu:
+                    case R.id.mealMenu:
                         Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
                         startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);

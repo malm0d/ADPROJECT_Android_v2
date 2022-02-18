@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,11 +39,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class PastMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener  {
+public class PastMealsActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,View.OnClickListener  {
 
     private ArrayList<MealHelper> mealsDataArray;
     private String GoalStr;
 
+    private Button setGoalBtn;
     private String shareusername;
 
     NavigationBarView bottomNavigation;
@@ -55,42 +57,13 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
         SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
         shareusername = pref.getString("username", "");
 
+        setGoalBtn = findViewById(R.id.setCurrentGoalBtn);
+        setGoalBtn.setOnClickListener(this);
+
         mealsDataArray = new ArrayList<>();
         getDataFromServer();
 
-
-        //bottom navigation bar
-        bottomNavigation = findViewById(R.id.bottom_navigation);
-        //set Setting selected
-        bottomNavigation.setSelectedItemId(R.id.addMenu);
-
-        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.mealMenu: break;
-                    case R.id.pathMenu:
-                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
-                        startActivity(pastMeal);
-                        break;
-                    case R.id.addMenu:
-                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
-                        startActivity(add);
-                        break;
-                    case R.id.friendsMenu:
-                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
-                        startActivity(friends);
-                        break;
-                    case R.id.settingsMenu:
-                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
-                        startActivity(settings);
-                        break;
-                }
-                return false;
-            }
-        });
-
-//        initBoomNacigation();
+        initBoomNacigation();
     }
 
     private void initBoomNacigation(){
@@ -103,10 +76,12 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
-                    case R.id.mealMenu: break;
-                    case R.id.pathMenu:
+                    case R.id.mealMenu:
                         Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
                         startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
@@ -124,6 +99,20 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onClick(View v){
+
+        int id = v.getId();
+        if(id == R.id.setCurrentGoalBtn){
+            Intent intent = new Intent();
+            intent.setClass(this,SetGoalActivity.class);
+            startActivity(intent);
+
+        }
+
+
     }
     
 
@@ -137,10 +126,15 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
             listView.setOnItemClickListener(this);
         }
 
+            if (GoalStr.equals(" ")){
+                setGoalBtn.setVisibility(View.VISIBLE);
+
+            }else {
+                setGoalBtn.setVisibility(View.INVISIBLE);
+            }
             TextView goalText = findViewById(R.id.currentgoal);
             String goalStr = "Current Goal: " + GoalStr;
             goalText.setText(goalStr);
-
 
     }
 
