@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,9 +44,9 @@ public class FriendRequestsActivity extends AppCompatActivity {
     Button mReceivedReqBtn;
     TextView mFriendReqListHeader;
     ListView mReqList;
-    ConstraintLayout mDelReqPopup;
-    ConstraintLayout mProcessReqPopup;
     NavigationBarView bottomNavigation;
+    Dialog confirmDel_dialog;
+    Dialog addFriend_dialog;
 
     private String username;
     private String friend_username;
@@ -122,6 +124,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
         mReceivedReqBtn = findViewById(R.id.receivedRequestsBtn);
         mFriendReqListHeader = findViewById(R.id.friendRequestListHeader);
         mReqList = findViewById(R.id.requestsList);
+        confirmDel_dialog = new Dialog(this);
+        addFriend_dialog = new Dialog(this);
     }
 
     private void initSentReqListView(ArrayList<UserHelper> requests) {
@@ -131,32 +135,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
             mReqList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-                    mDelReqPopup = findViewById(R.id.delReqPopup);
-                    mDelReqPopup.setVisibility(View.VISIBLE);
-                    mReqList.setEnabled(false);
-                    mReceivedReqBtn.setEnabled(false);
-                    mSentReqBtn.setEnabled(false);
-
-                    Button mConfirmDelReqBtn = findViewById(R.id.confirmDelReqBtn);
-                    mConfirmDelReqBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            action = "delete";
-                            friend_username = requests.get(pos).getUsername();
-                            processFriendRequest(friend_username);
-                        }
-                    });
-
-                    Button mRevertReqBtn = findViewById(R.id.revertReqBtn);
-                    mRevertReqBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mDelReqPopup.setVisibility(View.INVISIBLE);
-                            mReqList.setEnabled(true);
-                            mReceivedReqBtn.setEnabled(true);
-                            mSentReqBtn.setEnabled(true);
-                        }
-                    });
+                    UserHelper user = requests.get(pos);
+                    openConfirmDialog(user);
                 }
             });
         }
@@ -169,44 +149,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
             mReqList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-                    mProcessReqPopup = findViewById(R.id.processReqPopup);
-                    mProcessReqPopup.setVisibility(View.VISIBLE);
-                    mReqList.setEnabled(false);
-                    mReceivedReqBtn.setEnabled(false);
-                    mSentReqBtn.setEnabled(false);
-                    TextView mProcessReqTxt = findViewById(R.id.processReqTxt02);
-                    mProcessReqTxt.setText("From: " + requests.get(pos).getName());
-
-                    Button mAcceptReqBtn = findViewById(R.id.acceptReqBtn);
-                    mAcceptReqBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            action = "accept";
-                            friend_username = requests.get(pos).getUsername();
-                            processFriendRequest(friend_username);
-                        }
-                    });
-
-                    Button mRejectReqBtn = findViewById(R.id.rejectReqBtn);
-                    mRejectReqBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            action = "reject";
-                            friend_username = requests.get(pos).getUsername();
-                            processFriendRequest(friend_username);
-                        }
-                    });
-
-                    Button mCancelReqBtn = findViewById(R.id.cancelReqBtn);
-                    mCancelReqBtn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mProcessReqPopup.setVisibility(View.INVISIBLE);
-                            mReqList.setEnabled(true);
-                            mReceivedReqBtn.setEnabled(true);
-                            mSentReqBtn.setEnabled(true);
-                        }
-                    });
+                    UserHelper user = requests.get(pos);
+                    openAddFriendDialog(user);
                 }
             });
         }
@@ -310,22 +254,14 @@ public class FriendRequestsActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        mProcessReqPopup.setVisibility(View.INVISIBLE);
-                                        mReqList.setEnabled(true);
-                                        mReceivedReqBtn.setEnabled(true);
-                                        mSentReqBtn.setEnabled(true);
                                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                         mReceivedReqBtn.performClick();
                                     }
                                 });
-                            } else if (message.equals("Rejected friend request from" + friend_username)) {
+                            } else if (message.equals("Rejected friend request from " + friend_username)) {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        mProcessReqPopup.setVisibility(View.INVISIBLE);
-                                        mReqList.setEnabled(true);
-                                        mReceivedReqBtn.setEnabled(true);
-                                        mSentReqBtn.setEnabled(true);
                                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                         mReceivedReqBtn.performClick();
                                     }
@@ -334,10 +270,6 @@ public class FriendRequestsActivity extends AppCompatActivity {
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        mDelReqPopup.setVisibility(View.INVISIBLE);
-                                        mReqList.setEnabled(true);
-                                        mReceivedReqBtn.setEnabled(true);
-                                        mSentReqBtn.setEnabled(true);
                                         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
                                         mSentReqBtn.performClick();
                                     }
@@ -350,5 +282,72 @@ public class FriendRequestsActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void openConfirmDialog(UserHelper user) {
+        confirmDel_dialog.setContentView(R.layout.confirm_delete_dialog);
+        confirmDel_dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+
+        Button mConfirmDelReqBtn = confirmDel_dialog.findViewById(R.id.confirmDelBtn);
+        mConfirmDelReqBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                action = "delete";
+                friend_username = user.getUsername();
+                processFriendRequest(friend_username);
+                confirmDel_dialog.dismiss();
+            }
+        });
+
+        Button mRevertReqBtn = confirmDel_dialog.findViewById(R.id.revertBtn);
+        mRevertReqBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmDel_dialog.dismiss();
+            }
+        });
+
+        confirmDel_dialog.show();
+    }
+
+    private void openAddFriendDialog(UserHelper user) {
+        addFriend_dialog.setContentView(R.layout.add_friend_dialog);
+        addFriend_dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+
+        TextView mProcessReqTxt = addFriend_dialog.findViewById(R.id.processReqTxt02);
+        mProcessReqTxt.setText("From: " + user.getName());
+
+        Button mAcceptReqBtn = addFriend_dialog.findViewById(R.id.acceptReqBtn);
+        mAcceptReqBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                action = "accept";
+                friend_username = user.getUsername();
+                processFriendRequest(friend_username);
+                addFriend_dialog.dismiss();
+            }
+        });
+
+        Button mRejectReqBtn = addFriend_dialog.findViewById(R.id.rejectReqBtn);
+        mRejectReqBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                action = "reject";
+                friend_username = user.getUsername();
+                processFriendRequest(friend_username);
+                addFriend_dialog.dismiss();
+            }
+        });
+
+        Button mCancelReqBtn = addFriend_dialog.findViewById(R.id.cancelReqBtn);
+        mCancelReqBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+             addFriend_dialog.dismiss();
+            }
+        });
+
+        addFriend_dialog.show();
+
     }
 }

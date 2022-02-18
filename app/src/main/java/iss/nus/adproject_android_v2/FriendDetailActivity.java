@@ -4,9 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,10 +42,10 @@ public class FriendDetailActivity extends AppCompatActivity {
     Button mDelFriendBtn;
     Button mBackToMSBtn;
     TextView mDelConfirmation;
-    ConstraintLayout mDelPopup;
-    LinearLayout mManageFriendsLL02;
+
     Button mCfmDelBtn;
     Button mRevertBtn;
+    Dialog dialog;
 
     String username;
     UserHelper friend;
@@ -68,6 +70,8 @@ public class FriendDetailActivity extends AppCompatActivity {
 
         mFriendUsername = findViewById(R.id.friendDetailUsername);
         mFriendUsername.setText("Username: " + friend.getUsername());
+
+        dialog = new Dialog(this);
 
         mFriendProfilePic = findViewById(R.id.friendProfilePic);
         String url = getResources().getString(R.string.IP) + "/api/friends/profilePic";
@@ -102,28 +106,7 @@ public class FriendDetailActivity extends AppCompatActivity {
         mDelFriendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mManageFriendsLL02 = findViewById(R.id.manageFriendsLL02);
-                mManageFriendsLL02.setVisibility(View.INVISIBLE);
-
-                mDelPopup = findViewById(R.id.delPopup);
-                mDelPopup.setVisibility(View.VISIBLE);
-
-                mCfmDelBtn = findViewById(R.id.confirmDelBtn);
-                mCfmDelBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        deleteFriend();
-                    }
-                });
-
-                mRevertBtn = findViewById(R.id.revertBtn);
-                mRevertBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mDelPopup.setVisibility(View.INVISIBLE);
-                        mManageFriendsLL02.setVisibility(View.VISIBLE);
-                    }
-                });
+                openConfirmDialog();
             }
         });
     }
@@ -172,16 +155,10 @@ public class FriendDetailActivity extends AppCompatActivity {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    mDelPopup.setVisibility(View.INVISIBLE);
                                     mDelConfirmation = findViewById(R.id.delConfirmation);
                                     mDelConfirmation.setText("You are not longer friends with: " + friend.getName());
                                     mDelConfirmation.setTextColor(Color.GREEN);
                                     mDelConfirmation.setVisibility(View.VISIBLE);
-
-                                    mManageFriendsLL02.setVisibility(View.VISIBLE);
-                                    mViewFoodBlogBtn.setVisibility(View.INVISIBLE);
-                                    mDelFriendBtn.setVisibility(View.INVISIBLE);
-                                    mBackToMSBtn.setVisibility(View.VISIBLE);
                                 }
                             });
                         }
@@ -192,5 +169,30 @@ public class FriendDetailActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void openConfirmDialog() {
+        dialog.setContentView(R.layout.confirm_delete_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+
+        mCfmDelBtn = dialog.findViewById(R.id.confirmDelBtn);
+        mCfmDelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteFriend();
+                dialog.dismiss();
+                mViewFoodBlogBtn.setVisibility(View.INVISIBLE);
+                mDelFriendBtn.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        mRevertBtn = dialog.findViewById(R.id.revertBtn);
+        mRevertBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
