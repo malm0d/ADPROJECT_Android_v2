@@ -10,6 +10,7 @@ public class MealHelper implements Serializable {
 
     private String id;
     private String imageURL;
+    private String filename;
     private String title;
     private boolean visibility;
     private String trackScore;
@@ -22,9 +23,10 @@ public class MealHelper implements Serializable {
     private List<Object> comments;
 
 
-    public MealHelper(String id, String imageURL, String title, boolean visibility, String trackScore, String timeStamp, String description, Goal goal, boolean flagged, String feeling, List<Object> likers, List<Object> comments) {
+    public MealHelper(String id, String imageURL,String filename, String title, boolean visibility, String trackScore, String timeStamp, String description, Goal goal, boolean flagged, String feeling, List<Object> likers, List<Object> comments) {
         this.id = id;
         this.imageURL = imageURL;
+        this.filename = filename;
         this.title = title;
         this.visibility = visibility;
         this.trackScore = trackScore;
@@ -47,6 +49,10 @@ public class MealHelper implements Serializable {
 
     public String getId() {
         return id;
+    }
+
+    public String getFilename(){
+        return filename;
     }
 
     public String getImageURL() {
