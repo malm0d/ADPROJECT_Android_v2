@@ -264,7 +264,7 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
                         ObjectMapper mapper = new ObjectMapper();
 
-                        final ArrayList<Goal> completedGoal1 = mapper.readValue(dataStr, new TypeReference<ArrayList<Goal> >(){});
+                        final ArrayList<Goal> completedGoal1 = mapper.readValue(dataStr, new TypeReference<ArrayList<Goal>>(){});
 
                         System.out.println("check data ");
 

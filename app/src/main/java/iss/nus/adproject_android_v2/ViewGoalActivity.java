@@ -1,5 +1,6 @@
 package iss.nus.adproject_android_v2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -45,7 +46,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
     private ProgressBar progressBar;
     NavigationBarView bottomNavigation;
     private String shareusername;
-
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +55,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
         shareusername = pref.getString("username", "");
 
-
+        context = this;
         GoDetailsBtn = findViewById(R.id.SeeDetailsBtn);
         GoDetailsBtn.setOnClickListener(this);
         PastGoalBtn =findViewById(R.id.PastGoalBtn);
@@ -173,30 +174,43 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
                 String res = response.body().string();
                 System.out.println("This information return from server side");
                 System.out.println(res);
-                try {
-                    JSONObject jsonObj = new JSONObject(res);
-                    String dataStr = jsonObj.toString();
+                if(!res.isEmpty()) {
 
-                    ObjectMapper mapper = new ObjectMapper();
 
-                     final Goal currentGoal = mapper.readValue(dataStr, new TypeReference<Goal>(){});
+                    try {
+                        JSONObject jsonObj = new JSONObject(res);
+                        String dataStr = jsonObj.toString();
 
-                    System.out.println("check data ");
+                        ObjectMapper mapper = new ObjectMapper();
 
+                        final Goal currentGoal = mapper.readValue(dataStr, new TypeReference<Goal>() {
+                        });
+
+                        System.out.println("check data ");
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                    initView(currentGoal);
+                                    Toast.makeText(ViewGoalActivity.this, "success", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            initView(currentGoal);
-                            Toast.makeText(ViewGoalActivity.this, "success", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent();
+                            intent.setClass(context, SetGoalActivity.class);
+                            startActivity(intent);
                         }
                     });
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-
 
             }
         });
