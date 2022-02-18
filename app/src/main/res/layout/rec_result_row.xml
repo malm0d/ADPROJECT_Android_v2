@@ -27,8 +27,8 @@
 
     <ImageView
         android:id="@+id/recEntryImage"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:scaleType="centerCrop"
@@ -40,7 +40,7 @@
     <TextView
         android:id="@+id/recEntryTitle"
         android:layout_width="wrap_content"
-        android:layout_height="42dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="2dp"
         android:maxWidth="265dp"
@@ -55,7 +55,7 @@
         android:id="@+id/recEntryAuthor"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="2dp"
         android:text="author"
         android:textSize="14sp"
         app:layout_constraintLeft_toLeftOf="@id/recEntryTitle"
@@ -74,9 +74,9 @@
 
     <ImageView
         android:id="@+id/recFeeling"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="2dp"
         android:layout_marginBottom="2dp"
         android:scaleType="centerCrop"
         app:layout_constraintLeft_toLeftOf="@id/recEntryTitle"
@@ -87,7 +87,7 @@
         android:id="@+id/recTrack"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="2dp"
         android:text="on/off track"
         android:layout_marginLeft="20dp"
         app:layout_constraintLeft_toRightOf="@id/recFeeling"
