@@ -36,10 +36,10 @@ public class ResponseActivity extends AppCompatActivity implements View.OnClickL
 
     private String recommend(String responseResult) {
         if (responseResult.equals("true")) {
-            return "On-Track";
+            return "Off-Track";
         }
         else {
-            return "Off-Track";
+            return "On-Track";
         }
     }
 
