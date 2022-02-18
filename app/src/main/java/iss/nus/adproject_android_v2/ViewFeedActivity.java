@@ -58,11 +58,17 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
         activeUserId = intent.getIntExtra("activeUserId", 0);
         activeUsername = intent.getStringExtra("activeUsername");
         pageNo = 0;
-        pageLength = 5;
+        pageLength = 10;
     }
     @Override
     public void onResume() {
+
         super.onResume();
+
+        if( (pageNo + 1) * pageLength == blogEntries.size()) {
+            return;
+        }
+
         getBlogEntriesThread = new Thread(new Runnable() {
             @Override
             public void run() {
