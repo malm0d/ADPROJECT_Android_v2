@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,11 +48,11 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
     Button mSearchBtn;
     TextView mUsersFound;
     ListView mUsersList;
-    ConstraintLayout mAddPopup;
     Button mConfirmAddBtn;
     Button mRevertAddBtn;
     TextView mConfirmAddTxt;
     NavigationBarView bottomNavigation;
+    Dialog dialog;
 
     private String query;
     private String username;
@@ -114,6 +117,8 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
         mUserQuery = findViewById(R.id.userQuery);
 
         mSearchBtn = findViewById(R.id.searchUserBtn);
+
+        dialog = new Dialog(this);
     }
 
     protected void initListView(ArrayList<UserHelper> data) {
@@ -127,30 +132,8 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
 
     @Override
     public void onItemClick(AdapterView<?> av, View v, int pos, long id) {
-        mUsersList.setEnabled(false);
-        mAddPopup = findViewById(R.id.addPopup);
-        mAddPopup.setVisibility(View.VISIBLE);
-        mConfirmAddTxt = findViewById(R.id.confirmAddFriendTxt02);
-        mConfirmAddTxt.setText("To: " + users.get(pos).getName());
-
-
-        mRevertAddBtn = findViewById(R.id.revertAddBtn);
-        mRevertAddBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAddPopup.setVisibility(View.INVISIBLE);
-                mUsersList.setEnabled(true);
-            }
-        });
-
-        mConfirmAddBtn = findViewById(R.id.confirmAddBtn);
-        mConfirmAddBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String url_friendRequest = getResources().getString(R.string.IP) + "/api/friends/add";
-                sendFriendRequest(url_friendRequest, users.get(pos), username);
-            }
-        });
+        UserHelper user = users.get(pos);
+        openDialog(user);
     }
 
     private void getUsersByQuery(String url, String query, String username) {
@@ -246,9 +229,7 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
                             public void run() {
                                 String url_query = getResources().getString(R.string.IP) + "/api/friends/find_users";
                                 getUsersByQuery(url_query, query, username);
-                                mUsersList.setEnabled(true);
                                 Toast.makeText(getApplicationContext(), "Friend Request Sent", Toast.LENGTH_LONG).show();
-                                mAddPopup.setVisibility(View.INVISIBLE);
                             }
                         });
                     }
@@ -264,5 +245,33 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(),0);
         }
+    }
+
+    private void openDialog(UserHelper user) {
+        dialog.setContentView(R.layout.send_friend_req_dialog);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable((Color.TRANSPARENT)));
+
+        mConfirmAddTxt = dialog.findViewById(R.id.confirmAddFriendTxt02);
+        mConfirmAddTxt.setText("To: " + user.getName());
+
+        mRevertAddBtn = dialog.findViewById(R.id.revertAddBtn);
+        mRevertAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        mConfirmAddBtn = dialog.findViewById(R.id.confirmAddBtn);
+        mConfirmAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url_friendRequest = getResources().getString(R.string.IP) + "/api/friends/add";
+                sendFriendRequest(url_friendRequest, user, username);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }
