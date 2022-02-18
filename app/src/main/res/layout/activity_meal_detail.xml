@@ -78,21 +78,21 @@
         app:layout_constraintRight_toRightOf="@id/mealdetailimage"
         app:layout_constraintTop_toBottomOf="@id/detailMealtitle" />
 
-    <ImageButton
-        android:id="@+id/facebookBtn"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintLeft_toLeftOf="@id/mealDetailDes"
-        app:layout_constraintTop_toBottomOf="@id/mealDetailDes" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/facebookBtn"-->
+<!--        android:layout_width="35dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        app:layout_constraintLeft_toLeftOf="@id/mealDetailDes"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/mealDetailDes" />-->
 
-    <ImageButton
-        android:id="@+id/instagramBtn"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginLeft="15dp"
-        app:layout_constraintLeft_toRightOf="@id/facebookBtn"
-        app:layout_constraintTop_toTopOf="@id/facebookBtn" />
+<!--    <ImageButton-->
+<!--        android:id="@+id/instagramBtn"-->
+<!--        android:layout_width="35dp"-->
+<!--        android:layout_height="35dp"-->
+<!--        android:layout_marginLeft="15dp"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/facebookBtn"-->
+<!--        app:layout_constraintTop_toTopOf="@id/facebookBtn" />-->
 
     <Switch
         android:id="@+id/publicStates"

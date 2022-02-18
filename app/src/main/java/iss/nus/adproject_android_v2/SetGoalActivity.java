@@ -2,8 +2,13 @@ package iss.nus.adproject_android_v2;
 
 import android.content.Context;
 import android.content.Intent;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,6 +16,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.IOException;
 
@@ -30,12 +37,19 @@ public class SetGoalActivity extends AppCompatActivity implements View.OnClickLi
 
     private Context context;
 
+    private String shareusername;
+
+    NavigationBarView bottomNavigation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_set_goal);
 
         context = this;
+
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        shareusername = pref.getString("username", "");
 
         ImageView logoImage = findViewById(R.id.logoimageView);
         logoImage.setImageResource(R.drawable.logo);
@@ -55,6 +69,40 @@ public class SetGoalActivity extends AppCompatActivity implements View.OnClickLi
         totalSpinner.setAdapter(adapter);
         targetSpinner.setAdapter(adapter);
 
+
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        //set Setting selected
+        bottomNavigation.setSelectedItemId(R.id.addMenu);
+
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu: break;
+                    case R.id.pathMenu:
+                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        startActivity(pastMeal);
+                        break;
+                    case R.id.addMenu:
+                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
+                        startActivity(add);
+                        break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
+            }
+        });
+
+//        initBoomNacigation();
+
     }
 
     @Override
@@ -63,8 +111,8 @@ public class SetGoalActivity extends AppCompatActivity implements View.OnClickLi
         int id = v.getId();
         if(id == R.id.submitGoal){
 
-            String url = "http://192.168.86.248:8888/api/setGoal";
-            String UserName = "Ken";
+            String url = "http://192.168.86.248:9999/api/setGoal";
+            String UserName = shareusername;
             String goalDescription = userGoal.getText().toString();
             String totalMealCount = totalSpinner.getSelectedItem().toString();
             String targetCount =   targetSpinner.getSelectedItem().toString();
@@ -131,6 +179,39 @@ public class SetGoalActivity extends AppCompatActivity implements View.OnClickLi
         });
 
 
+    }
+
+    private void initBoomNacigation(){
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        //set Setting selected
+        bottomNavigation.setSelectedItemId(R.id.addMenu);
+
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu: break;
+                    case R.id.pathMenu:
+                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        startActivity(pastMeal);
+                        break;
+                    case R.id.addMenu:
+                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
+                        startActivity(add);
+                        break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
 

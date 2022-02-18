@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FriendDetailActivity">
+
+    <TextView
+        android:id="@+id/manageFriendHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage Friend"
+        android:textSize="30dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/friendProfilePic"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <iss.nus.adproject_android_v2.ui.ImageViewPlus
+        android:id="@+id/friendProfilePic"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:scaleType="fitXY"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/manageFriendHeader"
+        app:layout_constraintBottom_toTopOf="@id/manageFriendsLL01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/delConfirmation"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:text="You are no longer friends with abc"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/manageFriendsLL01"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/friendProfilePic" />
+
+    <LinearLayout
+        android:id="@+id/manageFriendsLL01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/friendProfilePic"
+        app:layout_constraintBottom_toTopOf="@id/manageFriendsLL02">
+
+        <TextView
+            android:id="@+id/friendDetailName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/friendDetailUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/manageFriendsLL02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/manageFriendsLL01"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/viewFoodBlogBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="View Food Blog"
+            android:backgroundTint="#0066ff"
+            android:layout_marginVertical="5dp"/>
+
+        <Button
+            android:id="@+id/delFriendBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Delete Friend"
+            android:backgroundTint="#cc1f36"
+            android:layout_marginVertical="5dp"/>
+
+        <Button
+            android:id="@+id/backToMSBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Back"
+            android:backgroundTint="#999999"
+            android:layout_marginVertical="5dp"/>
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/delPopup"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:background="@drawable/popup_background"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/confirmDelTxt01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm delete?"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/confirmDelTxt02"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/confirmDelTxt02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Warning this cannot be undone!"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/confirmDelTxt01"
+            app:layout_constraintBottom_toTopOf="@id/confirmDelBtn"
+            />
+
+        <Button
+            android:id="@+id/confirmDelBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:backgroundTint="#cc1f36"
+            app:layout_constraintTop_toBottomOf="@id/confirmDelTxt02"
+            app:layout_constraintBottom_toTopOf="@id/revertBtn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <Button
+            android:id="@+id/revertBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:backgroundTint="#0066ff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirmDelBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

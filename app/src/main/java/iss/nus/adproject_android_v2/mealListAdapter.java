@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class mealListAdapter extends ArrayAdapter<Object> {
@@ -38,20 +40,37 @@ public class mealListAdapter extends ArrayAdapter<Object> {
 
         MealHelper meals = Meals.get(pos);
 
-        ImageView mealImage = view.findViewById(R.id.mealImage);
-        mealImage.setImageResource(R.drawable.food2);
+        showphoto(view,meals.getImageURL());
 
         TextView titleView = view.findViewById(R.id.mealtitle);
         titleView.setText(meals.getTitle());
 
         TextView timeView = view.findViewById(R.id.mealtime);
-        timeView.setText(meals.getTimeStamp());
+        String timeStr = meals.getTimeStamp();
+        String newStr = timeStr.replaceAll("T"," ");
+        timeView.setText(newStr);
 
         TextView scoreView = view.findViewById(R.id.mealscore);
-        String ScoreStr = "Score: " + meals.getTrackScore();
+        String ScoreStr = "Track Score:  " + meals.getTrackScore();
         scoreView.setText(ScoreStr);
 
         return view;
+    }
+
+    public void showphoto(View view,String imageName){
+
+        ImageView mealImage = view.findViewById(R.id.mealImage);
+//        mealImage.setImageResource(R.drawable.food2);
+        String imageApiUrl = "http://192.168.86.248:9999/api/foodImage/get";
+        String queryString = "?imagePath=";
+        String imageDir = "/static/blog/images/";
+
+
+        Glide.with(context)
+                .load(imageApiUrl + queryString + imageDir + imageName)
+                .placeholder(R.drawable.food1)
+                .into(mealImage);
+
     }
 
 

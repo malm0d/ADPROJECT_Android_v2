@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ManageSocialsActivity">
+
+    <TextView
+        android:id="@+id/manageSocialsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage Socials"
+        android:textSize="30dp"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/manageSocialsBtns"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/manageSocialsBtns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/manageSocialsHeader">
+
+        <Button
+            android:id="@+id/manageFriendsBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Manage Friends"
+            android:backgroundTint="#0066ff"
+            android:layout_marginVertical="20dp"/>
+
+        <Button
+            android:id="@+id/addFriendBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Add Friend"
+            android:backgroundTint="#0066ff"
+            android:layout_marginVertical="20dp"/>
+
+        <Button
+            android:id="@+id/friendRequestsBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Friend Requests"
+            android:backgroundTint="#0066ff"
+            android:layout_marginVertical="20dp"/>
+
+        <Button
+            android:id="@+id/feedBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Feed"
+            android:backgroundTint="#0066ff"
+            android:layout_marginVertical="20dp"/>
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".FriendRequestsActivity">
+
+    <TextView
+        android:id="@+id/friendRequestsHeader"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Friend Requests"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"/>
+
+    <LinearLayout
+        android:id="@+id/friendRequestLL01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/friendRequestsHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/sentRequestsBtn"
+            android:layout_width="170dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="20dp"
+            android:text="Sent Requests"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="#999999"/>
+
+        <Button
+            android:id="@+id/receivedRequestsBtn"
+            android:layout_width="180dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="10dp"
+            android:text="Received Requests"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="#999999"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/friendRequestLL02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/friendRequestLL01"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/friendRequestListHeader"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="  Requests"
+            android:textSize="17dp"
+            android:gravity="center_vertical"
+            android:background="#0066ff"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+    <ListView
+        android:id="@+id/requestsList"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintTop_toBottomOf="@id/friendRequestLL02"
+        android:dividerHeight="1dp"
+        android:divider="#e5e5ff"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/processReqPopup"
+        android:layout_width="250dp"
+        android:layout_height="270dp"
+        android:background="@drawable/popup_background"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/processReqTxt01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accept friend request?"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/processReqTxt01"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/processReqTxt02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/processReqTxt01"
+            app:layout_constraintBottom_toTopOf="@id/acceptReqBtn"
+            />
+
+        <Button
+            android:id="@+id/acceptReqBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:backgroundTint="#71cd48"
+            app:layout_constraintTop_toBottomOf="@id/processReqTxt01"
+            app:layout_constraintBottom_toTopOf="@id/rejectReqBtn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+
+        <Button
+            android:id="@+id/rejectReqBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Reject"
+            android:backgroundTint="#cc1f36"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/acceptReqBtn"
+            app:layout_constraintBottom_toTopOf="@id/cancelReqBtn"/>
+        <Button
+            android:id="@+id/cancelReqBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:backgroundTint="#0066ff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rejectReqBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/delReqPopup"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:background="@drawable/popup_background"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/confirmDelReqTxt01"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirm delete request?"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/confirmDelReqTxt02"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/confirmDelReqTxt02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Warning this cannot be undone!"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textSize="15sp"
+            android:layout_marginBottom="30dp"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/confirmDelReqTxt01"
+            app:layout_constraintBottom_toTopOf="@id/confirmDelReqBtn"
+            />
+
+        <Button
+            android:id="@+id/confirmDelReqBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:backgroundTint="#cc1f36"
+            app:layout_constraintTop_toBottomOf="@id/confirmDelReqTxt02"
+            app:layout_constraintBottom_toTopOf="@id/revertReqBtn"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <Button
+            android:id="@+id/revertReqBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="No"
+            android:backgroundTint="#0066ff"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/confirmDelReqBtn" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

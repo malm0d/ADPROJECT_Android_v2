@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ResetPwdActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="175dp"
+        android:textSize="30dp"/>
+
+    <TextView
+        android:id="@+id/sendEmailOutcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:text="Invalid email"
+        android:visibility="invisible"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="Enter email to receive reset password link:"
+        android:textColor="@color/black"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp" />
+
+    <EditText
+        android:id="@+id/emailLink"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center_horizontal"
+        android:hint="Email"
+        android:ems="10"/>
+
+    <Button
+        android:id="@+id/sendEmailBtn"
+        android:layout_width="520px"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#0066ff"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="Send"/>
+
+    <Button
+        android:id="@+id/backToLoginBtn"
+        android:layout_width="520px"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#999999"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible"
+        android:text="Back to login"/>
+</LinearLayout>

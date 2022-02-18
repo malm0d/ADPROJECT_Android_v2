@@ -39,6 +39,8 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
     private String timeStamp;
     private String userId;
     private int goalId;
+    private boolean flagged = false;
+    private boolean visibility = true;
 
     private boolean selectedTrack = false;
     private int trackClicks = 0;
@@ -276,6 +278,8 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                 .addFormDataPart("timeStamp", timeStamp)
                 .addFormDataPart("userId", userId)
                 //.addFormDataPart("goalId", String.valueOf(goalId))
+                .addFormDataPart("flagged", String.valueOf(flagged))
+                .addFormDataPart("visibility", String.valueOf(visibility))
                 .build();
 
         Request request = new Request.Builder().url(serverUrl).post(requestBody).build();

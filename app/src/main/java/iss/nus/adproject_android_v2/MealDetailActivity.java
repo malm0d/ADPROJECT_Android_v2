@@ -1,9 +1,11 @@
 package iss.nus.adproject_android_v2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,6 +20,8 @@ import android.widget.Toast;
 
 //import com.fasterxml.jackson.core.type.TypeReference;
 //import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,8 +53,8 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
     EditText mealDesc;
 
-    ImageButton facebookBtn;
-    ImageButton instagramBtn;
+//    ImageButton facebookBtn;
+//    ImageButton instagramBtn;
 
     Switch publicSwitch;
 
@@ -60,11 +64,15 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
     private CustomDatePicker mTimerPicker;
 
+    private String shareusername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_detail);
+
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        shareusername = pref.getString("username", "");
 
         Intent intent = getIntent();
         meal = (MealHelper)intent.getSerializableExtra("meal");
@@ -72,6 +80,8 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
         initTheUi();
         showData(meal);
         initTimerPicker();
+
+
     }
 
     public void initTheUi(){
@@ -84,16 +94,16 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
         deleteBtn = findViewById(R.id.deleteMealBtn);
         timeBtn = findViewById(R.id.editTimeBtn);
         editBtn = findViewById(R.id.editNoteBtn);
-        facebookBtn = findViewById(R.id.facebookBtn);
-        instagramBtn = findViewById(R.id.instagramBtn);
+//        facebookBtn = findViewById(R.id.facebookBtn);
+//        instagramBtn = findViewById(R.id.instagramBtn);
 
         publicSwitch = findViewById(R.id.publicStates);
 
         deleteBtn.setOnClickListener(this);
         timeBtn.setOnClickListener(this);
         editBtn.setOnClickListener(this);
-        facebookBtn.setOnClickListener(this);
-        instagramBtn.setOnClickListener(this);
+//        facebookBtn.setOnClickListener(this);
+//        instagramBtn.setOnClickListener(this);
         saveChage.setOnClickListener(this);
 
         publicSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -112,11 +122,17 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
     public void showData(MealHelper meal){
 
-        mealDetailImg.setBackgroundResource(R.drawable.food2);
+
+
+        showphoto(meal.getImageURL());
 
         mealTitle.setText(meal.getTitle());
         mealDesc.setText(meal.getDescription());
         mealtime.setText(meal.getTimeStamp());
+
+        String timeStr = meal.getTimeStamp();
+        String newStr = timeStr.replaceAll("T"," ");
+        mealtime.setText(newStr);
 
 //        mealTitle.setText("chicken");
 //        mealDesc.setText("very nice dinner, health, beauty, wonderful");
@@ -135,8 +151,8 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
         deleteBtn.setBackgroundResource(R.drawable.delete);
         timeBtn.setBackgroundResource(R.drawable.time);
         editBtn.setBackgroundResource(R.drawable.edit);
-        facebookBtn.setBackgroundResource(R.drawable.facebook);
-        instagramBtn.setBackgroundResource(R.drawable.instagram);
+//        facebookBtn.setBackgroundResource(R.drawable.facebook);
+//        instagramBtn.setBackgroundResource(R.drawable.instagram);
 
     }
 
@@ -149,8 +165,8 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
         int id = v.getId();
         if(id == R.id.deleteMealBtn){
             showMessage("delete meal");
-            String url = "http://192.168.86.248:8888/api/deleteMeal";
-            String UserName = "Ken";
+            String url = "http://192.168.86.248:9999/api/deleteMeal";
+            String UserName = shareusername;
             deleteMealRequest(url,UserName,meal.getId());
         }else if (id == R.id.editTimeBtn){
 
@@ -169,21 +185,12 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
             saveChage.setVisibility(View.VISIBLE);
 
-        }else if (id == R.id.facebookBtn){
-
-            showMessage("share to facebook");
-
-
-        }else if (id == R.id.instagramBtn){
-
-            showMessage("share to instagram");
-
         }else if(id == R.id.submitChange){
 
             showMessage("submit changes");
 
-            String url = "http://192.168.86.248:8888/api/modifyMealInfo";
-            String UserName = "Ken";
+            String url = "http://192.168.86.248:9999/api/modifyMealInfo";
+            String UserName = shareusername;
 
             String mealTime = mealtime.getText().toString();
             String mealDes = mealDesc.getText().toString();
@@ -340,6 +347,37 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
             }
         });
+
+    }
+
+
+    public void showphoto(String imageName){
+//        mealImage.setImageResource(R.drawable.food2);
+        String imageApiUrl = "http://192.168.86.248:9999/api/foodImage/get";
+        String queryString = "?imagePath=";
+        String imageDir = "/static/blog/images/";
+
+        Glide.with(this)
+                .load(imageApiUrl + queryString + imageDir + imageName)
+                .placeholder(R.drawable.food1)
+                .into(mealDetailImg);
+
+    }
+
+
+    @Override
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            Intent intent = new Intent();
+
+            setResult(RESULT_OK, intent);
+
+        }
+
+        return super.onKeyDown(keyCode, event);
 
     }
 
