@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/ADPROJECT_Android_v2/app/src/main/res/drawable/thumb1.xml" value="0.125" />
         <entry key="..\:/ADPROJECT_Android_v2/app/src/main/res/drawable/track1.xml" value="0.125" />
         <entry key="..\:/ADPROJECT_Android_v2/app/src/main/res/layout/activity_capture.xml" value="0.176" />
@@ -12,10 +13,40 @@
         <entry key="..\:/ADPROJECT_Android_v2/app/src/main/res/layout/activity_submit.xml" value="0.176" />
         <entry key="..\:/ADPROJECT_Android_v2/app/src/main/res/layout/rec_result_row.xml" value="0.264" />
         <entry key="..\:/ADPROJECT_Android_v2/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.17916666666666667" />
+=======
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_comment_blog_entry.xml" value="0.25" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_flag_blog_entry.xml" value="0.25" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_makeshift_friends_list.xml" value="0.2760416666666667" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_meal_detail.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_past_meals.xml" value="0.17654508611955422" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_set_goal.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_submit.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_test_upload_image.xml" value="0.26927083333333335" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_view_blog.xml" value="0.1" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_view_blog_entry.xml" value="0.375" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/activity_view_feed.xml" value="0.20199275362318841" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/blog_row.xml" value="0.335" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/comment_row.xml" value="0.335" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/fragment_blog_entry_row.xml" value="0.16894630192502533" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/friends_list_row.xml" value="0.17654508611955422" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/mealrow.xml" value="0.36302083333333335" />
+        <entry key="..\:/Users/danie/AndroidStudioProjects/ADPROJECT_Android_v2/app/src/main/res/layout/row.xml" value="0.2760416666666667" />
+>>>>>>> view-blog-daniel
       </map>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
+<<<<<<< HEAD
+=======
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.335" />
+      </ProjectState>
+    </option>
+>>>>>>> view-blog-daniel
   </component>
 </project>

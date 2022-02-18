@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CommentBlogEntryActivity">
+
+    <include
+        layout="@layout/blog_row"
+        android:id="@+id/comment_blog_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:id="@+id/active_username"
+        android:text="username:"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textStyle = "bold"
+        android:gravity="left"
+        app:layout_constraintTop_toBottomOf="@+id/comment_blog_entry"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintWidth_percent="0.2"
+
+        />
+
+    <EditText
+        android:id="@+id/comment_input"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/active_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/active_username"
+        app:layout_constraintTop_toTopOf="@id/active_username"
+        app:layout_constraintWidth_percent="0.5" />
+    <Button
+        android:id="@+id/submit_comment_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/comment_input"
+        app:layout_constraintTop_toTopOf="@id/comment_input"
+        app:layout_constraintStart_toEndOf="@id/comment_input"
+        />
+
+    <ListView
+        android:id="@+id/comment_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@id/comment_input"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
