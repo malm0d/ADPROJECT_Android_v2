@@ -47,8 +47,8 @@ public class mealListAdapter extends ArrayAdapter<Object> {
 
         TextView timeView = view.findViewById(R.id.mealtime);
         String timeStr = meals.getTimeStamp();
-        String newStr = timeStr.replaceAll("T"," ");
-        timeView.setText(newStr);
+//        String newStr = timeStr.replaceAll("T"," ");
+        timeView.setText(timeStr);
 
         TextView scoreView = view.findViewById(R.id.mealscore);
         String ScoreStr = "Track Score:  " + meals.getTrackScore();

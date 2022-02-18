@@ -131,8 +131,8 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
         mealtime.setText(meal.getTimeStamp());
 
         String timeStr = meal.getTimeStamp();
-        String newStr = timeStr.replaceAll("T"," ");
-        mealtime.setText(newStr);
+//        String newStr = timeStr.replaceAll("T"," ");
+        mealtime.setText(timeStr);
 
 //        mealTitle.setText("chicken");
 //        mealDesc.setText("very nice dinner, health, beauty, wonderful");
