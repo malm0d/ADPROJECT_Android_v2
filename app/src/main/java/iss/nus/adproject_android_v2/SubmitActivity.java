@@ -300,12 +300,19 @@ public class SubmitActivity extends AppCompatActivity implements View.OnClickLis
                 final String res = response.body().string();
                 System.out.println(res);
                 if (res == null) {
-                    Toast.makeText(SubmitActivity.this, "An error occurred getting a proper response from the recommender", Toast.LENGTH_LONG).show();
+                    Toast.makeText(SubmitActivity.this, "An error occurred getting a proper response from the recommender. Please wait and try again.", Toast.LENGTH_LONG).show();
                 }
-                if (res.equals("IOException") || res.equals("MultipartFileFailure")) {
-                    Toast.makeText(SubmitActivity.this, "An error occurred on the server", Toast.LENGTH_LONG).show();
+                else if (res.equals("IOException") || res.equals("MultipartFileFailure")) {
+                    Toast.makeText(SubmitActivity.this, "An error occurred on the server. Please wait and try again.", Toast.LENGTH_LONG).show();
                 }
-                startResponseActivity(res);
+                else if (res.equals("nocurrentgoalset")) {
+                    Toast.makeText(SubmitActivity.this, "No current goal set. Please set a goal.", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(SubmitActivity.this, SetGoalActivity.class);
+                    startActivity(intent);
+                }
+                else {
+                    startResponseActivity(res);
+                }
             }
         });
     }
