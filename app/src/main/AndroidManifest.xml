@@ -21,6 +21,12 @@
         android:theme="@style/Theme.ADPROJECT_Android_v2"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".RecSearchResultActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecommendActivity"
+            android:exported="false" />
+        <activity    
             android:name=".FriendRequestsActivity"
             android:exported="false" />
         <activity

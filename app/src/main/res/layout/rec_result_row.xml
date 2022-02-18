@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp"
+    android:orientation="horizontal"
+    android:layout_gravity="center">
+
+    <!--<ImageView
+        android:id="@+id/foodImage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>-->
+
+    <!--<TextView
+        android:id="@+id/foodTitle"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:background="@color/white"/>-->
+    <!--        android:layout_weight="2"
+            />-->
+
+    <ImageView
+        android:id="@+id/recEntryImage"
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/recEntryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="42dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp"
+        android:maxWidth="265dp"
+        android:text="Fried Chicken"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@id/recEntryImage"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/recEntryAuthor"/>
+
+    <TextView
+        android:id="@+id/recEntryAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        android:text="author"
+        app:layout_constraintLeft_toLeftOf="@id/recEntryTitle"
+        app:layout_constraintTop_toBottomOf="@id/recEntryTitle"
+        app:layout_constraintBottom_toTopOf="@id/recFeeling"
+        />
+
+    <!--<TextView
+        android:id="@+id/recFeeling"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:text="feeling"
+        app:layout_constraintLeft_toLeftOf="@id/recEntryTitle"
+        app:layout_constraintTop_toBottomOf="@id/recEntryAuthor" />-->
+
+    <ImageView
+        android:id="@+id/recFeeling"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="2dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="@id/recEntryTitle"
+        app:layout_constraintTop_toBottomOf="@id/recEntryAuthor"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/recTrack"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:text="on/off track"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintLeft_toRightOf="@id/recFeeling"
+        app:layout_constraintTop_toBottomOf="@id/recEntryAuthor"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
