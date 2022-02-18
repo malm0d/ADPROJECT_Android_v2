@@ -4,6 +4,8 @@
     <string name="totalMealCount">totalMealCount: </string>
     <string name="targetCount">targetCount: </string>
 
+    <string name="endGoal">End this goal</string>
+    <string name="confirm_endGoal">Do you wish to end this goal?</string>
     <string name="cancel">Cancel</string>
     <string name="title">Choose Date</string>
     <string name="confirm">Sure</string>

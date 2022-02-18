@@ -61,6 +61,21 @@
         </activity>
 
         <activity
+            android:name=".PastGoalsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GoalDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ViewGoalActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UserProfile"
+            android:exported="false" />
+        <activity
             android:name=".SettingPage"
             android:exported="false" />
         <activity

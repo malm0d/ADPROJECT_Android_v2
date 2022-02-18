@@ -26,7 +26,7 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
         setContentView(R.layout.activity_setting_page);
 
         profileBtn = findViewById(R.id.editProfile);
-       // profileBtn.setOnClickListener(this);
+        profileBtn.setOnClickListener(this);
 
         notificationBtn = findViewById(R.id.notificationPage);
         notificationBtn.setOnClickListener(this);
@@ -86,6 +86,10 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
 
         if (v == notificationBtn) {
             Intent intent = new Intent(this, Notification.class);
+            startActivity(intent);
+        }
+        if(v ==profileBtn){
+            Intent intent = new Intent(this, UserProfile.class);
             startActivity(intent);
         }
     }
