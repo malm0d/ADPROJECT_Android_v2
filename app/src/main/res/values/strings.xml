@@ -49,4 +49,7 @@
     <string name="settings">Settings</string>
     <string name="setTime">Set Time</string>
     <string name="send_reminder">Send reminder</string>
+
+    <!-- IP Address -->
+    <string name="IP">http://192.168.1.8:8080</string>
 </resources>

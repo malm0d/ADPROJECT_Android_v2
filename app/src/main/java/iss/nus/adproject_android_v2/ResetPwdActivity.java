@@ -59,7 +59,7 @@ public class ResetPwdActivity extends AppCompatActivity {
     }
 
     private void sendEmail(String email) {
-        String url = "http://192.168.1.8:8080/api/login/reset_email";
+        String url = getResources().getString(R.string.IP) + "/api/login/reset_email";
         RequestPost(url, email);
     }
 

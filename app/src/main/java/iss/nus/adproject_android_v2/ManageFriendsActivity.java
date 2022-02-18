@@ -135,12 +135,12 @@ public class ManageFriendsActivity extends AppCompatActivity implements AdapterV
     }
 
     private void getFriends() {
-        String url = "http://192.168.1.8:8080/api/friends/all";
+        String url = getResources().getString(R.string.IP) + "/api/friends/all";
         requestPost(url, username);
     }
 
     private void getQueryResult() {
-        String url = "http://192.168.1.8:8080/api/friends/find";
+        String url = getResources().getString(R.string.IP) + "/api/friends/find";
         queryRequest(url, username);
     }
 
