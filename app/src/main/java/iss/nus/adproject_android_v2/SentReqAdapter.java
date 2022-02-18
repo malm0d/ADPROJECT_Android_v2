@@ -45,7 +45,7 @@ public class SentReqAdapter extends ArrayAdapter<Object> {
         reqActionBtn.setBackgroundResource(R.drawable.delete);
 
         ImageViewPlus userImage = view.findViewById(R.id.userImage);
-        String url = "http://192.168.1.8:8080/api/friends/profilePic";
+        String url = context.getResources().getString(R.string.IP) + "/api/friends/profilePic";
         String queryString = "?fileName=";
         String fileName = requests.get(pos).getProfilePic();
         String userId = requests.get(pos).getUserId();

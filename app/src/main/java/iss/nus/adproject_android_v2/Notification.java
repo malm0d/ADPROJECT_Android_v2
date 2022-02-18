@@ -64,10 +64,12 @@ public class Notification extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
-                    case R.id.mealMenu: break;
-                    case R.id.pathMenu:
+                    case R.id.mealMenu:
                         Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
                         startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);

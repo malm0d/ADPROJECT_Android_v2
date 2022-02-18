@@ -87,11 +87,11 @@ public class ManageFriendsActivity extends AppCompatActivity implements AdapterV
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.mealMenu:
-                        //link to meal page
-                        break;
-                    case R.id.pathMenu:
                         Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
                         startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
@@ -135,12 +135,12 @@ public class ManageFriendsActivity extends AppCompatActivity implements AdapterV
     }
 
     private void getFriends() {
-        String url = "http://192.168.1.8:8080/api/friends/all";
+        String url = getResources().getString(R.string.IP) + "/api/friends/all";
         requestPost(url, username);
     }
 
     private void getQueryResult() {
-        String url = "http://192.168.1.8:8080/api/friends/find";
+        String url = getResources().getString(R.string.IP) + "/api/friends/find";
         queryRequest(url, username);
     }
 

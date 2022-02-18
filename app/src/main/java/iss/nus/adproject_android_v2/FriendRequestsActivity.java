@@ -49,8 +49,6 @@ public class FriendRequestsActivity extends AppCompatActivity {
     private String username;
     private String friend_username;
     private ArrayList<UserHelper> requests;
-    private String url_getReq = "http://192.168.1.8:8080/api/friends/requests";
-    private String url_processReq = "http://192.168.1.8:8080/api/friends/request/process";
     private String sent;
     private String action;
 
@@ -63,6 +61,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
         username = pref.getString("username", "");
 
         initUI();
+
+        String url_getReq = getResources().getString(R.string.IP) + "/api/friends/requests";
 
         mSentReqBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,11 +92,11 @@ public class FriendRequestsActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.mealMenu:
-                        //link to meal page
-                        break;
-                    case R.id.pathMenu:
                         Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
                         startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
@@ -268,6 +268,8 @@ public class FriendRequestsActivity extends AppCompatActivity {
     public void processFriendRequest(String friend_username) {
         OkHttpClient client = new OkHttpClient();
         FormBody.Builder formBuilder = new FormBody.Builder();
+
+        String url_processReq = getResources().getString(R.string.IP) + "/api/friends/request/process";
 
         formBuilder.add("username", username);
         formBuilder.add("sender", friend_username);

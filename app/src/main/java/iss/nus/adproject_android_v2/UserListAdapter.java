@@ -41,7 +41,7 @@ public class UserListAdapter extends ArrayAdapter<Object> {
         addUserBtn.setBackgroundResource(R.drawable.add_user);
 
         ImageView userImage = view.findViewById(R.id.userImage);
-        String url = "http://192.168.1.8:8080/api/friends/profilePic";
+        String url = getContext().getResources().getString(R.string.IP) + "/api/friends/profilePic";
         String queryString = "?fileName=";
         String fileName = users.get(pos).getProfilePic();
         String userId = users.get(pos).getUserId();

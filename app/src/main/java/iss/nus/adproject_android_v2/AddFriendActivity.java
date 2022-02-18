@@ -55,9 +55,6 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
     private String username;
     private ArrayList<UserHelper> users;
 
-    private String url_query = "http://192.168.1.8:8080/api/friends/find_users";
-    private String url_friendRequest = "http://192.168.1.8:8080/api/friends/add";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +70,7 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
             public void onClick(View view) {
                 hideKeyboard();
                 query = mUserQuery.getText().toString();
+                String url_query = getResources().getString(R.string.IP) + "/api/friends/find_users";
                 getUsersByQuery(url_query, query, username);
             }
         });
@@ -85,11 +83,11 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.mealMenu:
-                        //link to meal page
-                        break;
-                    case R.id.pathMenu:
                         Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
                         startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
@@ -149,6 +147,7 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
         mConfirmAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                String url_friendRequest = getResources().getString(R.string.IP) + "/api/friends/add";
                 sendFriendRequest(url_friendRequest, users.get(pos), username);
             }
         });
@@ -156,6 +155,8 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
 
     private void getUsersByQuery(String url, String query, String username) {
         OkHttpClient client = new OkHttpClient();
+
+        String url_query = getResources().getString(R.string.IP) + "/api/friends/find_users";
 
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url_query).newBuilder();
         httpBuilder.addQueryParameter("query", query);
@@ -243,6 +244,7 @@ public class AddFriendActivity extends AppCompatActivity implements AdapterView.
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                String url_query = getResources().getString(R.string.IP) + "/api/friends/find_users";
                                 getUsersByQuery(url_query, query, username);
                                 mUsersList.setEnabled(true);
                                 Toast.makeText(getApplicationContext(), "Friend Request Sent", Toast.LENGTH_LONG).show();

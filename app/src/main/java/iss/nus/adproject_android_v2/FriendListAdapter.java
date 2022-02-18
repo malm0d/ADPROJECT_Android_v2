@@ -44,7 +44,7 @@ public class FriendListAdapter extends ArrayAdapter<Object> {
         friendDetailBtn.setBackgroundResource(R.drawable.view_detail);
 
         ImageViewPlus friendImage = view.findViewById(R.id.friendImage);
-        String url = "http://192.168.1.8:8080/api/friends/profilePic";
+        String url = getContext().getResources().getString(R.string.IP) + "/api/friends/profilePic";
         String queryString = "?fileName=";
         String fileName = friends.get(pos).getProfilePic();
         String userId = friends.get(pos).getUserId();

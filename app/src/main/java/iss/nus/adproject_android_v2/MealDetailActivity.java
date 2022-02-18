@@ -131,8 +131,8 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
         mealtime.setText(meal.getTimeStamp());
 
         String timeStr = meal.getTimeStamp();
-        String newStr = timeStr.replaceAll("T"," ");
-        mealtime.setText(newStr);
+//        String newStr = timeStr.replaceAll("T"," ");
+        mealtime.setText(timeStr);
 
 //        mealTitle.setText("chicken");
 //        mealDesc.setText("very nice dinner, health, beauty, wonderful");
@@ -165,7 +165,7 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
         int id = v.getId();
         if(id == R.id.deleteMealBtn){
             showMessage("delete meal");
-            String url = "http://192.168.86.248:9999/api/deleteMeal";
+            String url = getResources().getString(R.string.IP) + "/api/deleteMeal";
             String UserName = shareusername;
             deleteMealRequest(url,UserName,meal.getId());
         }else if (id == R.id.editTimeBtn){
@@ -189,7 +189,7 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
             showMessage("submit changes");
 
-            String url = "http://192.168.86.248:9999/api/modifyMealInfo";
+            String url = getResources().getString(R.string.IP) + "/api/modifyMealInfo";
             String UserName = shareusername;
 
             String mealTime = mealtime.getText().toString();
@@ -353,7 +353,8 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
     public void showphoto(String imageName){
 //        mealImage.setImageResource(R.drawable.food2);
-        String imageApiUrl = "http://192.168.86.248:9999/api/foodImage/get";
+//        String imageApiUrl = "http://192.168.86.248:9999/api/foodImage/get";
+        String imageApiUrl = getResources().getString(R.string.IP) + "/api/foodImage/get";
         String queryString = "?imagePath=";
         String imageDir = "/static/blog/images/";
 
