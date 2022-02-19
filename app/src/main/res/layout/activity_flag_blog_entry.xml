@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FlagBlogEntryActivity">
+
+    <include
+        layout="@layout/blog_row"
+        android:id="@+id/report_blog_row"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        />
+
+"/>
+
+    <TextView
+        android:id="@+id/flagEntryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Flag entry as inappropriate"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/report_blog_row"
+
+
+       />
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/flagEntryTitle">
+        <RadioButton android:id="@+id/radio_offensive_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offensive Language"
+            
+            />
+        <RadioButton android:id="@+id/radio_offensive_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offensive Image"
+            
+            />
+        <RadioButton android:id="@+id/radio_irrelevant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Irrelevant"
+            
+            />
+        <RadioButton android:id="@+id/radio_advertisement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Advertisement"
+            
+            />
+        <RadioButton android:id="@+id/radio_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Other: "
+            
+            />
+    </RadioGroup>
+    <EditText
+        android:id="@+id/other_reason_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/radio_group"
+
+        />
+    <Button
+        android:id = "@+id/submit_report_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/other_reason_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="Submit"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
