@@ -40,15 +40,15 @@ public class mealListAdapter extends ArrayAdapter<Object> {
 
         MealHelper meals = Meals.get(pos);
 
-        showphoto(view,meals.getImageURL());
+        showphoto(view,meals.getFilename());
 
         TextView titleView = view.findViewById(R.id.mealtitle);
         titleView.setText(meals.getTitle());
 
         TextView timeView = view.findViewById(R.id.mealtime);
         String timeStr = meals.getTimeStamp();
-//        String newStr = timeStr.replaceAll("T"," ");
-        timeView.setText(timeStr);
+        String newStr = timeStr.substring(0,16).replaceAll("T"," ");
+        timeView.setText(newStr);
 
         TextView scoreView = view.findViewById(R.id.mealscore);
         String ScoreStr = "Track Score:  " + meals.getTrackScore();
@@ -58,22 +58,16 @@ public class mealListAdapter extends ArrayAdapter<Object> {
     }
 
     public void showphoto(View view,String imageName){
-
         ImageView mealImage = view.findViewById(R.id.mealImage);
-//        mealImage.setImageResource(R.drawable.food2);
-//        String imageApiUrl = "http://192.168.86.248:9999/api/foodImage/get";
+        //String imageApiUrl = "http://192.168.86.248:9999/api/foodImage/get";
         String imageApiUrl = context.getResources().getString(R.string.IP) + "/api/foodImage/get";
         String queryString = "?imagePath=";
-        String imageDir = "/static/blog/images/";
-
-
+        String imageDir = "./upload/";
         Glide.with(context)
                 .load(imageApiUrl + queryString + imageDir + imageName)
-                .placeholder(R.drawable.food1)
+                .placeholder(R.drawable.meal)
                 .into(mealImage);
-
     }
-
 
 
 }

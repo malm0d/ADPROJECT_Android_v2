@@ -124,15 +124,15 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
 
 
-        showphoto(meal.getImageURL());
+        showphoto(meal.getFilename());
 
         mealTitle.setText(meal.getTitle());
         mealDesc.setText(meal.getDescription());
         mealtime.setText(meal.getTimeStamp());
 
         String timeStr = meal.getTimeStamp();
-//        String newStr = timeStr.replaceAll("T"," ");
-        mealtime.setText(timeStr);
+        String newStr = timeStr.substring(0,16).replaceAll("T"," ");
+        mealtime.setText(newStr);
 
 //        mealTitle.setText("chicken");
 //        mealDesc.setText("very nice dinner, health, beauty, wonderful");
@@ -356,7 +356,7 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 //        String imageApiUrl = "http://192.168.86.248:9999/api/foodImage/get";
         String imageApiUrl = getResources().getString(R.string.IP) + "/api/foodImage/get";
         String queryString = "?imagePath=";
-        String imageDir = "/static/blog/images/";
+        String imageDir = "./upload/";
 
         Glide.with(this)
                 .load(imageApiUrl + queryString + imageDir + imageName)
