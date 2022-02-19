@@ -1,5 +1,6 @@
 package iss.nus.adproject_android_v2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +51,8 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
     private Button viewMoreBtn;
     private ListView listView;
     private ViewBlogAdapter adapter;
+
+    NavigationBarView bottomNavigation;
     Parcelable state;
 
 
@@ -64,6 +69,36 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
 
         pageNo = 0;
         pageLength = 10;
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.friendsMenu);
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu:
+                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
+                        break;
+                    case R.id.addMenu:
+                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
+                        startActivity(add);
+                        break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
+            }
+        });
 
     }
     @Override
