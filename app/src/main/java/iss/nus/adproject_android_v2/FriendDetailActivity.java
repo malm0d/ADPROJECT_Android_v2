@@ -86,12 +86,16 @@ public class FriendDetailActivity extends AppCompatActivity {
 
         mViewFoodBlogBtn = findViewById(R.id.viewFoodBlogBtn);
         // To link with view food blog
-//        mViewFoodBlogBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent();
-//            }
-//        });
+        mViewFoodBlogBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(FriendDetailActivity.this,ViewBlogActivity.class);
+                intent.putExtra("friendUserId",userId);
+                String friendUsername = friend.getUsername();
+                intent.putExtra("friendUsername",friendUsername);
+                startActivity(intent);
+            }
+        });
 
         mBackToMSBtn = findViewById(R.id.backToMSBtn);
         mBackToMSBtn.setOnClickListener(new View.OnClickListener() {

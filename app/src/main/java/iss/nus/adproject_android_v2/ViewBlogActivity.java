@@ -3,6 +3,7 @@ package iss.nus.adproject_android_v2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -55,10 +56,18 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_blog);
         Intent intent = getIntent();
-        activeUserId = intent.getIntExtra("activeUserId", 0);
-        friendUserId = intent.getIntExtra("friendUserId",0);
-        friendUsername = intent.getStringExtra("friendUsername");
-        activeUsername = intent.getStringExtra("activeUsername");
+        Bundle extras = intent.getExtras();
+        if(extras != null) {
+            friendUserId = Integer.valueOf( intent.getStringExtra("friendUserId"));
+            friendUsername = intent.getStringExtra("friendUsername");
+        }
+//        activeUserId = intent.getIntExtra("activeUserId", 0);
+//        activeUsername = intent.getStringExtra("activeUsername");
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        activeUsername = pref.getString("username", "");
+        activeUserId = Integer.valueOf( pref.getString("userId",""));
+
+
 
 
 
