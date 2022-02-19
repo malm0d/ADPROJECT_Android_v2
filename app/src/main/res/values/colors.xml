@@ -27,4 +27,9 @@
 
     <color name="blueOnT">#7CB5EC</color>
     <color name="greyOffT">#444348</color>
+    <color name="joy">#fd7f6f</color>
+    <color name="happy">#ffee65</color>
+    <color name="pensive">#b2e061</color>
+    <color name="cry">#bd7ebe</color>
+
 </resources>
