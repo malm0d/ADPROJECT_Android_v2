@@ -145,7 +145,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         profilePhoto = findViewById(R.id.profilePhoto);
         String queryString = "?imagePath=";
-        String imageDir = "/static/blog/images/";
+        String imageDir = "./images/" + user.getid() + "/";
         String profilePic = user.getProfilePic();
         Glide.with(this)
                 .load(imageApiUrl + queryString + imageDir + profilePic)

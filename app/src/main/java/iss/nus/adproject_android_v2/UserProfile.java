@@ -148,8 +148,23 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
         achievement1 = findViewById(R.id.achievement1);
         achievement2 = findViewById(R.id.achievement2);
 
-        achievement1.setText(completedGoal.get(completedGoal.size() - 1).getGoalDescription());
-        achievement2.setText(completedGoal.get(completedGoal.size() - 2).getGoalDescription());
+        if(completedGoal.size() >1){
+            achievement1.setVisibility(View.VISIBLE);
+            achievement2.setVisibility(View.VISIBLE);
+            achievement1.setText(completedGoal.get(completedGoal.size() - 1).getGoalDescription());
+            achievement2.setText(completedGoal.get(completedGoal.size() - 2).getGoalDescription());
+        }
+        else if(completedGoal.size() ==1){
+            achievement1.setVisibility(View.VISIBLE);
+            achievement1.setText(completedGoal.get(completedGoal.size() - 1).getGoalDescription());
+            achievement2.setVisibility(View.INVISIBLE);
+        }
+        else{
+            achievement1.setVisibility(View.INVISIBLE);
+            achievement2.setVisibility(View.INVISIBLE);
+        }
+
+
     }
 
     private void getDataFromServer(){
@@ -329,11 +344,11 @@ public class UserProfile extends AppCompatActivity implements View.OnClickListen
 
 
     public void showphoto(){
-        String imageApiUrl = "http://192.168.31.50:8888/api/image/get";
+        String imageApiUrl = getResources().getString(R.string.IP) + "/api/image/get";
 
         profilephoto = findViewById(R.id.mine_iv_headportrait);
         String queryString = "?imagePath=";
-        String imageDir = "/static/blog/images/";
+        String imageDir = "./images/" + currentUser.getid() + "/";
         Glide.with(this)
                 .load(imageApiUrl + queryString + imageDir + currentUser.getProfilePic())
                 .placeholder(R.drawable.no_img)
