@@ -3,6 +3,7 @@ package iss.nus.adproject_android_v2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -54,11 +55,16 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_feed);
-        Intent intent = getIntent();
-        activeUserId = intent.getIntExtra("activeUserId", 0);
-        activeUsername = intent.getStringExtra("activeUsername");
+        //Intent intent = getIntent();
+        //activeUserId = intent.getIntExtra("activeUserId", 0);
+        //activeUsername = intent.getStringExtra("activeUsername");
+        SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
+        activeUsername = pref.getString("username", "");
+        activeUserId = Integer.valueOf( pref.getString("userId",""));
+
         pageNo = 0;
         pageLength = 10;
+
     }
     @Override
     public void onResume() {

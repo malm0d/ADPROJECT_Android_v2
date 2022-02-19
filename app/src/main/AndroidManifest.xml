@@ -21,7 +21,7 @@
         android:theme="@style/Theme.ADPROJECT_Android_v2"
         android:usesCleartextTraffic="true">
         <activity
-<<<<<<< HEAD
+
             android:name=".RecSearchResultActivity"
             android:exported="false" />
         <activity
@@ -90,7 +90,9 @@
             android:exported="false" />
         <activity
             android:name=".Notification"
-=======
+            android:exported="false"
+            />
+        <activity
             android:name=".ViewFeedActivity"
             android:exported="false" />
         <activity
@@ -107,7 +109,7 @@
             android:exported="false" />
         <activity
             android:name=".ViewBlogActivity"
->>>>>>> view-blog-daniel
+
             android:exported="false" />
         <activity
             android:name=".ResponseActivity"
