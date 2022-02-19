@@ -51,14 +51,16 @@ public class ManageSocialsActivity extends AppCompatActivity {
             }
         });
 
-        // To link up with FeedActivity
-//        mFeedBtn = findViewById(R.id.feedBtn);
-//        mFeedBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+  //       To link up with FeedActivity
+        mFeedBtn = findViewById(R.id.feedBtn);
+        mFeedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent4 = new Intent(ManageSocialsActivity.this,ViewFeedActivity.class);
+                startActivity(intent4);
+
+            }
+        });
 
         //bottom navigation bar
         bottomNavigation = findViewById(R.id.bottom_navigation);
