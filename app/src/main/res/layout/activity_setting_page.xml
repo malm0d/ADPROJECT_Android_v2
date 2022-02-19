@@ -8,34 +8,30 @@
 
     <Button
         android:id="@+id/editProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:backgroundTint="#2196F3"
-        android:text="@string/editProfile"
-        android:textColor="#FFFFFF"
-        tools:layout_marginTop="100dp" />
+        android:layout_marginTop="140dp"
+        android:textSize="18sp"
+        android:text="@string/editProfile" />
 
     <Button
         android:id="@+id/notificationPage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="#2196F3"
         android:text="@string/notification"
-        android:textColor="#FFFFFF"
-        tools:layout_marginTop="10dp" />
+        android:textSize="18sp"
+        android:layout_marginTop="60dp" />
 
     <Button
         android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="#2196F3"
+        android:textSize="18sp"
         android:text="@string/logout"
-        android:textColor="#FFFFFF"
-        tools:layout_marginTop="10dp" />
+        android:layout_marginTop="60dp" />
 
     <!--view needed to ensure navigation bar stays at bottom for linear layout-->
     <View

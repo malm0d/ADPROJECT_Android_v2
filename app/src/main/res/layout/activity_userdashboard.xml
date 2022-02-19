@@ -10,7 +10,7 @@
         android:id="@+id/textViews"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:orientation="horizontal">
 
@@ -53,8 +53,24 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pieChart"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="200dp"
             android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/myFeeling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/my_feeling"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:padding="5dp"/>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/pieChart2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"/>
 
 
         <!--view needed to ensure navigation bar stays at bottom for linear layout-->
