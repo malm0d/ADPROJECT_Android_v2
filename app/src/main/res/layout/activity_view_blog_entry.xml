@@ -46,7 +46,7 @@
     <TextView
         android:id="@+id/detailMealtitle"
         android:layout_width="0dp"
-        android:layout_height="32dp"
+        android:layout_height="wrap_content"
         android:layout_marginRight="15dp"
 
         android:textSize="18dp"
