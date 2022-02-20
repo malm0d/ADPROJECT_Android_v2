@@ -222,8 +222,9 @@ public class Userdashboard extends AppCompatActivity {
                         Toast.makeText(Userdashboard.this, "success", Toast.LENGTH_SHORT).show();
 
                         int onTrackPercent = (int) (mealTrack[0]/ (mealTrack[0]+mealTrack[1])*100);
+                        int totalMeal= (int) (mealTrack[0]+mealTrack[1]);
 
-                        if(onTrackPercent==0){
+                        if(totalMeal==0){
                             myProgress.setText("No meals recorded yet");
                             myProgress.setTypeface(null, Typeface.ITALIC);
 
@@ -354,17 +355,22 @@ public class Userdashboard extends AppCompatActivity {
 
                         //set centre text
                         int joyPercent = (int) (feeling[0]/(feeling[0]+feeling[1]+feeling[2]+feeling[3]) *100);
-                        if (joyPercent>0){
+                        int totalMeal= (int) (feeling[0]+feeling[1]+feeling[2]+feeling[3]);
+
+                        /*if (totalMeal>0){
                             pieChart2.setCenterText(joyPercent+"% "+ getResources().getString(R.string.joy));
                             pieChart2.setCenterTextSize(15f);
-                        }
+                        }*/
 
                         //make title disappear if no meal entries recorded
-                        if(joyPercent==0){
+                        if(totalMeal==0){
                             myFeeling.setVisibility(View.INVISIBLE);
                             pieChart2.getLegend().setEnabled(false);
                         }
                         else{
+                            pieChart2.setCenterText(joyPercent+"% "+ getResources().getString(R.string.joy));
+                            pieChart2.setCenterTextSize(15f);
+
                             //format legend
                             pieChart2.getLegend().setEnabled(true);
                             Legend legend2 = pieChart2.getLegend();
