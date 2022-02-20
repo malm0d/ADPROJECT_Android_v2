@@ -214,13 +214,7 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onClick(View view) {
-        if(view == likeBtn) {
-            System.out.println("Me likey");
-        }
-        else if(view == flagBtn) {
-            System.out.println("Me flaggy");
-        }
-        else if(view == viewMoreBtn){
+       if(view == viewMoreBtn){
             pageNo++;
             int currentPosition = listView.getFirstVisiblePosition();
             onResume();

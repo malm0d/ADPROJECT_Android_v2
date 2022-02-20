@@ -148,10 +148,10 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
     }
     public void showData(){
         String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
-
+        String imageDir = "upload/";
         String queryString = "?imagePath=";
         Glide   .with(this)
-                .load(imageApiUrl + queryString + blogEntry.getImageURL())
+                .load(imageApiUrl + queryString + imageDir + blogEntry.getImageURL())
                 .placeholder(R.drawable.no_img)
                 .into(mealDetailImg);
 
@@ -273,6 +273,13 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
                     @Override
                     public void run() {
                         blogEntry.setLikedByActiveUser(finalLikeEndState);
+                        if(finalLikeEndState) {
+                            blogEntry.setNumberOfLikes(blogEntry.getNumberOfLikes() + 1);
+                        }
+                        else {
+                            blogEntry.setNumberOfLikes(blogEntry.getNumberOfLikes() - 1);
+                        }
+                        likesText.setText("Liked by " + blogEntry.getNumberOfLikes() + " users");
                         likeBtn.setBackgroundResource(finalDrawableId);
 
                     }
