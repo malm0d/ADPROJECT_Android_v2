@@ -32,7 +32,12 @@
     <!--User Dashboard-->
     <string name="current_goal">Current Goal:   </string>
     <string name="my_progress">How did I progress? </string>
+    <string name="my_feeling">How did I feel? </string>
     <string name="intro_to_app">Select "'"add"'" at navigation bar to start logging a meal entry</string>
+    <string name="joy"> &#128513; </string>
+    <string name="happy">&#128522; </string>
+    <string name="pensive">&#128542; </string>
+    <string name="cry">&#128557; </string>
 
     <!-- Navigation Bar -->
     <string name="text_label_1">Meals</string>

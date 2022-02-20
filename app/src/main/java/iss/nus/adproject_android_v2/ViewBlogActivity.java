@@ -1,5 +1,6 @@
 package iss.nus.adproject_android_v2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.datatype.jsr310.deser.JSR310DateTimeDeserializerBase;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,6 +50,7 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
     private String activeUsername;
     private ImageView likeBtn;
     private ImageView flagBtn;
+    NavigationBarView bottomNavigation;
 
 
 
@@ -61,11 +65,41 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
             friendUserId = Integer.valueOf( intent.getStringExtra("friendUserId"));
             friendUsername = intent.getStringExtra("friendUsername");
         }
-//        activeUserId = intent.getIntExtra("activeUserId", 0);
-//        activeUsername = intent.getStringExtra("activeUsername");
+
         SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
         activeUsername = pref.getString("username", "");
         activeUserId = Integer.valueOf( pref.getString("userId",""));
+
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.friendsMenu);
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu:
+                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
+                        break;
+                    case R.id.addMenu:
+                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
+                        startActivity(add);
+                        break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
+            }
+        });
 
 
 

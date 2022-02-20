@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -47,6 +49,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
 
     EditText mealDesc;
     TextView entryAuthor;
+    TextView likesText;
 
     Button saveChage;
     String activeUsername;
@@ -54,6 +57,8 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
     private BlogEntry blogEntry;
     private Integer activeUserId;
     private ActivityResultLauncher<Intent> rlFlagBlogEntryActivity;
+
+    NavigationBarView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +71,37 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         activeUserId = intent.getIntExtra("activeUserId",0);
         activeUsername = intent.getStringExtra("activeUsername");
 
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.friendsMenu);
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu:
+                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        Intent currentPath = new Intent(getApplicationContext(), ViewGoalActivity.class);
+                        startActivity(currentPath);
+                        break;
+                    case R.id.addMenu:
+                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
+                        startActivity(add);
+                        break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
+            }
+        });
 
 
         rlFlagBlogEntryActivity = registerForActivityResult(
@@ -77,6 +113,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
                     }
                 }
         );
+
     }
     @Override
     protected void onResume() {
@@ -96,6 +133,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         commentBtn = findViewById(R.id.commentBtn);
         flagBtn = findViewById(R.id.flagBtn);
         entryAuthor = findViewById(R.id.entryAuthor);
+        likesText = findViewById(R.id.likesText);
 
         likeBtn.setOnClickListener(this);
         if(blogEntry.isFlaggedByActiveUser()) {
@@ -112,9 +150,8 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
 
         String queryString = "?imagePath=";
-        String imageDir = "/static";
         Glide   .with(this)
-                .load(imageApiUrl + queryString + imageDir + blogEntry.getImageURL())
+                .load(imageApiUrl + queryString + blogEntry.getImageURL())
                 .placeholder(R.drawable.no_img)
                 .into(mealDetailImg);
 
@@ -122,6 +159,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         mealTitle.setText(blogEntry.getTitle());
         entryAuthor.setText("by " + blogEntry.getAuthorUsername());
         mealDesc.setText(blogEntry.getDescription());
+        likesText.setText("Liked by " + blogEntry.getNumberOfLikes() + " users");
 
         LocalDateTime timestamp = blogEntry.getTimeStamp();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
