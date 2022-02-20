@@ -360,7 +360,7 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
         Glide.with(this)
                 .load(imageApiUrl + queryString + imageDir + imageName)
-                .placeholder(R.drawable.food1)
+                .placeholder(R.drawable.meal)
                 .into(mealDetailImg);
 
     }
