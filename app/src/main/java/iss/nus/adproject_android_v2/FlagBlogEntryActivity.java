@@ -84,9 +84,8 @@ public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnC
         String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
 
         String queryString = "?imagePath=";
-        String imageDir = "/static";
         Glide.with(this)
-                .load(imageApiUrl + queryString + imageDir + blogEntry.getImageURL())
+                .load(imageApiUrl + queryString + blogEntry.getImageURL())
                 .placeholder(R.drawable.no_img)
                 .into(entryImage);
 
