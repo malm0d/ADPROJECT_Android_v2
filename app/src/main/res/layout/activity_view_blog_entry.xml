@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewBlogEntryActivity">
+    tools:context=".ViewBlogEntryActivity"
+    >
     <ImageView
         android:scaleType="centerCrop"
         android:id="@+id/mealdetailimage"
@@ -89,10 +90,22 @@
         app:layout_constraintLeft_toLeftOf="@id/mealdetailimage"
         app:layout_constraintRight_toRightOf="@id/mealdetailimage"
         app:layout_constraintTop_toBottomOf="@id/detailMealtime"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
 
 
         />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_navigation_menu"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mealDetailDes"
 
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

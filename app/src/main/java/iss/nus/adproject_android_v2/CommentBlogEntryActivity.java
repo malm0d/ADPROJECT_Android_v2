@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +55,7 @@ public class CommentBlogEntryActivity extends AppCompatActivity implements View.
     private EditText commentInput;
     private TextView activeUsernameTextView;
     private String activeUsername;
+    NavigationBarView bottomNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,37 @@ public class CommentBlogEntryActivity extends AppCompatActivity implements View.
         blogEntry = (BlogEntry) intent.getSerializableExtra("blogEntry");
         activeUserId = intent.getIntExtra("activeUserId", 0);
         activeUsername = intent.getStringExtra("activeUsername");
+
+        //bottom navigation bar
+        bottomNavigation = findViewById(R.id.bottom_navigation);
+        bottomNavigation.setSelectedItemId(R.id.friendsMenu);
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch(item.getItemId()){
+                    case R.id.mealMenu:
+                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        startActivity(pastMeal);
+                        break;
+                    case R.id.pathMenu:
+                        //link to path
+                        break;
+                    case R.id.addMenu:
+                        Intent add = new Intent(getApplicationContext(), CaptureActivity.class);
+                        startActivity(add);
+                        break;
+                    case R.id.friendsMenu:
+                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        startActivity(friends);
+                        break;
+                    case R.id.settingsMenu:
+                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        startActivity(settings);
+                        break;
+                }
+                return false;
+            }
+        });
 
 
 
@@ -152,8 +186,10 @@ public class CommentBlogEntryActivity extends AppCompatActivity implements View.
 
     private void updateUI(){
         renderBlogEntry();
+        commentInput.setText("");
         activeUsernameTextView.setText(activeUsername);
         CommentAdapter adapter = new CommentAdapter(this,comments);
+
 
         commentSection = findViewById(R.id.comment_section);
         if(commentSection != null) {
