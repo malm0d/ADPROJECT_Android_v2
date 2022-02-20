@@ -19,7 +19,7 @@
     <string name="current_date">Current date</string>
     <string name="select_time">Choose time</string>
     <string name="current_time">Current time</string>
-  
+
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>
