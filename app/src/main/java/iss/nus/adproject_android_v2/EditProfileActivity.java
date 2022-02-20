@@ -34,6 +34,7 @@ import java.io.IOException;
 import iss.nus.adproject_android_v2.ui.ImageViewPlus;
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -140,11 +141,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void showphoto(){
-        String imageApiUrl = "http://192.168.31.50:8888/api/image/get";
+        String imageApiUrl = getResources().getString(R.string.IP) + "/api/image/get";
 
         profilePhoto = findViewById(R.id.profilePhoto);
         String queryString = "?imagePath=";
-        String imageDir = "/static/blog/images/";
+        String imageDir = "./images/" + user.getid() + "/";
         String profilePic = user.getProfilePic();
         Glide.with(this)
                 .load(imageApiUrl + queryString + imageDir + profilePic)
@@ -158,7 +159,8 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         int id = v.getId();
         if (id == R.id.submitProfileChange) {
 
-            String url = "http://192.168.31.50:8888/api/saveProfile";
+            String url = getResources().getString(R.string.IP) + "/api/saveProfile";   //save both photo and info
+            String url1 = getResources().getString(R.string.IP) + "/api/saveProfileWithoutPhoto"; //only change info
             String UserName = shareusername;
             String Name = NameEdit.getText().toString();
             String dateOfBirth = DateOfBirthEdit.getText().toString();
@@ -170,7 +172,13 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 //                profileValidation.setVisibility(View.VISIBLE);
             } else {
 
-                RequestPost(url, UserName, Name, dateOfBirth, Height, Weight);
+                if(path != ""){
+                    RequestPost(url, UserName, Name, dateOfBirth, Height, Weight);
+                }
+                else{
+                    RequestPostWithoutPhoto(url1, UserName, Name, dateOfBirth, Height, Weight);
+                }
+
 
             }
 
@@ -292,16 +300,60 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 .build();
 
         Request request = new Request.Builder().url(url).post(multipartBody).build();
-//        FormBody.Builder formBuilder = new FormBody.Builder();
-//
-//        formBuilder.add("UserName", UserName);
-//        formBuilder.add("Name", Name);
-//        formBuilder.add("dateOfBirth", dateOfBirth);
-//        formBuilder.add("Height", Height);
-//        formBuilder.add("Weight", Weight);
-//
-//        Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
-//        System.out.println(fileName);
+        Call call = client.newCall(request);
+
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(EditProfileActivity.this, "server error", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                final String res = response.body().string();
+                System.out.println("This information return from server side");
+                System.out.println(res);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Toast.makeText(EditProfileActivity.this, "success", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        intent.setClass(context, UserProfile.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
+
+
+    }
+    private void RequestPostWithoutPhoto(String url, String UserName, String Name, String dateOfBirth, String Height, String Weight) {
+
+        OkHttpClient client = new OkHttpClient();
+
+
+        FormBody.Builder formBuilder = new FormBody.Builder();
+
+        formBuilder.add("UserName", UserName);
+        formBuilder.add("Name", Name);
+        formBuilder.add("dateOfBirth", dateOfBirth);
+        formBuilder.add("Height", Height);
+        formBuilder.add("Weight", Weight);
+
+        Request request = new Request.Builder().url(url).post(formBuilder.build()).build();
+
         Call call = client.newCall(request);
 
 
@@ -344,22 +396,3 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
 }
 
-
-
-//    public Boolean validateEntries(String username, String email, String password) {
-//        if (username == null || username.trim().length() == 0) {
-//            Toast.makeText(getApplicationContext(), "Username is required", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-//
-//        if (email == null || email.trim().length() == 0) {
-//            Toast.makeText(getApplicationContext(), "Email is required", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-//
-//        if (password == null || password.trim().length() == 0) {
-//            Toast.makeText(getApplicationContext(), "Password is required", Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-//        return true;
-//    }

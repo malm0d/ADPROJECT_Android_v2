@@ -42,25 +42,16 @@ j
         app:layout_constraintBottom_toTopOf="@+id/onPathReCord"
         />
 
-    <TextView
-        android:id="@+id/onPathReCord"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="70% on-path"
-        android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/UserNameText"
-        app:layout_constraintLeft_toRightOf="@+id/mine_iv_headportrait"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/EditProfileBtn"
-        />
+
     <Button
         android:id="@+id/EditProfileBtn"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:text="Edit Profile"
         android:backgroundTint="#2196F3"
+        android:layout_marginTop="30dp"
         app:layout_constraintLeft_toRightOf="@id/mine_iv_headportrait"
-        app:layout_constraintTop_toBottomOf="@+id/onPathReCord"
+        app:layout_constraintTop_toBottomOf="@+id/UserNameText"
         app:layout_constraintRight_toRightOf="parent"/>
 
 

@@ -1,5 +1,6 @@
 package iss.nus.adproject_android_v2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,11 +42,11 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
     TextView targetCount;
     TextView pathProgressText;
     TextView TotalMealRecord;
-    Button GoDetailsBtn,PastGoalBtn;
+    Button GoDetailsBtn,PastGoalBtn,analyticsBtn;
     private ProgressBar progressBar;
     NavigationBarView bottomNavigation;
     private String shareusername;
-
+    private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,10 +55,13 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
         shareusername = pref.getString("username", "");
 
+        context = this;
         GoDetailsBtn = findViewById(R.id.SeeDetailsBtn);
         GoDetailsBtn.setOnClickListener(this);
         PastGoalBtn =findViewById(R.id.PastGoalBtn);
         PastGoalBtn.setOnClickListener(this);
+        analyticsBtn = findViewById(R.id.analyticsBtn);
+        analyticsBtn.setOnClickListener(this);
         getCurrentGoalFromServer();
         getMealsDataFromServer();
         initBoomNacigation();
@@ -67,7 +71,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         //bottom navigation bar
         bottomNavigation = findViewById(R.id.bottom_navigation);
         //set Setting selected
-        bottomNavigation.setSelectedItemId(R.id.settingsMenu);
+        bottomNavigation.setSelectedItemId(R.id.pathMenu);
 
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -133,7 +137,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void getCurrentGoalFromServer(){
-        String url1 = "http://192.168.31.50:8888/api/currentgoal";
+        String url1 = getResources().getString(R.string.IP) + "/api/currentgoal";
         String UserName = shareusername;
         RequestPost(url1,UserName);
     }
@@ -170,30 +174,43 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
                 String res = response.body().string();
                 System.out.println("This information return from server side");
                 System.out.println(res);
-                try {
-                    JSONObject jsonObj = new JSONObject(res);
-                    String dataStr = jsonObj.toString();
+                if(!res.isEmpty()) {
 
-                    ObjectMapper mapper = new ObjectMapper();
 
-                     final Goal currentGoal = mapper.readValue(dataStr, new TypeReference<Goal>(){});
+                    try {
+                        JSONObject jsonObj = new JSONObject(res);
+                        String dataStr = jsonObj.toString();
 
-                    System.out.println("check data ");
+                        ObjectMapper mapper = new ObjectMapper();
 
+                        final Goal currentGoal = mapper.readValue(dataStr, new TypeReference<Goal>() {
+                        });
+
+                        System.out.println("check data ");
+
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                    initView(currentGoal);
+                                    Toast.makeText(ViewGoalActivity.this, "success", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            initView(currentGoal);
-                            Toast.makeText(ViewGoalActivity.this, "success", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent();
+                            intent.setClass(context, SetGoalActivity.class);
+                            startActivity(intent);
                         }
                     });
-
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-
 
             }
         });
@@ -202,7 +219,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void getMealsDataFromServer(){
-        String url1 = "http://192.168.31.50:8888/api/goalsMeal";
+        String url1 = getResources().getString(R.string.IP) + "/api/goalsMeal";
         String UserName = shareusername;
         RequestPost1(url1,UserName);
     }
@@ -237,18 +254,20 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 String res1 = response.body().string();
+                res1= res1.replace("\"", "");
                 System.out.println("This information return from server side");
                 System.out.println(res1);
                 System.out.println("check data ");
-
-                String res2 = res1.substring(2,3);
-                String res3 = res1.substring(6,7);
-                String res4 = res1.substring(10,14);
+                String resSub = res1.substring(1,res1.length()-1);
+                String[] resSplit= resSub.split(",");
+                String mealontrack = resSplit[0];
+                String mealofftrack = resSplit[1];
+                String percentProgress = resSplit[2];
 
                 List<String> strList = new ArrayList<>() ;
-                strList.add(res2);
-                strList.add(res3);
-                strList.add(res4);
+                strList.add(mealontrack);
+                strList.add(mealofftrack);
+                strList.add(percentProgress);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -284,6 +303,11 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
 
         if(id == R.id.PastGoalBtn){
             Intent intent = new Intent(this, PastGoalsActivity.class);
+            startActivity(intent);
+        }
+
+        if(id==R.id.analyticsBtn){
+            Intent intent = new Intent(this, Userdashboard.class);
             startActivity(intent);
         }
     }

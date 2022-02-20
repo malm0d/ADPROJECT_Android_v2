@@ -3,7 +3,9 @@ package iss.nus.adproject_android_v2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Process;
 
 import androidx.annotation.NonNull;
 
@@ -42,14 +44,15 @@ import okhttp3.Response;
 public class Userdashboard extends AppCompatActivity {
 
 
-    float[] mealTrack = new float[2];
-    float[] feeling = new float[4];
-    TextView viewCurrentGoal, myProgress, intro, myFeeling;
-    PieChart pieChart,pieChart2;
-    PieData pieData, pieData2;
-    List<PieEntry> pieEntryList = new ArrayList<>();
-    List<PieEntry> pieEntryList2 = new ArrayList<>();
-    NavigationBarView bottomNavigation;
+    private float[] mealTrack = new float[2];
+    private float[] feeling = new float[4];
+    private TextView viewCurrentGoal, myProgress, intro, myFeeling;
+    private PieChart pieChart,pieChart2;
+    private PieData pieData, pieData2;
+    private List<PieEntry> pieEntryList = new ArrayList<>();
+    private List<PieEntry> pieEntryList2 = new ArrayList<>();
+    private NavigationBarView bottomNavigation;
+    private long pressedTime;
 
 
     @Override
@@ -222,8 +225,9 @@ public class Userdashboard extends AppCompatActivity {
                         Toast.makeText(Userdashboard.this, "success", Toast.LENGTH_SHORT).show();
 
                         int onTrackPercent = (int) (mealTrack[0]/ (mealTrack[0]+mealTrack[1])*100);
+                        int totalMeal= (int) (mealTrack[0]+mealTrack[1]);
 
-                        if(onTrackPercent==0){
+                        if(totalMeal==0){
                             myProgress.setText("No meals recorded yet");
                             myProgress.setTypeface(null, Typeface.ITALIC);
 
@@ -354,17 +358,22 @@ public class Userdashboard extends AppCompatActivity {
 
                         //set centre text
                         int joyPercent = (int) (feeling[0]/(feeling[0]+feeling[1]+feeling[2]+feeling[3]) *100);
-                        if (joyPercent>0){
+                        int totalMeal= (int) (feeling[0]+feeling[1]+feeling[2]+feeling[3]);
+
+                        /*if (totalMeal>0){
                             pieChart2.setCenterText(joyPercent+"% "+ getResources().getString(R.string.joy));
                             pieChart2.setCenterTextSize(15f);
-                        }
+                        }*/
 
                         //make title disappear if no meal entries recorded
-                        if(joyPercent==0){
+                        if(totalMeal==0){
                             myFeeling.setVisibility(View.INVISIBLE);
                             pieChart2.getLegend().setEnabled(false);
                         }
                         else{
+                            pieChart2.setCenterText(joyPercent+"% "+ getResources().getString(R.string.joy));
+                            pieChart2.setCenterTextSize(15f);
+
                             //format legend
                             pieChart2.getLegend().setEnabled(true);
                             Legend legend2 = pieChart2.getLegend();
@@ -389,5 +398,18 @@ public class Userdashboard extends AppCompatActivity {
         });
         return "";
     }
+
+    @Override
+    public void onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            ExitActivity.exit(getApplicationContext());
+        } else {
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
+
+    }
+
 
 }

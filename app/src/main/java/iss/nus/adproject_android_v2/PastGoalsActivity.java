@@ -50,7 +50,7 @@ public class PastGoalsActivity extends AppCompatActivity {
         //bottom navigation bar
         bottomNavigation = findViewById(R.id.bottom_navigation);
         //set Setting selected
-        bottomNavigation.setSelectedItemId(R.id.settingsMenu);
+        bottomNavigation.setSelectedItemId(R.id.pathMenu);
 
         bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -95,7 +95,7 @@ public class PastGoalsActivity extends AppCompatActivity {
     }
 
     private void getDataFromServer(){
-        String url = "http://192.168.31.50:8888/api/pastGoal";
+        String url = getResources().getString(R.string.IP) + "/api/pastGoal";
         String UserName = shareusername;
         RequestPost(url,UserName);
     }

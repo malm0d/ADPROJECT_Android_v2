@@ -1,0 +1,9 @@
+diff a/app/src/main/java/iss/nus/adproject_android_v2/ViewBlogEntryActivity.java b/app/src/main/java/iss/nus/adproject_android_v2/ViewBlogEntryActivity.java	(rejected hunks)
+@@ -49,6 +49,7 @@
+ 
+     EditText mealDesc;
+     TextView entryAuthor;
++    TextView likesText;
+ 
+     Button saveChage;
+     String activeUsername;
