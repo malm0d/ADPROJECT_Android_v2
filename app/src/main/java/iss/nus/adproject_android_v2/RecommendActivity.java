@@ -179,7 +179,7 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
             }
             System.out.println("input: " + input);
             //send input to spring
-            String postUrl = getResources().getString(R.string.IP) + "/api/recommend/postStringData/"
+            String postUrl = getResources().getString(R.string.IP) + "/api/recommend/passData/"
                     + userId + "/" + input + "/" + feeling + "/" + track;
             System.out.print(postUrl);
             RequestGet(postUrl);

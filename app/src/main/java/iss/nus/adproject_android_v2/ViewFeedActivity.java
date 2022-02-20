@@ -36,6 +36,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+
 public class ViewFeedActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
     private String url;
     private List<BlogEntry> blogEntries = new ArrayList<BlogEntry>();;
