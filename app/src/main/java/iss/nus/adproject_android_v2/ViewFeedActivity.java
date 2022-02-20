@@ -110,6 +110,7 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
 
         if( (pageNo + 1) * pageLength == blogEntries.size()) {
             blogEntries.clear();
+            pageNo = 0;
         }
 
         getBlogEntriesThread = new Thread(new Runnable() {
