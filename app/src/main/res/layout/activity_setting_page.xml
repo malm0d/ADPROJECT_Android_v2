@@ -6,14 +6,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/captureText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_label_5"
+        android:textSize="40sp"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="20dp"/>
+
     <Button
         android:id="@+id/editProfile"
         android:layout_width="300dp"
         android:layout_height="70dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="120dp"
         android:textSize="18sp"
-        android:text="@string/editProfile" />
+        android:text="@string/editProfile"
+        android:backgroundTint="@color/button"/>
 
     <Button
         android:id="@+id/notificationPage"
@@ -22,7 +33,8 @@
         android:layout_gravity="center_horizontal"
         android:text="@string/notification"
         android:textSize="18sp"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/button"/>
 
     <Button
         android:id="@+id/logout"
@@ -31,7 +43,8 @@
         android:layout_gravity="center_horizontal"
         android:textSize="18sp"
         android:text="@string/logout"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="60dp"
+        android:backgroundTint="@color/button"/>
 
     <!--view needed to ensure navigation bar stays at bottom for linear layout-->
     <View

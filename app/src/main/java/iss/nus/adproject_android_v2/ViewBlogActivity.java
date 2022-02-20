@@ -210,11 +210,6 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
 
     @Override
     public void onClick(View view) {
-        if(view == likeBtn) {
-            System.out.println("Me likey");
-        }
-        else if(view == flagBtn) {
-            System.out.println("Me flaggy");
-        }
+
     }
 }

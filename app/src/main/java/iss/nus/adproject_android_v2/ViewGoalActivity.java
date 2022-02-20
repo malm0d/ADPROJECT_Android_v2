@@ -81,8 +81,8 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
                         startActivity(pastMeal);
                         break;
                     case R.id.pathMenu:
-                        Intent currentPath = new Intent(getApplicationContext(), ViewGoalActivity.class);
-                        startActivity(currentPath);
+                        //Intent currentPath = new Intent(getApplicationContext(), ViewGoalActivity.class);
+                        //startActivity(currentPath);
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);

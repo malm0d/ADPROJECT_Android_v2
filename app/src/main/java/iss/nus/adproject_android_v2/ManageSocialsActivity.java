@@ -101,8 +101,8 @@ public class ManageSocialsActivity extends AppCompatActivity {
                         startActivity(add);
                         break;
                     case R.id.friendsMenu:
-                        Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
-                        startActivity(friends);
+                        //Intent friends = new Intent(getApplicationContext(), ManageSocialsActivity.class);
+                        //startActivity(friends);
                         break;
                     case R.id.settingsMenu:
                         Intent settings = new Intent(getApplicationContext(), SettingPage.class);

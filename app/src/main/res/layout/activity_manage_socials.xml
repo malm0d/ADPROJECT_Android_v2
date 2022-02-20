@@ -12,11 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Manage Socials"
-        android:textSize="30dp"
+        android:textSize="40sp"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/manageSocialsBtns"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="20dp"/>
 
     <LinearLayout
         android:id="@+id/manageSocialsBtns"
@@ -24,49 +25,54 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/manageSocialsHeader">
 
         <Button
             android:id="@+id/myBlogBtn"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:text="My Blog"
-            android:backgroundTint="#0066ff"
-            android:layout_marginVertical="20dp"/>
+            android:backgroundTint="@color/button"
+            android:layout_marginVertical="20dp"
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/manageFriendsBtn"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:text="Manage Friends"
-            android:backgroundTint="#0066ff"
-            android:layout_marginVertical="20dp"/>
+            android:backgroundTint="@color/button"
+            android:layout_marginVertical="20dp"
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/addFriendBtn"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:text="Add Friend"
-            android:backgroundTint="#0066ff"
-            android:layout_marginVertical="20dp"/>
+            android:backgroundTint="@color/button"
+            android:layout_marginVertical="20dp"
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/friendRequestsBtn"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:text="Friend Requests"
-            android:backgroundTint="#0066ff"
-            android:layout_marginVertical="20dp"/>
+            android:backgroundTint="@color/button"
+            android:layout_marginVertical="20dp"
+            android:textSize="18sp"/>
 
         <Button
             android:id="@+id/feedBtn"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
             android:text="Feed"
-            android:backgroundTint="#0066ff"
-            android:layout_marginVertical="20dp"/>
+            android:backgroundTint="@color/button"
+            android:layout_marginVertical="20dp"
+            android:textSize="18sp"/>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

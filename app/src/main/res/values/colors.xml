@@ -31,4 +31,9 @@
     <color name="happy">#ffee65</color>
     <color name="pensive">#b2e061</color>
     <color name="cry">#bd7ebe</color>
+
+    <color name="theme1">#192E58</color>
+    <color name="theme2">#1D65A6</color>
+    <color name="button">#0066ff</color>
+
 </resources>

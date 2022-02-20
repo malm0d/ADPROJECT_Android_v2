@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Process;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -17,7 +19,8 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
     private Button profileBtn;
     private Button notificationBtn;
     private Button logoutBtn;
-    NavigationBarView bottomNavigation;
+    private NavigationBarView bottomNavigation;
+    private long pressedTime;
 
 
     @Override
@@ -73,8 +76,8 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
                         startActivity(friends);
                         break;
                     case R.id.settingsMenu:
-                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
-                        startActivity(settings);
+                        //Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        //startActivity(settings);
                         break;
                 }
                 return false;
@@ -99,4 +102,6 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
         Intent intent = new Intent(SettingPage.this, LoginActivity.class);
         startActivity(intent);
     }
+
+
 }
