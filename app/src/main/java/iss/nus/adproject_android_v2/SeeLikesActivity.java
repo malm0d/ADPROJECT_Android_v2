@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
@@ -18,6 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import iss.nus.adproject_android_v2.adapter.LikesAdapter;
@@ -30,6 +34,16 @@ import okhttp3.Response;
 
 public class SeeLikesActivity extends AppCompatActivity {
     private BlogEntry blogEntry;
+    private ImageView entryImage;
+    private TextView blogTitle;
+    private TextView timeStampText;
+    private TextView likesText;
+    private ImageView likeBtn;
+    private ImageView flagBtn;
+    private TextView rowAuthor;
+
+
+
     private TextView likedByText;
     private ListView likeList;
     private List<String> usernames; // get from API
@@ -79,8 +93,51 @@ public class SeeLikesActivity extends AppCompatActivity {
             }
         });
     }
+    public void renderBlogEntry() {
+        entryImage = findViewById(R.id.entryImage);
+        blogTitle = findViewById(R.id.blogTitle);
+        timeStampText = findViewById(R.id.timestampText);
+        likesText = findViewById(R.id.likesText);
+        rowAuthor = findViewById(R.id.rowAuthor);
+        likeBtn = findViewById(R.id.rowLikeBtn);
+        flagBtn = findViewById(R.id.rowFlagBtn);
+
+        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
+        String imageDir = "upload/";
+        String queryString = "?imagePath=";
+        Glide.with(this)
+                .load(imageApiUrl + queryString + imageDir + blogEntry.getImageURL())
+                .placeholder(R.drawable.no_img)
+                .into(entryImage);
+
+        blogTitle.setText(blogEntry.getTitle());
+        LocalDateTime timestamp = blogEntry.getTimeStamp();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
+        String formattedTimestamp = timestamp.format(formatter);
+        timeStampText.setText(formattedTimestamp);
+        String likeString = "Liked by " + blogEntry.getNumberOfLikes() + " users";
+        likesText.setText(likeString);
+        String authorText = "by " + blogEntry.getAuthorUsername();
+        rowAuthor.setText(authorText);
+
+        if(blogEntry.isLikedByActiveUser()){
+            likeBtn.setBackgroundResource(R.drawable.thumb_logo_blue_fill);
+        }
+        else {
+            likeBtn.setBackgroundResource(R.drawable.thumb_logo_no_fill);
+        }
+
+
+        if(blogEntry.isFlaggedByActiveUser()) {
+            flagBtn.setBackgroundResource(R.drawable.flag_logo_red_fill);
+        }
+        else {
+            flagBtn.setBackgroundResource(R.drawable.flag_logo_no_fill);
+        }
+    }
 
     public void updateUi() {
+        renderBlogEntry();
         likedByText = findViewById(R.id.likedByText);
         likeList = findViewById(R.id.likeList);
         bottomNavigation = findViewById(R.id.bottom_navigation);
