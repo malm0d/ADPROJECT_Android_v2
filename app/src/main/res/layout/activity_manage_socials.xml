@@ -29,6 +29,14 @@
         app:layout_constraintTop_toBottomOf="@id/manageSocialsHeader">
 
         <Button
+            android:id="@+id/myBlogBtn"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="My Blog"
+            android:backgroundTint="#0066ff"
+            android:layout_marginVertical="20dp"/>
+
+        <Button
             android:id="@+id/manageFriendsBtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
