@@ -23,7 +23,7 @@ public class AlertReceiver extends BroadcastReceiver {
         createNotificationChannel(context);
         createNotification(context);
 
-        Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "I'm running", Toast.LENGTH_SHORT).show();
         System.out.println("Notification sent");
     }
 

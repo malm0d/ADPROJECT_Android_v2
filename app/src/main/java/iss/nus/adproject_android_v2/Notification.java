@@ -99,11 +99,11 @@ public class Notification extends AppCompatActivity {
                     timePicker.setEnabled(true);
                     setTimeBtn.setEnabled(true);
 
-                    startAlarm();
+                    startDefaultAlarm();
 
                 }
                 else{
-                    //Toast.makeText(getApplicationContext(),"notification turned off", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"notification turned off", Toast.LENGTH_SHORT).show();
                     timePicker.setEnabled(false);
                     setTimeBtn.setEnabled(false);
 
@@ -122,6 +122,8 @@ public class Notification extends AppCompatActivity {
         setTimeBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
+                //cancel default alarm
+                cancelAlarm();
 
                 hour = timePicker.getHour();
                 min= timePicker.getMinute();
@@ -129,9 +131,32 @@ public class Notification extends AppCompatActivity {
                 String msg = "notification set at " + hour +":" +String.format("%02d",min) +" daily";
                 Toast.makeText(getApplicationContext(),msg, Toast.LENGTH_SHORT).show();
 
+                //start customised alarm
                 startAlarm();
             }
         });
+    }
+
+    private void startDefaultAlarm(){
+
+        Calendar alarmTime = Calendar.getInstance();
+        alarmTime.set(Calendar.HOUR_OF_DAY,20);
+        alarmTime.set(Calendar.MINUTE,00);
+        alarmTime.set(Calendar.SECOND,0);
+
+        Intent intent = new Intent(getApplicationContext(), AlertReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        if (alarmTime.before(Calendar.getInstance())) {
+            alarmTime.add(Calendar.DATE, 1);
+        }
+
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime.getTimeInMillis(), AlarmManager.INTERVAL_DAY , pendingIntent);
+        System.out.println("Alarm set for notification");
+        Toast.makeText(getApplicationContext(),"default notification set at 20:00 daily", Toast.LENGTH_SHORT).show();
+
+
     }
 
 
@@ -161,8 +186,7 @@ public class Notification extends AppCompatActivity {
     private void cancelAlarm(){
         AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
-        Toast.makeText(getApplicationContext(),"notification turned off", Toast.LENGTH_SHORT).show();
-
+        //Toast.makeText(getApplicationContext(),"notification turned off", Toast.LENGTH_SHORT).show();
 
     }
 
