@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ADPROJECT_Android_v2</string>
+    <string name="app_name">Food Diary</string>
     <string name="set_goal">What is your lifestyle goal?</string>
     <string name="totalMealCount">totalMealCount: </string>
     <string name="targetCount">targetCount: </string>
