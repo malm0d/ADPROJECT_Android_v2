@@ -21,26 +21,28 @@
         android:theme="@style/Theme.ADPROJECT_Android_v2"
         android:usesCleartextTraffic="true">
         <activity
-
+            android:name=".SeeLikesActivity"
+            android:exported="false" />
+        <activity
             android:name=".RecSearchResultActivity"
             android:exported="false" />
         <activity
             android:name=".RecommendActivity"
             android:exported="false" />
-        <activity    
+        <activity
             android:name=".FriendRequestsActivity"
             android:exported="false" />
         <activity
             android:name=".AddFriendActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".FriendDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ManageFriendsActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".ManageSocialsActivity"
             android:exported="false" />
@@ -59,14 +61,12 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".PastGoalsActivity"
             android:exported="false" />
@@ -90,8 +90,7 @@
             android:exported="false" />
         <activity
             android:name=".Notification"
-            android:exported="false"
-            />
+            android:exported="false" />
         <activity
             android:name=".ViewFeedActivity"
             android:exported="false" />
@@ -109,7 +108,6 @@
             android:exported="false" />
         <activity
             android:name=".ViewBlogActivity"
-
             android:exported="false" />
         <activity
             android:name=".ResponseActivity"
@@ -139,11 +137,13 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <receiver

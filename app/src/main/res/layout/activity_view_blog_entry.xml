@@ -119,5 +119,16 @@
 
         />
 
+    <Button
+        android:id="@+id/seeLikesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:text="See likes"
+        android:textSize="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/mealDetailDes"
+        app:layout_constraintEnd_toEndOf="@+id/likesText"
+        app:layout_constraintTop_toBottomOf="@+id/likesText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

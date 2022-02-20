@@ -54,6 +54,8 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
     Button saveChage;
     String activeUsername;
 
+    Button seeLikesBtn;
+
     private BlogEntry blogEntry;
     private Integer activeUserId;
     private ActivityResultLauncher<Intent> rlFlagBlogEntryActivity;
@@ -144,10 +146,14 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         }
         commentBtn.setOnClickListener(this);
 
+        seeLikesBtn = findViewById(R.id.seeLikesBtn);
+        seeLikesBtn.setOnClickListener(this);
+
 
     }
     public void showData(){
-        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
+        String imageApiUrl = "http://3.1.222.99:9999/api/image/get";
+//        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
         String imageDir = "upload/";
         String queryString = "?imagePath=";
         Glide   .with(this)
@@ -202,6 +208,13 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
             intent.putExtra("activeUserId",activeUserId);
             intent.putExtra("activeUsername",activeUsername);
             startActivity(intent);
+        }
+
+        else if (v == seeLikesBtn) {
+            Intent intent = new Intent(this, SeeLikesActivity.class);
+            intent.putExtra("blogEntry",blogEntry);
+            startActivity(intent);
+
         }
 
 
