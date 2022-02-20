@@ -254,18 +254,20 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 String res1 = response.body().string();
+                res1= res1.replace("\"", "");
                 System.out.println("This information return from server side");
                 System.out.println(res1);
                 System.out.println("check data ");
-
-                String res2 = res1.substring(2,3);
-                String res3 = res1.substring(6,7);
-                String res4 = res1.substring(10,14);
+                String resSub = res1.substring(1,res1.length()-1);
+                String[] resSplit= resSub.split(",");
+                String mealontrack = resSplit[0];
+                String mealofftrack = resSplit[1];
+                String percentProgress = resSplit[2];
 
                 List<String> strList = new ArrayList<>() ;
-                strList.add(res2);
-                strList.add(res3);
-                strList.add(res4);
+                strList.add(mealontrack);
+                strList.add(mealofftrack);
+                strList.add(percentProgress);
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
