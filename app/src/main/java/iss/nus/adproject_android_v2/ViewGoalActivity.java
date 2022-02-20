@@ -63,7 +63,6 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         analyticsBtn = findViewById(R.id.analyticsBtn);
         analyticsBtn.setOnClickListener(this);
         getCurrentGoalFromServer();
-        getMealsDataFromServer();
         initBoomNacigation();
     }
 
@@ -114,6 +113,7 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
         targetCount.setText(goalTargetCount);
         String goalTotalCount = "Total Count ：" +goal.getTotalMealCount();
         totalCount.setText(goalTotalCount);
+        getMealsDataFromServer();
     }
     protected void initView1(List<String> strList){
 
@@ -174,9 +174,15 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
                 String res = response.body().string();
                 System.out.println("This information return from server side");
                 System.out.println(res);
-                if(!res.isEmpty()) {
+                if(res.isEmpty()) {
+
+                            Intent intent = new Intent();
+                            intent.setClass(context, SetGoalActivity.class);
+                            startActivity(intent);
 
 
+                }
+                else {
                     try {
                         JSONObject jsonObj = new JSONObject(res);
                         String dataStr = jsonObj.toString();
@@ -191,8 +197,8 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                    initView(currentGoal);
-                                    Toast.makeText(ViewGoalActivity.this, "success", Toast.LENGTH_SHORT).show();
+                                initView(currentGoal);
+                                Toast.makeText(ViewGoalActivity.this, "success", Toast.LENGTH_SHORT).show();
                             }
                         });
 
@@ -200,16 +206,6 @@ public class ViewGoalActivity extends AppCompatActivity implements View.OnClickL
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-                else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent();
-                            intent.setClass(context, SetGoalActivity.class);
-                            startActivity(intent);
-                        }
-                    });
                 }
 
             }
