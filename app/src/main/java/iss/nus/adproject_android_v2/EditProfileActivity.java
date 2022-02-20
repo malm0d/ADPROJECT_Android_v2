@@ -141,7 +141,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void showphoto(){
-        String imageApiUrl = "http://192.168.31.50:8888/api/image/get";
+        String imageApiUrl = getResources().getString(R.string.IP) + "/api/image/get";
 
         profilePhoto = findViewById(R.id.profilePhoto);
         String queryString = "?imagePath=";
