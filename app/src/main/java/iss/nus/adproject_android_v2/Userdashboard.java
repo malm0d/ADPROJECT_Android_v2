@@ -96,7 +96,8 @@ public class Userdashboard extends AppCompatActivity {
                         startActivity(pastMeal);
                         break;
                     case R.id.pathMenu:
-                        //link to path
+                        Intent currentPath = new Intent(getApplicationContext(), ViewGoalActivity.class);
+                        startActivity(currentPath);
                         break;
                     case R.id.addMenu:
                         Intent add = new Intent(getApplicationContext(), CaptureActivity.class);

@@ -117,7 +117,8 @@ public class RecommendActivity extends AppCompatActivity implements View.OnClick
                         startActivity(pastMeal);
                         break;
                     case R.id.pathMenu:
-                        //link to path
+                        Intent currentPath = new Intent(getApplicationContext(), ViewGoalActivity.class);
+                        startActivity(currentPath);
                         break;
                     case R.id.addMenu:
                         finish();
