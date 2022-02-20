@@ -76,8 +76,8 @@ public class SettingPage extends AppCompatActivity implements View.OnClickListen
                         startActivity(friends);
                         break;
                     case R.id.settingsMenu:
-                        Intent settings = new Intent(getApplicationContext(), SettingPage.class);
-                        startActivity(settings);
+                        //Intent settings = new Intent(getApplicationContext(), SettingPage.class);
+                        //startActivity(settings);
                         break;
                 }
                 return false;

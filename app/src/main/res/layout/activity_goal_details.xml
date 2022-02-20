@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:text="Goal Details"
         android:textSize="40sp"
-        android:textColor="@color/black"
+        android:textColor="#0066ff"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         />

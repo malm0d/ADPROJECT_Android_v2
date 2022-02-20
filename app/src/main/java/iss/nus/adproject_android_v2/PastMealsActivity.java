@@ -77,8 +77,8 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch(item.getItemId()){
                     case R.id.mealMenu:
-                        Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
-                        startActivity(pastMeal);
+                        //Intent pastMeal = new Intent(getApplicationContext(), PastMealsActivity.class);
+                        //startActivity(pastMeal);
                         break;
                     case R.id.pathMenu:
                         Intent currentPath = new Intent(getApplicationContext(), ViewGoalActivity.class);
