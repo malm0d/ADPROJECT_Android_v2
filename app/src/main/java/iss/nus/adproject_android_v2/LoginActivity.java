@@ -174,28 +174,27 @@ public class LoginActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         startDashboardActivity();
-                    } else {
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                mInvalidLoginTxt.setVisibility(View.VISIBLE);
-                                mUsernameTxt.getText().clear();
-                                mPasswordTxt.getText().clear();
-                                mInvalidLoginTxt.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mInvalidLoginTxt.setVisibility(View.INVISIBLE);
-                                    }
-                                }, 5000);
-                            }
-                        });
-                    }
+                    } 
 
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-
+                        }
+                    });
+                } else {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mInvalidLoginTxt.setVisibility(View.VISIBLE);
+                            mUsernameTxt.getText().clear();
+                            mPasswordTxt.getText().clear();
+                            mInvalidLoginTxt.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mInvalidLoginTxt.setVisibility(View.INVISIBLE);
+                                }
+                            }, 5000);
                         }
                     });
                 }
