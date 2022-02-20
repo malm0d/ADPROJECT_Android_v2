@@ -49,6 +49,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
 
     EditText mealDesc;
     TextView entryAuthor;
+    TextView likesText;
 
     Button saveChage;
     String activeUsername;
@@ -132,6 +133,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         commentBtn = findViewById(R.id.commentBtn);
         flagBtn = findViewById(R.id.flagBtn);
         entryAuthor = findViewById(R.id.entryAuthor);
+        likesText = findViewById(R.id.likesText);
 
         likeBtn.setOnClickListener(this);
         if(blogEntry.isFlaggedByActiveUser()) {
@@ -157,6 +159,7 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         mealTitle.setText(blogEntry.getTitle());
         entryAuthor.setText("by " + blogEntry.getAuthorUsername());
         mealDesc.setText(blogEntry.getDescription());
+        likesText.setText("Liked by " + blogEntry.getNumberOfLikes() + " users");
 
         LocalDateTime timestamp = blogEntry.getTimeStamp();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, h:mm a");
