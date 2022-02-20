@@ -24,7 +24,7 @@
         android:layout_marginTop="120dp"
         android:textSize="18sp"
         android:text="@string/editProfile"
-        android:backgroundTint="#0066ff"/>
+        android:backgroundTint="@color/button"/>
 
     <Button
         android:id="@+id/notificationPage"
@@ -34,7 +34,7 @@
         android:text="@string/notification"
         android:textSize="18sp"
         android:layout_marginTop="60dp"
-        android:backgroundTint="#0066ff"/>
+        android:backgroundTint="@color/button"/>
 
     <Button
         android:id="@+id/logout"
@@ -44,7 +44,7 @@
         android:textSize="18sp"
         android:text="@string/logout"
         android:layout_marginTop="60dp"
-        android:backgroundTint="#0066ff"/>
+        android:backgroundTint="@color/button"/>
 
     <!--view needed to ensure navigation bar stays at bottom for linear layout-->
     <View
