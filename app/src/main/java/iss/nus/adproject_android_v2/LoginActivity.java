@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     Button mCreateAccBtn;
     TextView mForgotPwdTxt;
     TextView mInvalidLoginTxt;
+    private long pressedTime;
 
     UserHelper user = new UserHelper();
 
@@ -200,5 +201,17 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (pressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            ExitActivity.exit(getApplicationContext());
+        } else {
+            Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT).show();
+        }
+        pressedTime = System.currentTimeMillis();
+
     }
 }
