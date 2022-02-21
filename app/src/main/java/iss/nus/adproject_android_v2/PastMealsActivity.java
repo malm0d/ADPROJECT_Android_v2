@@ -127,7 +127,7 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
             listView.setOnItemClickListener(this);
         }
 
-            if (GoalStr.equals(" ")){
+            if (GoalStr.equals("")){
                 setGoalBtn.setVisibility(View.VISIBLE);
 
             }else {
