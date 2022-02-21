@@ -127,15 +127,21 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
             listView.setOnItemClickListener(this);
         }
 
-            if (GoalStr.equals("")){
-                setGoalBtn.setVisibility(View.VISIBLE);
+            checkIfshowSetGoalBtn();
 
-            }else {
-                setGoalBtn.setVisibility(View.INVISIBLE);
-            }
+    }
+
+    private void checkIfshowSetGoalBtn(){
+
+        if (GoalStr.equals("")){
+            setGoalBtn.setVisibility(View.VISIBLE);
+
+        }else {
+            setGoalBtn.setVisibility(View.INVISIBLE);
             TextView goalText = findViewById(R.id.currentgoal);
             String goalStr = "Current Goal: " + GoalStr;
             goalText.setText(goalStr);
+        }
 
     }
 
@@ -230,6 +236,7 @@ public class PastMealsActivity extends AppCompatActivity implements AdapterView.
                                 initListView(mealList);
                                 Toast.makeText(PastMealsActivity.this, "success", Toast.LENGTH_SHORT).show();
                             }else {
+                                checkIfshowSetGoalBtn();
                                 Toast.makeText(PastMealsActivity.this, "current no meals", Toast.LENGTH_SHORT).show();
                             }
 
