@@ -72,22 +72,31 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"/>
 
-
-        <!--view needed to ensure navigation bar stays at bottom for linear layout-->
-        <View
+        <TextView
+            android:id="@+id/introGoal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/white"/>
-
+            android:layout_height="wrap_content"
+            android:text="@string/intro_goal"
+            android:padding="20dp"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/intro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/intro_to_app"
-            android:padding="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:visibility="invisible"/>
+
+
+        <!--view needed to ensure navigation bar stays at bottom for linear layout-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
 
 
         <com.google.android.material.bottomnavigation.BottomNavigationView

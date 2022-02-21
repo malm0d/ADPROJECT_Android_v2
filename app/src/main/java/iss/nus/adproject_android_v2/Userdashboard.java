@@ -46,7 +46,7 @@ public class Userdashboard extends AppCompatActivity {
 
     private float[] mealTrack = new float[2];
     private float[] feeling = new float[4];
-    private TextView viewCurrentGoal, myProgress, intro, myFeeling;
+    private TextView viewCurrentGoal, myProgress, intro, myFeeling, introGoal;
     private PieChart pieChart,pieChart2;
     private PieData pieData, pieData2;
     private List<PieEntry> pieEntryList = new ArrayList<>();
@@ -63,6 +63,7 @@ public class Userdashboard extends AppCompatActivity {
         viewCurrentGoal = findViewById(R.id.viewCurrentGoal);
         myProgress = findViewById(R.id.myProgress);
         intro = findViewById(R.id.intro);
+        introGoal = findViewById(R.id.introGoal);
         myFeeling=findViewById(R.id.myFeeling);
 
         //get userId
@@ -159,6 +160,10 @@ public class Userdashboard extends AppCompatActivity {
                         if (res.contains("Internal Server Error"))
                         {
                             viewCurrentGoal.setText("No goal set yet");
+                        }
+                        else if (res.contains("no goal set yet")){
+                            introGoal.setVisibility(View.VISIBLE);
+                            viewCurrentGoal.setText(res);
                         }
                         else{
                             viewCurrentGoal.setText(res);

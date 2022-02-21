@@ -19,7 +19,7 @@
     <string name="current_date">Current date</string>
     <string name="select_time">Choose time</string>
     <string name="current_time">Current time</string>
-
+  
     <string-array name="gender">
         <item>Male</item>
         <item>Female</item>
@@ -33,7 +33,8 @@
     <string name="current_goal">Current Goal:   </string>
     <string name="my_progress">How did I progress? </string>
     <string name="my_feeling">How did I feel? </string>
-    <string name="intro_to_app">Select "'"add"'" at navigation bar to start logging a meal entry</string>
+    <string name="intro_to_app">Select "'"add"'" at navigation bar to log a meal entry </string>
+    <string name="intro_goal">Select "'"path"'" at navigation bar to add a new goal then</string>
     <string name="joy"> &#128513; </string>
     <string name="happy">&#128522; </string>
     <string name="pensive">&#128542; </string>
@@ -58,6 +59,6 @@
     <string name="send_reminder">Send reminder</string>
 
     <!-- IP Address -->
-    <!--<string name="IP">http://3.1.222.99:9999</string>-->
-    <string name="IP">http://192.168.0.108:8080</string>
+    <string name="IP">http://3.1.222.99:9999</string>
+    <!--<string name="IP">http://192.168.1.176:8080</string>-->
 </resources>
