@@ -41,8 +41,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.OnItemClickListener, View.OnClickListener{
-    private final String url = getResources().getString(R.string.IP) + "/api/blogentry/blog";
-//    private final String url = "http://192.168.0.108:8080/api/blogentry/blog";
+    private String url;
+//private final String url = getResources().getString(R.string.IP) + "/api/blogentry/blog";
     private List<BlogEntry> blogEntries;
     private Thread getBlogEntriesThread;
     private Integer activeUserId;
@@ -70,6 +70,8 @@ public class ViewBlogActivity extends AppCompatActivity implements  AdapterView.
         SharedPreferences pref = getSharedPreferences("user_login_info", MODE_PRIVATE);
         activeUsername = pref.getString("username", "");
         activeUserId = Integer.valueOf( pref.getString("userId",""));
+
+        url = getResources().getString(R.string.IP) + "/api/blogentry/blog";
 
         //bottom navigation bar
         bottomNavigation = findViewById(R.id.bottom_navigation);
