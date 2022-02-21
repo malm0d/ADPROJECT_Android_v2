@@ -135,7 +135,8 @@ public class ViewFeedActivity extends AppCompatActivity implements AdapterView.O
         updateUi();
     }
     private void getBlogEntries() throws IOException {
-        url = "http://192.168.0.108:8080/api/blogentry/page";
+        url = getResources().getString(R.string.IP) + "/api/blogentry/page";
+//        url = "http://192.168.0.108:8080/api/blogentry/page";
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder .addQueryParameter("activeUserId",activeUserId.toString())

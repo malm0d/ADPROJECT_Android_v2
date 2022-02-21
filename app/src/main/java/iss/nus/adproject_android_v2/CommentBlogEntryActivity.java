@@ -149,8 +149,8 @@ public class CommentBlogEntryActivity extends AppCompatActivity implements View.
 
     }
     public void renderBlogEntry() {
-
-        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
+        String imageApiUrl = getResources().getString(R.string.IP) + "/api/image/get";
+//        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
         String imageDir = "upload/";
         String queryString = "?imagePath=";
         Glide.with(this)
@@ -198,8 +198,8 @@ public class CommentBlogEntryActivity extends AppCompatActivity implements View.
     }
 
     public void downloadComments() throws  IOException{
-
-        String url = "http://192.168.0.108:8080/api/comment/get";
+        String url = getResources().getString(R.string.IP) + "/api/comment/get";
+//        String url = "http://192.168.0.108:8080/api/comment/get";
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder .addQueryParameter("mealEntryId",blogEntry.getId().toString());
@@ -227,7 +227,8 @@ public class CommentBlogEntryActivity extends AppCompatActivity implements View.
 
     }
     public void submitComment(String caption) {
-        String url = "http://192.168.0.108:8080/api/comment/submit";
+        String url = getResources().getString(R.string.IP) + "/api/comment/submit";
+//        String url = "http://192.168.0.108:8080/api/comment/submit";
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder .addQueryParameter("activeUserId",activeUserId.toString())

@@ -115,8 +115,8 @@ public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnC
     }
 
     public void renderBlogEntry() {
-
-        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
+        String imageApiUrl = getResources().getString(R.string.IP) + "/api/image/get";
+//        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
         String imageDir = "upload/";
         String queryString = "?imagePath=";
         Glide.with(this)
@@ -138,7 +138,8 @@ public class FlagBlogEntryActivity extends AppCompatActivity implements View.OnC
 
 
     public void submitForm() {
-        String url = "http://192.168.0.108:8080/api/report/submit";
+        String url = getResources().getString(R.string.IP) + "/api/report/submit";
+//        String url = "http://192.168.0.108:8080/api/report/submit";
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder .addQueryParameter("userId",activeUserId.toString())

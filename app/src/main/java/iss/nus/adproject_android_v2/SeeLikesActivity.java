@@ -102,7 +102,8 @@ public class SeeLikesActivity extends AppCompatActivity {
         likeBtn = findViewById(R.id.rowLikeBtn);
         flagBtn = findViewById(R.id.rowFlagBtn);
 
-        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
+        String imageApiUrl = getResources().getString(R.string.IP) + "/api/image/get";
+//        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
         String imageDir = "upload/";
         String queryString = "?imagePath=";
         Glide.with(this)
@@ -149,7 +150,8 @@ public class SeeLikesActivity extends AppCompatActivity {
     }
 
     private void getUsernames() throws IOException {
-        String url = "http://192.168.0.108:8080/api/likes/get";
+        String url = getResources().getString(R.string.IP) + "/api/likes/get";
+//        String url = "http://192.168.0.108:8080/api/likes/get";
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
         httpBuilder.addQueryParameter("mealEntryId",blogEntry.getId().toString());

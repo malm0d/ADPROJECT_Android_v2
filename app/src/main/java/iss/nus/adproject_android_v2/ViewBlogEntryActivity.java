@@ -152,7 +152,8 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
 
     }
     public void showData(){
-        String imageApiUrl = "http://3.1.222.99:9999/api/image/get";
+        String imageApiUrl = getResources().getString(R.string.IP) + "/api/image/get";
+//        String imageApiUrl = "http://3.1.222.99:9999/api/image/get";
 //        String imageApiUrl = "http://192.168.0.108:8080/api/image/get";
         String imageDir = "upload/";
         String queryString = "?imagePath=";
@@ -238,8 +239,8 @@ public class ViewBlogEntryActivity extends AppCompatActivity implements View.OnC
         }
 
 
-
-        String url = "http://192.168.0.108:8080/api/likes/" + operation;
+        String url = getResources().getString(R.string.IP) + "/api/likes/" + operation;
+//        String url = "http://192.168.0.108:8080/api/likes/" + operation;
         OkHttpClient client = new OkHttpClient();
         HttpUrl.Builder httpBuilder = HttpUrl.parse(url).newBuilder();
 

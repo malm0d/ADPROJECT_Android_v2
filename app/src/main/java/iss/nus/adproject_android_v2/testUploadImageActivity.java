@@ -128,7 +128,8 @@ public class testUploadImageActivity extends AppCompatActivity implements View.O
 
     public void uploadFile(String path,String filename)
     {
-        String url = "http://192.168.86.248:8888/api/upload";
+        String url = getResources().getString(R.string.IP) + "/api/upload";
+//        String url = "http://192.168.86.248:8888/api/upload";
         OkHttpClient okhttp = new OkHttpClient();
         File file = new File(path);
         if(path.isEmpty() || !file.exists()){
@@ -179,7 +180,8 @@ public class testUploadImageActivity extends AppCompatActivity implements View.O
 
     public void downloadFile(final String filename)
     {
-        String url = "http://192.168.86.248:8888/api/download";
+        String url = getResources().getString(R.string.IP) + "/api/download";
+//        String url = "http://192.168.86.248:8888/api/download";
 
         OkHttpClient okhttp = new OkHttpClient();
         if(filename == null || filename.isEmpty()){
