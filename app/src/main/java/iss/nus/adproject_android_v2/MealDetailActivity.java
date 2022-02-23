@@ -114,6 +114,8 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
                 }else {
                     publicSwitch.setText("Private");
                 }
+
+                submitChangeTocloud();
             }
         });
 
@@ -189,22 +191,28 @@ public class MealDetailActivity extends AppCompatActivity implements View.OnClic
 
             showMessage("submit changes");
 
-            String url = getResources().getString(R.string.IP) + "/api/modifyMealInfo";
-            String UserName = shareusername;
-
-            String mealTime = mealtime.getText().toString();
-            String mealDes = mealDesc.getText().toString();
-            String publicStates;
-            if (publicSwitch.getText().toString().equals("Public")){
-                publicStates = "1";
-            }else {
-                publicStates = "0";
-            }
-
-
-            updateMealRequest(url,UserName,mealTime,mealDes,publicStates,meal.getId());
+            submitChangeTocloud();
 
         }
+
+    }
+
+
+    private void submitChangeTocloud(){
+
+        String url = getResources().getString(R.string.IP) + "/api/modifyMealInfo";
+        String UserName = shareusername;
+
+        String mealTime = mealtime.getText().toString();
+        String mealDes = mealDesc.getText().toString();
+        String publicStates;
+        if (publicSwitch.getText().toString().equals("Public")){
+            publicStates = "1";
+        }else {
+            publicStates = "0";
+        }
+
+        updateMealRequest(url,UserName,mealTime,mealDes,publicStates,meal.getId());
 
     }
 
